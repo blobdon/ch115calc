@@ -11,7 +11,7 @@ if (isset($_GET['submitReset'])){
   session_start();
   session_unset();
   session_regenerate_id(true);
-  header("Location: /index.php"); /* Redirect browser */
+  header("Location: index.php"); /* Redirect browser */
   exit(0);
 }
 #

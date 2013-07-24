@@ -90,7 +90,7 @@
       </ul>
       </div>
       <div class='reset-button'>
-        <form action="/process.php" method='GET'>
+        <form action="process.php" method='GET'>
           <!-- <input type="submit" class='btn btn-warning' name='submitBegin' value='Begin'> -->
           <input type="submit" class='btn btn-warning' name='submitReset' value='Reset'>
         </form>
@@ -107,7 +107,7 @@
 
     </div>
     <div class='span8' id='questions'>
-      <form class='form-horizontal' action="/process.php" method='GET'>
+      <form class='form-horizontal' action="process.php" method='GET'>
         <?php
           include($_SESSION['form'][$_SESSION['index']]);
           echo '<hr>';

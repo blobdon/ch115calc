@@ -3,6 +3,17 @@ $(document).ready(function() {
 	//$('#question-group').css('background-color', '#ffffff');
 // Navigation
 // Veteran Service
+	// if ( $('#serviceStart').val() && $('#serviceEnd').val() ) {
+	//	//checkService();
+	//	if ( checkService()==='yes') {
+	//		//hide any detailed questions that havent been answered yet b/c not necessary
+	//		$('.service-details:not(:has(input:checked))').hide();
+	//		//alert($('#serviceDays').val()+' during '+serviceEra+' is qualifying service. You may proceeed to next section');
+	//	}
+	//	else {
+	//		$('.service-details').show();
+	//	}
+	//}
 	//$('.service-details').hide();
 	// defaults for serviceStart datepicker
 	$('#serviceStart').datepicker({
@@ -26,21 +37,21 @@ $(document).ready(function() {
 			$('#serviceStart').datepicker('setEndDate',$('#serviceEnd').val());
 
 	});
-	$('#vetService :input')
-		.change( function() {
-			//check number of days and show/hide additional questions as appropriate
-			if ( $('#serviceStart').val() && $('#serviceEnd').val() ) {
-				//checkService();
-				if ( checkService()==='yes') {
-					//hide any detailed questions that havent been answered yet b/c not necessary
-					$('.service-details:not(:has(input:checked))').hide();
-					//alert($('#serviceDays').val()+' during '+serviceEra+' is qualifying service. You may proceeed to next section');
-				}
-				else {
-					$('.service-details').show();
-				}
-			}
-	});
+	// $('.vetService :input')
+	//	.change( function() {
+	//		//check number of days and show/hide additional questions as appropriate
+	//		if ( $('#serviceStart').val() && $('#serviceEnd').val() ) {
+	//			//checkService();
+	//			if ( checkService()==='yes') {
+	//				//hide any detailed questions that havent been answered yet b/c not necessary
+	//				//$('.service-details:not(:has(input:checked))').hide();
+	//				//alert($('#serviceDays').val()+' during '+serviceEra+' is qualifying service. You may proceeed to next section');
+	//			}
+	//			else {
+	//				$('.service-details').show();
+	//			}
+	//		}
+	// });
 //Veteran Residence
 	//$('#vetResidePriorQ, #vetReside3YearsQ').hide(); //Hide question(s) not needed yet in this section
 	$('#vetResidence :input')
@@ -95,106 +106,66 @@ $(document).ready(function() {
 		});
 
 // Applicant Income
-	$('.getPay').hide();
+	// $('.getPay').hide();
 
-	$('#earnedIncomeCalcButton')
-		.click(function(e) {
-			e.preventDefault();
-		})
-		.popover({
-			animation: false,
-			html: true,
-			placement: 'bottom',
-			selector: false,
-			trigger: 'click',
-			title: 'Earned Income Calculator',
-			content: function() {
-				return $('#earnedIncomeCalcContent').html();
-			},
-			container: ''
-	});
-	$('#otherIncomeCalcButton')
-		.click(function(e) {
-			e.preventDefault();
-		})
-		.popover({
-			animation: false,
-			html: true,
-			placement: 'top',
-			selector: false,
-			trigger: 'click',
-			title: 'Other Income Calculator',
-			content: function() {
-				return $('#otherIncomeCalcContent').html();
-			},
-			container: ''
-	});
+	// $('#earnedIncomeCalcButton')
+	//	.click(function(e) {
+	//		e.preventDefault();
+	//	})
+	//	.popover({
+	//		animation: false,
+	//		html: true,
+	//		placement: 'bottom',
+	//		selector: false,
+	//		trigger: 'click',
+	//		title: 'Earned Income Calculator',
+	//		content: function() {
+	//			return $('#earnedIncomeCalcContent').html();
+	//		},
+	//		container: ''
+	// });
+	// $('#otherIncomeCalcButton')
+	//	.click(function(e) {
+	//		e.preventDefault();
+	//	})
+	//	.popover({
+	//		animation: false,
+	//		html: true,
+	//		placement: 'top',
+	//		selector: false,
+	//		trigger: 'click',
+	//		title: 'Other Income Calculator',
+	//		content: function() {
+	//			return $('#otherIncomeCalcContent').html();
+	//		},
+	//		container: ''
+	// });
 // Applicant Assets
-	$('#applAssets :input')
-		.click( function() {
-			checkAssets();
-	});
+	// $('#applAssets :input')
+	//	.click( function() {
+	//		checkAssets();
+	// });
 
 // Applicant Shelter
 
-	$('#housingCalcButton')
-		.click(function(e) {
-			e.preventDefault();
-		})
-		.popover({
-			animation: false,
-			html: true,
-			placement: 'top',
-			selector: false,
-			trigger: 'click',
-			title: 'Monthly Housing Calculator',
-			content: function() {
-				return $('#housingCalcContent').html();
-			},
-			container: ''
-	});
+	// $('#housingCalcButton')
+	//	.click(function(e) {
+	//		e.preventDefault();
+	//	})
+	//	.popover({
+	//		animation: false,
+	//		html: true,
+	//		placement: 'top',
+	//		selector: false,
+	//		trigger: 'click',
+	//		title: 'Monthly Housing Calculator',
+	//		content: function() {
+	//			return $('#housingCalcContent').html();
+	//		},
+	//		container: ''
+	// });
 
-
-	$('[name=pay]')
-		.click(function() {
-			if ( $('#noPay').is(':checked')){
-				$('.getPay').hide();
-			} else if ( $('#weeklyPay').is(':checked')){
-				$('#getWeeklyPay').show();
-				$('#getBiweeklyPay').hide();
-				$('#getSemimonthlyPay').hide();
-				$('#getMonthlyPay').hide();
-			} else if ( $('#biweeklyPay').is(':checked')){
-				$('#getWeeklyPay').hide();
-				$('#getBiweeklyPay').show();
-				$('#getSemimonthlyPay').hide();
-				$('#getMonthlyPay').hide();
-			} else if ( $('#semimonthlyPay').is(':checked')){
-				$('#getWeeklyPay').hide();
-				$('#getBiweeklyPay').hide();
-				$('#getSemimonthlyPay').show();
-				$('#getMonthlyPay').hide();
-			} else if ( $('#monthlyPay').is(':checked')){
-				$('#getWeeklyPay').hide();
-				$('#getBiweeklyPay').hide();
-				$('#getSemimonthlyPay').hide();
-				$('#getMonthlyPay').show();
-			}
-		});
-
-	});
-
-
-
-	// $('[name=budget]')
-	//	.click(function() {
-	//		if ( $('#spouseBudget').is(':checked')){
-	//			$('.spouse').show();
-	//		}
-	//		else {
-	//			$('.spouse').hide();
-	//		}
-	//	});
+}); //end of document ready.
 
 var wars = [ /*These dates reflect MGL c4 s7 cl43rd, not including campaigns or merchant marines, as of 6/11/2013*/
     { name: 'WWI', begin: Date.parse('6-Apr-1917'), end: Date.parse('11-Nov-1918') },
@@ -309,40 +280,33 @@ function checkResidence(){
 function checkAssets(){
 	if ($('#applAssetsMarried1').is(':checked')) {
 		$('#eligibleAssets').val('No');
-		$('#applAssetsNav').removeClass('alert-success alert-info').addClass('alert-error');
 		alert('red');
 		//return 'No';
 	}
 	else if ( $('#maritalStatusMarried').is(':checked') ) {
 		if ( $('#applAssetsMarried0').is(':checked') ){
 			$('#eligibleAssets').val('Yes');
-			$('#applAssetsNav').removeClass('alert-error alert-info').addClass('alert-success');
 			//return 'Yes';
 		}
 		else {
 			$('#eligibleAssets').val('incomplete');
-			$('#applAssetsNav').removeClass('alert-success alert-error').addClass('alert-info');
 		}
 	}
 	else if ( $('#maritalStatusSingle').is(':checked') ) {
 		if ( $('#applAssetsSingle0').is(':checked') ){
 			$('#eligibleAssets').val('Yes');
-			$('#applAssetsNav').removeClass('alert-error alert-info').addClass('alert-success');
 			//return 'Yes';
 		}
 		else if ($('#applAssetsSingle1').is(':checked')) {
 			$('#eligibleAssets').val('No');
-			$('#applAssetsNav').removeClass('alert-success alert-info').addClass('alert-error');
 			//return 'No';
 		}
 		else {
 			$('#eligibleAssets').val('incomplete');
-			$('#applAssetsNav').removeClass('alert-success alert-error').addClass('alert-info');
 		}
 	}
 	else {
 		$('#eligibleAssets').val('incomplete');
-		$('#applAssetsNav').removeClass('alert-success alert-error').addClass('alert-info');
 	}
 }
 

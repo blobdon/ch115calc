@@ -1,7 +1,7 @@
-
+<fieldset id='vetService'>
 <div class='row'>
 <div class='span8 question'>
-  <h4 class=''>Please indicate your branch of service, 
+  <h4 class=''>Please indicate your branch of service,
     dates of service, and which type of discharge you received.</h4>
     <div class='row'>
       <div class='span2 <?php echo !empty($_SESSION['errors']['branch']) ? 'question alert-error' : '';?>'>
@@ -30,7 +30,7 @@
         <span><?php echo isset($_SESSION['errors']['serviceEnd'])?$_SESSION['errors']['serviceEnd']:'';?></span>
         </label>
       </div>
-      <div class='span2 <?php echo !empty($_SESSION['errors']['discharge']) ? 'question alert-error' : '';?>'>  
+      <div class='span2 <?php echo !empty($_SESSION['errors']['discharge']) ? 'question alert-error' : '';?>'>
         <label class='text-center' for="discharge">Type of discharge <br>
         <select class='span2' name="discharge" id="discharge">
           <option value=""></option>
@@ -87,7 +87,7 @@
 
 <div class='row'>
 <!-- Exceptions for purple heart -->
-<div class='span8 service-details question <?php echo !empty($_SESSION['errors']['purpleHeart']) ? 'alert-error' : '';?>'> 
+<div class='span8 service-details question <?php echo !empty($_SESSION['errors']['purpleHeart']) ? 'alert-error' : '';?>'>
   <h4>Were you awarded a Purple Heart?</h4>
   <div class='span8'>
     <input type='radio' name='purpleHeart' id='purpleHeartInclude' value='Skipped' class='hide' checked>
@@ -100,7 +100,7 @@
       <input type='radio' name='purpleHeart' id='purpleHeart0' value='No'
       <?php retain_Radio('purpleHeart', 'No'); ?>>
       NO, I was not awarded a Purple Heart
-    </label> 
+    </label>
   </div>
 </div>
 </div>
@@ -121,13 +121,13 @@
       <?php retain_Radio('serviceDisability','No');?>>
       NO, I do not have a service-connected disability
      </label>
-   </div> 
+   </div>
 </div>
 </div>
 
 <div class='row'>
 <!-- Exceptions for death in service -->
-<!-- <div class='span8 service-details question <?php echo !empty($_SESSION['errors']['serviceDeath']) ? 'alert-error' : '';?>'> 
+<!-- <div class='span8 service-details question <?php echo !empty($_SESSION['errors']['serviceDeath']) ? 'alert-error' : '';?>'>
   <h4>Did the veteran die while on active duty? (under conditions other than dishonorable)</h4>
   <div class='span8'>
     <input type='radio' name='serviceDeath' id='serviceDeathInclude' value='Skipped' class='hide' checked>
@@ -141,7 +141,8 @@
       <?php retain_Radio('serviceDeath','No');?>>
       NO
      </label>
-   </div> 
+   </div>
 </div> -->
 </div>
 <!-- <input type="submit" class='btn btn-primary' name='submitService' value='Continue'> -->
+</fieldset>
