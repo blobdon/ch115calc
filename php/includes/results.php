@@ -10,7 +10,7 @@
 <div class='row'>
 <div class='span8'>
   <hr>
-  <h3>Based on your answers, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.</h3>
+  <h3>Based on your answers, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></h3>
   <hr>
 </div>
 </div>

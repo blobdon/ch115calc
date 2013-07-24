@@ -23,8 +23,8 @@
 <html lang='en'>
 <html>
 <head>
-  <link rel="icon" 
-      type="image/png" 
+  <link rel="icon"
+      type="image/png"
       href="/img/calc-favicon.png">
   <title>Ch115 Calc</title>
   <!-- Bootstrap -->
@@ -137,6 +137,6 @@
    <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
    <script type="text/javascript" src="/js/date.js"></script>
    <script type="text/javascript" src="/js/mine.js"></script>
-     
+
 </body>
 </html>
