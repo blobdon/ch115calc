@@ -69,7 +69,7 @@ $(document).ready(function() {
 			}
 	});
 //Applicant Family
-	$('#liveWithSpouseQ').hide();
+	//$('#liveWithSpouseQ').hide();
 	// if married, ask appl whether lives with spouse
 	$('[name=maritalStatus]')
 		.click(function() {
@@ -77,25 +77,23 @@ $(document).ready(function() {
 				$('#liveWithSpouseQ').show();
 				$('#applAssetsMarriedQ').show();
 				$('#applAssetsSingleQ').hide();
-				$('[name=applAssetsSingle]').prop('checked',false);
+				//$('[name=applAssetsSingle]').prop('checked',false);
 				//$('[name=applAssetsSingle]').val('');
 			}
 			else {
 				$('#liveWithSpouseQ').hide();
 				$('#applAssetsSingleQ').show();
 				$('#applAssetsMarriedQ').hide();
-				$('[name=applAssetsMarried]').prop('checked',false);
+				//$('[name=applAssetsMarried]').prop('checked',false);
 				//$('[name=applAssetsMarried]').val('');
 			}
-			checkAssets();
-
-	});
+		});
 	// hide and show spouse related inccome questions based on married/single/living w/spouse
 	$('[name=liveWithSpouse], [name=maritalStatus]')
 		.click(function() {
 			if ( $('#maritalStatusSingle').is(':checked')){
 				$('.spouse').hide();
-				$("[name=liveWithSpouse]").prop('checked', false);
+				//$("[name=liveWithSpouse]").prop('checked', false);
 			}
 			else if ( $('#liveWithSpouse0').is(':checked')){
 				$('.spouse').hide();
@@ -277,36 +275,5 @@ function checkResidence(){
 }
 // compares assets answers (and marital status) to eligibility standards
 // -updates eligibleAssets and colors nav tab as appropriate
-function checkAssets(){
-	if ($('#applAssetsMarried1').is(':checked')) {
-		$('#eligibleAssets').val('No');
-		alert('red');
-		//return 'No';
-	}
-	else if ( $('#maritalStatusMarried').is(':checked') ) {
-		if ( $('#applAssetsMarried0').is(':checked') ){
-			$('#eligibleAssets').val('Yes');
-			//return 'Yes';
-		}
-		else {
-			$('#eligibleAssets').val('incomplete');
-		}
-	}
-	else if ( $('#maritalStatusSingle').is(':checked') ) {
-		if ( $('#applAssetsSingle0').is(':checked') ){
-			$('#eligibleAssets').val('Yes');
-			//return 'Yes';
-		}
-		else if ($('#applAssetsSingle1').is(':checked')) {
-			$('#eligibleAssets').val('No');
-			//return 'No';
-		}
-		else {
-			$('#eligibleAssets').val('incomplete');
-		}
-	}
-	else {
-		$('#eligibleAssets').val('incomplete');
-	}
-}
+
 
