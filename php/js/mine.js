@@ -1,17 +1,9 @@
 $(document).ready(function() {
 //Javascript visual differnces
-	$('#question-group').css('background-color', '#ffffff');
+	//$('#question-group').css('background-color', '#ffffff');
 // Navigation
-	$('.question-group').hide();
-	$('#vetService').show();
-	$("[data-choose]").on("click", function(e) {
-		e.preventDefault();  // prevent navigating
-		var chosen = $(this).data('choose'); // get corresponding selector from data-choose
-		$('.question-group').hide();
-		$(chosen).slideDown(500);
-	});
 // Veteran Service
-	$('.service-details').hide();
+	//$('.service-details').hide();
 	// defaults for serviceStart datepicker
 	$('#serviceStart').datepicker({
 		format: 'mm/dd/yy',
@@ -43,11 +35,9 @@ $(document).ready(function() {
 					//hide any detailed questions that havent been answered yet b/c not necessary
 					$('.service-details:not(:has(input:checked))').hide();
 					//alert($('#serviceDays').val()+' during '+serviceEra+' is qualifying service. You may proceeed to next section');
-					$('#vetServiceNav').removeClass('alert-error').addClass('alert-success');
 				}
 				else {
 					$('.service-details').show();
-					$('#vetServiceNav').removeClass('alert-success').addClass('alert-error');
 				}
 			}
 	});
@@ -197,14 +187,14 @@ $(document).ready(function() {
 
 
 	// $('[name=budget]')
-	// 	.click(function() {
-	// 		if ( $('#spouseBudget').is(':checked')){
-	// 			$('.spouse').show();
-	// 		}
-	// 		else {
-	// 			$('.spouse').hide();
-	// 		}
-	// 	});
+	//	.click(function() {
+	//		if ( $('#spouseBudget').is(':checked')){
+	//			$('.spouse').show();
+	//		}
+	//		else {
+	//			$('.spouse').hide();
+	//		}
+	//	});
 
 var wars = [ /*These dates reflect MGL c4 s7 cl43rd, not including campaigns or merchant marines, as of 6/11/2013*/
     { name: 'WWI', begin: Date.parse('6-Apr-1917'), end: Date.parse('11-Nov-1918') },
