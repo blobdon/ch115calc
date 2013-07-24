@@ -15,10 +15,6 @@
 </div>
 </div>
 
-
-
-
-
 <div class='row'>
 <div class='span8 hide' id='serviceResults'>
 	<h4>Veteran's service</h4>
@@ -32,7 +28,7 @@
   //         <i class="icon-remove"></i> (>=90 days Active Duty, at least 1 during wartime)<br>
   //         <i class="icon-remove"></i> (Less days than required, but Purple Heart, Service-Connected Disbility, or Service Death'
   //       ).'</div><br>';
-	
+
 //   if ($_SESSION['index'] === count($_SESSION['form'])) {
 
   ?>
@@ -84,7 +80,7 @@
         <td>Total Income (less 200 as work incentive)</td>
         <td>- $ <?php echo $applTotalIncome;?></td>
       </tr>
-      <tr class='total <?php echo $_SESSION['eligibleAll']==='Yes'?'success':'error';?>' 
+      <tr class='total <?php echo $_SESSION['eligibleAll']==='Yes'?'success':'error';?>'
           <?php echo ($applBenefitsPayable>0 && $_SESSION['eligibleAll']==='No')?'style="text-decoration:line-through"':'';?> >
         <td><b>Approximate monthly benefit</b></td>
         <td><b>= $ <?php echo money_format('%.2n', $applBenefitsPayable);?></b></td>
