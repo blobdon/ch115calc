@@ -28,12 +28,12 @@
       href="/img/calc-favicon.png">
   <title>Ch115 Calc</title>
   <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
+    <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
    <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
   <!-- additional -->
-    <link rel="stylesheet" type="text/css" href="/css/datepicker.css">
-    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="./css/custom.css">
 </head>
 <body>
 
@@ -133,10 +133,10 @@
 
 
    <script src="http://code.jquery.com/jquery.js"></script>
-   <script src="/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-   <script type="text/javascript" src="/js/date.js"></script>
-   <script type="text/javascript" src="/js/mine.js"></script>
+   <script src="./js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="./js/bootstrap-datepicker.js"></script>
+   <script type="text/javascript" src="./js/date.js"></script>
+   <script type="text/javascript" src="./js/mine.js"></script>
 
 </body>
 </html>
