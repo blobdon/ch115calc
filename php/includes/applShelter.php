@@ -70,7 +70,7 @@
   <div class='input-prepend input-append'>
     <span class='add-on'>$</span>
     <input type="text" name='applHousingCost' id='applHousingCost' class='span1'
-    value='<?php echo !empty($_SESSION['applHousingCost'])?htmlspecialchars($_SESSION['applHousingCost']):'';?>'>
+    value='<?php echo isset($_SESSION['applHousingCost'])?htmlspecialchars($_SESSION['applHousingCost']):'';?>'>
     <span class='add-on'>per month</span>
     <button class='calc hide' type='button' id="housingCalcButton" class="btn">
       Calculator
@@ -94,7 +94,7 @@
   <div class='input-prepend input-append'>
     <span class='add-on'>$</span>
     <input type="text" name='applHeatingCost' id='applHeatingCost' class='span1' 
-            value='<?php echo !empty($_SESSION['applHeatingCost'])?htmlspecialchars($_SESSION['applHeatingCost']):'';?>' >
+            value='<?php echo isset($_SESSION['applHeatingCost'])?htmlspecialchars($_SESSION['applHeatingCost']):'';?>' >
     <span class='add-on'>per month</span>
   </div>
   <?php echo isset($_SESSION['errors']['applHeatingCost'])?$_SESSION['errors']['applHeatingCost']:''; ?>

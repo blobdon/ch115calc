@@ -5,7 +5,7 @@
   <div class='input-prepend input-append'>
     <span class='add-on'>$</span>
     <input type="text" name='applEarnedIncome' id='applEarnedIncome' class='span1'
-    value='<?php echo !empty($_SESSION['applEarnedIncome'])?htmlspecialchars($_SESSION['applEarnedIncome']):'';?>'>
+    value='<?php echo isset($_SESSION['applEarnedIncome'])?htmlspecialchars($_SESSION['applEarnedIncome']):'';?>'>
     <span class='add-on'>per month</span>
     <button class='calc hide' type='button' id="earnedIncomeCalcButton" class="btn">
       Calculator
@@ -34,7 +34,7 @@
   <div class='input-prepend input-append'>
     <span class='add-on'>$</span>
     <input type="text" name='applOtherIncome' id='applOtherIncome' class='span1'
-    value='<?php echo !empty($_SESSION['applOtherIncome'])?htmlspecialchars($_SESSION['applOtherIncome']):'';?>'>
+    value='<?php echo isset($_SESSION['applOtherIncome'])?htmlspecialchars($_SESSION['applOtherIncome']):'';?>'>
     <span class='add-on'>per month</span>
     <button class='calc hide' type='button' id="otherIncomeCalcButton" class="btn">
       Calculator
