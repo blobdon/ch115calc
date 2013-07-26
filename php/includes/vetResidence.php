@@ -19,7 +19,7 @@
 </div>
 </div>
 
-<div class='row'>
+<div class='row hide'>
 <div class='span8 question <?php echo !empty($_SESSION['errors']['vetResidePrior']) ? 'alert-error' : '';?>' id='vetResidePriorQ'>
   <h4>Did you live in Massachusetts when you began your active duty service?</h4>
   <div class='span8'>
@@ -38,7 +38,7 @@
 </div>
 </div>
 
-<div class='row'>
+<div class='row hide'>
 <div class='span8 question <?php echo !empty($_SESSION['errors']['vetReside3Years']) ? 'alert-error' : '';?>' id='vetReside3YearsQ'>
   <input type='radio' name='vetReside3Years' id='vetReside3YearsInclude' value='Skipped' class='hide' checked>
   <h4>Have you lived, <abbr title="">continuosly</abbr>, in Massachusetts for 3 or more years?</h4>

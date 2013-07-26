@@ -1,13 +1,12 @@
 <?php
-  // error_reporting(E_ALL & E_NOTICE);
-  // ini_set('display_errors', 'On');
+  error_reporting(E_ALL & E_NOTICE);
+  ini_set('display_errors', 'On');
   session_start();
 ?><!DOCTYPE html>
 <?php
-  //echo session_id();
-  //echo '<br>';
   if ( !isset($_SESSION['form']) || !isset($_SESSION['index']) ){
     $_SESSION['form'] = array(
+      0 => dirname(__FILE__).'/includes/intro.php',
       1 => dirname(__FILE__).'/includes/vetService.php',
       2 => dirname(__FILE__).'/includes/vetResidence.php',
       3 => dirname(__FILE__).'/includes/applFamily.php',
@@ -15,7 +14,7 @@
       5 => dirname(__FILE__).'/includes/applShelter.php',
       6 => dirname(__FILE__).'/includes/results.php'
       );
-    $_SESSION['index'] = 1;
+    $_SESSION['index'] = 0;
   }
   require_once(dirname(__FILE__).'/includes/myFunctions.php');
 ?>
@@ -66,6 +65,8 @@
     </div>
     <div class='row'>
       <ul class='inline text-center'>
+        <li class='progress-tab text-center  <?php echo $_SESSION['index']==0?'current':'';?>'>Intro<br><i class='icon-ok'></i></li>
+        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
         <li class='progress-tab text-center  <?php echo $_SESSION['index']==1?'current':'';?>'>Service<br><i class='icon-star'></i></li>
         <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
         <li class='progress-tab text-center  <?php echo $_SESSION['index']==2?'current':'';?>'>Residence<br><i class='icon-envelope'></i></li>
