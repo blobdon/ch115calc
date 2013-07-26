@@ -112,8 +112,8 @@
         <?php
           include($_SESSION['form'][$_SESSION['index']]);
           echo '<hr>';
-          echo $_SESSION['index']>0?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Back'>":'';
-          echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large pull-right' name='submit' value='Continue'>":'';
+          echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'> ":'';
+          echo $_SESSION['index']>0?"<button type='submit' class='btn btn-large' name='submit' value='Back'>Go Back</button>":'';
         ?>
       </form>
     </div>
