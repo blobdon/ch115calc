@@ -18,7 +18,8 @@
   </div>
 </div>
 </div>
-
+<!-- next two questions only necessary for dependents - must also ask about dependents residence -->
+<?php if (isset($_SESSION['applicant'])):?>
 <div class='row hide'>
 <div class='span8 question <?php echo !empty($_SESSION['errors']['vetResidePrior']) ? 'alert-error' : '';?>' id='vetResidePriorQ'>
   <h4>Did you live in Massachusetts when you began your active duty service?</h4>
@@ -56,7 +57,7 @@
   </div>
 </div>
 </div>
-
+<?php endif;?>
 
 <!--   <div class='span8'>
   <h4>What is the ZIPCODE of your current residence?</h4>
