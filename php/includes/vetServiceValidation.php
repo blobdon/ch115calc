@@ -1,7 +1,6 @@
 <?php
   // error_reporting(E_ALL);
   // ini_set('display_errors', 'On');
-$_SESSION['test'] = dirname(__FILE__).'/includes/test';
 #
 # service date Validation and modification for unix epoch
 #      - would like to rework this to consitently use dateTime object, currently saves back to string in session

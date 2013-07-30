@@ -54,8 +54,13 @@
   <?php foreach ($_SESSION['questions'] as $name => $array) {
           if ($array['status']==='answered') : ?>
             <div class='row'>
-              <div class='span8 offset2 well'>
+              <div class='span8 offset2 answered'>
                 <?php include('./includes/questions/'.$array['filename']);?>
+                  <div class='reset-button'>
+                    <form action="process.php" method='GET'>
+                      <input type="submit" class='btn' name='Edit' value='Edit'>
+                    </form>
+                  </div>
               </div>
             </div>
           <?php endif;
@@ -63,16 +68,14 @@
   <div class='row'>
     <div class='span8 offset2' id='questions'>
       <form class='form-horizontal' action="process.php" method='GET'>
-        <?php
-        foreach ($_SESSION['questions'] as $name => $array) {
-          if ($array['status']==='current') {
-            include('./includes/questions/'.$array['filename']);
-          }
-        }
-          echo '<hr>';
-          echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'> ":'';
-          echo $_SESSION['index']>0?"<button type='submit' class='btn btn-large' name='submit' value='Back'>Go Back</button>":'';
+        <?php foreach ($_SESSION['questions'] as $name => $array) {
+                if ($array['status']==='current') {
+                  include('./includes/questions/'.$array['filename']);
+                }
+              }
         ?>
+        <?php echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'> ":'';?>
+        <?php echo $_SESSION['index']>0?"<button type='submit' class='btn btn-large' name='submit' value='Back'>Go Back</button>":'';?>
       </form>
     </div>
 

@@ -1,5 +1,8 @@
-<h4 class=''>Please indicate your branch of service, dates of service, and which type of discharge you received.</h4>
+<?php echo $_SESSION['questions']['service']['status']==='current'?'<h4>':''; ?>
+Please indicate your branch of service, dates of service, and which type of discharge you received.
+<?php echo $_SESSION['questions']['service']['status']==='current'?'</h4>':''; ?>
 <div class='row'>
+  <?php if ($_SESSION['questions']['service']['status']==='current') : ?>
   <div class='span2 <?php echo !empty($_SESSION['errors']['branch']) ? 'question alert-error' : '';?>'>
     <label class='text-center' for="branch">Branch of service <br>
     <select class='span2' name='branch' id='branch'>
@@ -38,4 +41,11 @@
       <option value="Other"<?php retain_Select('discharge','Other');?>>Other</option>
     </select></label>
   </div>
+  <?php else :?>
+  <div class='span8'>
+    <strong>
+      <?php echo 'Service in the '.$_SESSION['branch'].' from '.$_SESSION['serviceStart'].' to '.$_SESSION['serviceEnd'].' with '.$_SESSION['discharge'].' discharge';?>
+    </strong>
+  </div>
+  <?php endif;?>
 </div>

@@ -53,12 +53,14 @@ foreach ($_GET as $name => $value) {
 #
 #  1 - SERVICE-SPECIFIC VALIDATION
 #
-// if ($_SESSION['index'] === 1) {
 //   require_once(dirname(__FILE__).'/includes/vetServiceValidation.php');
-// }
 if ($_SESSION['questions']['service']['status']==='current') {
-  $_SESSION['questions']['service']['status']='answered';
-  $_SESSION['questions']['kdsm']['status']='current';
+    if (!empty($_SESSION['errors']['branch']) || !empty($_SESSION['errors']['serviceStart']) || !empty($_SESSION['errors']['serviceEnd']) || !empty($_SESSION['errors']['discharge']) ) {
+    } else {
+      $_SESSION['questions']['service']['status']='answered';
+      $_SESSION['questions']['kdsm']['status']='current';
+    }
+
 }
 
 # 2 - RESIDENCE VALIDATION
