@@ -4,21 +4,21 @@
   session_start();
 ?><!DOCTYPE html>
 <?php
-  if ( !isset($_SESSION['form']) || !isset($_SESSION['index']) ){
-    $_SESSION['form'] = array(
-      0 => dirname(__FILE__).'/includes/intro.php',
-      1 => dirname(__FILE__).'/includes/vetService.php',
-      2 => dirname(__FILE__).'/includes/vetResidence.php',
-      3 => dirname(__FILE__).'/includes/applFamily.php',
-      4 => dirname(__FILE__).'/includes/applFinances.php',
-      5 => dirname(__FILE__).'/includes/applShelter.php',
-      6 => dirname(__FILE__).'/includes/results.php'
-      );
-    $_SESSION['index'] = 0;
-  }
+  // if ( !isset($_SESSION['form']) || !isset($_SESSION['index']) ){
+  //   $_SESSION['form'] = array(
+  //     0 => dirname(__FILE__).'/includes/intro.php',
+  //     1 => dirname(__FILE__).'/includes/vetService.php',
+  //     2 => dirname(__FILE__).'/includes/vetResidence.php',
+  //     3 => dirname(__FILE__).'/includes/applFamily.php',
+  //     4 => dirname(__FILE__).'/includes/applFinances.php',
+  //     5 => dirname(__FILE__).'/includes/applShelter.php',
+  //     6 => dirname(__FILE__).'/includes/results.php'
+  //     );
+  //   $_SESSION['index'] = 0;
+  // }
   if ( !isset($_SESSION['questions']) ){
     $_SESSION['questions'] = array(
-      'service' => array('status' => 'none', 'filename' => 'service.php'),
+      'service' => array('status' => 'current', 'filename' => 'service.php'),
       'kdsm' => array('status' => 'none', 'filename' => 'kdsm.php'),
       'campaigns' => array('status' => 'none', 'filename' => 'campaigns.php'),
       'purpleHeart' => array('status' => 'none', 'filename' => 'purpleHeart.php'),
@@ -47,82 +47,28 @@
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
 </head>
 <body>
-
-  <div class='container progress-tracker'>
-    <br>
-    <div class='hide row'>
-      <div class='span2 text-center progress-tab <?php echo $_SESSION['index']==1?'current':'';?>'>
-        <div class=''>Service<br><i class='icon-star'></i></div>
-        <div class='pull-right progress-arrow'><i class='icon-arrow-right'></i></div>
-      </div>
-      <div class='span2 text-center progress-tab <?php echo $_SESSION['index']==2?'current':'';?>'>
-        <div class=''>Residence<br><i class='icon-envelope'></i></div>
-        <div class=' pull-right progress-arrow'><i class='icon-arrow-right'></i></div>
-      </div>
-      <div class='span2 text-center progress-tab <?php echo $_SESSION['index']==3?'current':'';?>'>
-        <div class=''>Family<br><i class='icon-user'></i></div>
-        <div class=' pull-right progress-arrow'><i class='icon-arrow-right'></i></div>
-      </div>
-      <div class='span2 text-center progress-tab <?php echo $_SESSION['index']==4?'current':'';?>'>
-        <div class=''>Finances<br><i class='icon-briefcase'></i></div>
-        <div class=' pull-right progress-arrow'><i class='icon-arrow-right'></i></div>
-      </div>
-      <div class='span2 text-center progress-tab <?php echo $_SESSION['index']==5?'current':'';?>'>
-        <div class=''>Housing<br><i class='icon-home'></i></div>
-        <div class=' pull-right progress-arrow'><i class='icon-arrow-right'></i></div>
-      </div>
-      <div class='span2 text-center progress-tab <?php echo $_SESSION['index']==6?'current':'';?>'>
-        <div class=''>Results<br><i class='icon-list'></i></div>
-      </div>
-    </div>
-    <div class='row'>
-      <ul class='inline text-center'>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==0?'current':'';?>'>Intro<br><i class='icon-ok'></i></li>
-        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==1?'current':'';?>'>Service<br><i class='icon-star'></i></li>
-        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==2?'current':'';?>'>Residence<br><i class='icon-envelope'></i></li>
-        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==3?'current':'';?>'>Family<br><i class='icon-user'></i></li>
-        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==4?'current':'';?>'>Financial<br><i class='icon-briefcase'></i></li>
-        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==5?'current':'';?>'>Housing<br><i class='icon-home'></i></li>
-        <li class=' progress-arrow text-center'><i class='icon-arrow-right'></i></li>
-        <li class='progress-tab text-center  <?php echo $_SESSION['index']==6?'current':'';?>'>Results<br><i class='icon-list'></i></li>
-      </ul>
-    </div>
-      <div class="hide pagination pagination-centered">
-      <ul>
-        <li><span class='text-center'>Service<br><i class='icon-star'></i></span></li>
-        <li><span class='text-center'>Residence<br><i class='icon-envelope'></i></span></li>
-        <li><span class='text-center'>Family<br><i class='icon-user'></i></span></li>
-        <li><span class='text-center'>Financial<br><i class='icon-briefcase'></i></span></li>
-        <li><span class='text-center'>Housing<br><i class='icon-home'></i></span></li>
-        <li><span class='text-center'>Results<br><i class='icon-list'></i></span></li>
-      </ul>
-      </div>
-      <div class='reset-button'>
-        <form action="process.php" method='GET'>
-          <!-- <input type="submit" class='btn btn-warning' name='submitBegin' value='Begin'> -->
-          <input type="submit" class='btn btn-warning' name='submitReset' value='Reset'>
-        </form>
-      </div>
-    </div> <!-- end of navigation div -->
-
-
-
-
+<!-- navigatio/progress tracker -->
+  <?php include('./includes/navTracker.php'); ?>
 
   <div class='container'>
+  <?php foreach ($_SESSION['questions'] as $name => $array) {
+          if ($array['status']==='answered') : ?>
+            <div class='row'>
+              <div class='span8 offset2 well'>
+                <?php include('./includes/questions/'.$array['filename']);?>
+              </div>
+            </div>
+          <?php endif;
+        }?>
   <div class='row'>
-    <div class='span2'>
-
-    </div>
-    <div class='span8' id='questions'>
+    <div class='span8 offset2' id='questions'>
       <form class='form-horizontal' action="process.php" method='GET'>
         <?php
-          include($_SESSION['form'][$_SESSION['index']]);
+        foreach ($_SESSION['questions'] as $name => $array) {
+          if ($array['status']==='current') {
+            include('./includes/questions/'.$array['filename']);
+          }
+        }
           echo '<hr>';
           echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'> ":'';
           echo $_SESSION['index']>0?"<button type='submit' class='btn btn-large' name='submit' value='Back'>Go Back</button>":'';
@@ -136,11 +82,10 @@
       <?php //echo $_SESSION['index'].'<br>'.$_SESSION['form'][$_SESSION['index']];  ?>
     </div>
       <?php
-        //print('<pre>');
-        //echo 'Session ';
-        //print_r($_SESSION);
-        //print('</pre>');
-        //session_write_close();
+        print('<pre>');
+        echo 'Session ';
+        print_r($_SESSION);
+        print('</pre>');
      ?>
   </div> <!-- main container -->
 

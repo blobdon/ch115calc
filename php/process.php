@@ -47,10 +47,18 @@ foreach ($_GET as $name => $value) {
   $_SESSION[$name] = $value;
 }
 #
+#  set some shortcut variables
+#
+
+#
 #  1 - SERVICE-SPECIFIC VALIDATION
 #
-if ($_SESSION['index'] === 1) {
-  require_once(dirname(__FILE__).'/includes/vetServiceValidation.php');
+// if ($_SESSION['index'] === 1) {
+//   require_once(dirname(__FILE__).'/includes/vetServiceValidation.php');
+// }
+if ($_SESSION['questions']['service']['status']==='current') {
+  $_SESSION['questions']['service']['status']='answered';
+  $_SESSION['questions']['kdsm']['status']='current';
 }
 
 # 2 - RESIDENCE VALIDATION
@@ -136,11 +144,11 @@ foreach ($_SESSION['errors'] as $value) {
 #
 # NAVIGATION AFTER ALL VALIDATION AND CALCULATIONS
 // modify index based on Back/Continut submission and presence of errors
-if (!$_SESSION['hazError'] && $_GET['submit']==='Continue') {
-  $_SESSION['index'] += 1;
-} elseif (!$_SESSION['hazError'] && $_GET['submit']==='Back') {
-  $_SESSION['index'] -= 1;
-}
+// if (!$_SESSION['hazError'] && $_GET['submit']==='Continue') {
+//   $_SESSION['index'] += 1;
+// } elseif (!$_SESSION['hazError'] && $_GET['submit']==='Back') {
+//   $_SESSION['index'] -= 1;
+// }
 //redirect to user page
 session_write_close();
 header("Location: index.php"); /* Redirect browser */
