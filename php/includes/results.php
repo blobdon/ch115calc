@@ -2,10 +2,8 @@
 #
 #  6 - RESULTS CALCULATION
 #
-  if ($_SESSION['index'] === 6 && !$_SESSION['hazError']) {
-    //make sure calling from correct file - DIR is from calling script, in this case already in /inlcudes
-    require_once(dirname(__FILE__).'/resultsCalc.php');
-  }
+//make sure calling from correct file - DIR is from calling script, in this case already in /inlcudes
+require_once(dirname(__FILE__).'/resultsCalc.php');
 ?>
 <div class='row'>
 <div class='span8'>

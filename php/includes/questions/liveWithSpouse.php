@@ -1,4 +1,4 @@
-<h4>If married, do you live with your spouse?</h4>
+<h4>Do you live with your spouse?</h4>
 <div class='span8'>
 		<input type='radio' name='liveWithSpouse' id='liveWithSpouseInclude' value='Skipped' class='hide' checked>
 		<label class="radio" for='liveWithSpouse1'>

@@ -75,105 +75,206 @@ if (is_Ready('service')) {
     if (is_Eligible_Service($serviceStart,$serviceEnd)) {
       $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
       $_SESSION['questions']['vetReside']['status']='current';
-
     } else {
       $_SESSION['eligibleService'] = 'No';
-      $_SESSION['questions']['serviceDisability']['status']='current';
+      $_SESSION['questions']['purpleHeart']['status']='current';
     }
   } // end of if no errors
 } // end of if service
+## service details - purpleHeart
+elseif (is_Ready('purpleHeart')) {
+  $_SESSION['questions']['purpleHeart']['status']='answered';
+  $serviceStart = new DateTime($_SESSION['serviceStart']);
+  $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['questions']['vetReside']['status']='current';
+  } else {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['questions']['serviceDisability']['status']='current';
+  }
+}
 ## service details - serviceDisability
 elseif (is_Ready('serviceDisability')) {
-  $routing = array('Yes'=>'vetReside', 'No'=>'purpleHeart');
-  radio_Router('serviceDisability', array('Yes'=>'vetReside', 'No'=>'purpleHeart'));
+  $_SESSION['questions']['serviceDisability']['status']='answered';
+  $serviceStart = new DateTime($_SESSION['serviceStart']);
+  $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['questions']['vetReside']['status']='current';
+  } else {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['questions']['kdsm']['status']='current';
+  }
 }
-## service details - purpleHeart
-elseif (is_Ready('purpleHeart')) {}
+## service details - kdsm
+elseif (is_Ready('kdsm')) {
+  $_SESSION['questions']['kdsm']['status']='answered';
+  $serviceStart = new DateTime($_SESSION['serviceStart']);
+  $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+  if ( is_Wartime($serviceStart, $serviceEnd) ) {
+    $_SESSION['test'] = 'hello';
+    $_SESSION['serviceEra'] = is_Wartime($serviceStart,$serviceEnd);
+  } else {
+    $_SESSION['serviceEra'] = 'Peacetime';
+    $_SESSION['test'] = 'got to else';
+  }
+  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['questions']['vetReside']['status']='current';
+      $_SESSION['test2'] = 'second if';
+  } else {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['questions']['campaigns']['status']='current';
+      $_SESSION['test2'] = 'second else';
+  }
+}
 ## service details - campaigns
 //have to update session var for campaigns outside loop, doesnt update if empty on later submits
 elseif (is_Ready('campaigns')) {
+  $_SESSION['questions']['campaigns']['status']='answered';
   $_SESSION['campaigns'] = $_GET['campaigns'];
+  $serviceStart = new DateTime($_SESSION['serviceStart']);
+  $serviceEnd = new DateTime($_SESSION['serviceEnd']);;
+  if ( is_Wartime($serviceStart, $serviceEnd) ) {
+    $_SESSION['serviceEra'] = is_Wartime($serviceStart,$serviceEnd);
+  } else {
+    $_SESSION['serviceEra'] = 'Peacetime';
+  }
+  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['questions']['vetReside']['status']='current';
+  } else {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['questions']['vetReside']['status']='current'; //later change to results page showing ineligible.
+  }
 }
-## service details - kdsm
-elseif (is_Ready('kdsm')) {}
 ## service details - serviceDeath
 elseif (is_Ready('serviceDeath')) {}
 ## residence - currently
 elseif (is_Ready('vetReside')) {
-    if ($_SESSION['vetReside'] === 'Yes'){
+  $_SESSION['questions']['vetReside']['status']='answered';
+  if ($_SESSION['vetReside'] === 'Yes'){
     $_SESSION['eligibleResidence'] = 'Yes';
   } else {
     $_SESSION['eligibleResidence'] = 'No';
   }
+  $_SESSION['questions']['maritalStatus']['status']='current';
 }
 ## residence - prior to service
 elseif (is_Ready('vetResidePrior')) {}
 ## residence - 3 years continuous
 elseif (is_Ready('vetReside3Years')) {}
 ## family - marital status
-elseif (is_Ready('maritalStatus')) {}
+elseif (is_Ready('maritalStatus')) {
+  $_SESSION['questions']['maritalStatus']['status']='answered';
+  if ($_SESSION['maritalStatus']==='Married') {
+    $_SESSION['questions']['liveWithSpouse']['status']='current';
+  } else {
+    $_SESSION['questions']['children']['status']='current';
+  }
+}
 ## family - if married, live with spouse
-elseif (is_Ready('liveWithSpouse')) {}
+elseif (is_Ready('liveWithSpouse')) {
+  $_SESSION['questions']['liveWithSpouse']['status']='answered';
+  $_SESSION['questions']['children']['status']='current';
+}
 ## family - children
 elseif (is_Ready('children')) {
-  $_SESSION['applChildren'] = filter_var($_GET['applChildren'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
-  if (empty($_SESSION['applChildren']) && $_SESSION['applChildren'] !== 0){
-    $_SESSION['errors']['applChildren'] = 'Please enter a valid number (eg 0,1,2...)';
-    $_SESSION['applChildren'] = $_GET['applChildren'];
+  $_SESSION['children'] = filter_var($_GET['children'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
+  if (empty($_SESSION['children']) && $_SESSION['children'] !== 0){
+    $_SESSION['errors']['children'] = 'Please enter a valid number (eg 0,1,2...)';
+    $_SESSION['children'] = $_GET['children'];
+  } else {
+    $_SESSION['questions']['children']['status']='answered';
+    $_SESSION['questions']['earnedIncome']['status']='current';
   }
 }
 ## finances - earned income
 elseif (is_Ready('earnedIncome')) {
-  $_SESSION['applEarnedIncome'] = filter_var($_GET['applEarnedIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
-  if (empty($_SESSION['applEarnedIncome']) && $_SESSION['applEarnedIncome'] !== 0){
-    $_SESSION['errors']['applEarnedIncome'] = 'Please enter a valid dollar amount (0 is OK)';
-    $_SESSION['applEarnedIncome'] = $_GET['applEarnedIncome'];
+  $_SESSION['earnedIncome'] = filter_var($_GET['earnedIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
+  if (empty($_SESSION['earnedIncome']) && $_SESSION['earnedIncome'] !== 0){
+    $_SESSION['errors']['earnedIncome'] = 'Please enter a valid dollar amount (0 is OK)';
+    $_SESSION['earnedIncome'] = $_GET['earnedIncome'];
+  } else {
+    $_SESSION['questions']['earnedIncome']['status']='answered';
+    $_SESSION['questions']['otherIncome']['status']='current';
   }
 }
 ## finances - other income
 elseif (is_Ready('otherIncome')) {
-  $_SESSION['applOtherIncome'] = filter_var($_GET['applOtherIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
-  if (empty($_SESSION['applOtherIncome']) && $_SESSION['applOtherIncome'] !== 0){
-    $_SESSION['errors']['applOtherIncome'] = 'Please enter a valid dollar amount (0 is OK)';
-    $_SESSION['applOtherIncome'] = $_GET['applOtherIncome'];
+  $_SESSION['otherIncome'] = filter_var($_GET['otherIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
+  if (empty($_SESSION['otherIncome']) && $_SESSION['otherIncome'] !== 0){
+    $_SESSION['errors']['otherIncome'] = 'Please enter a valid dollar amount (0 is OK)';
+    $_SESSION['otherIncome'] = $_GET['otherIncome'];
+  } else {
+    $_SESSION['questions']['otherIncome']['status']='answered';
+    $_SESSION['questions']['otherBenefits']['status']='current';
   }
 }
 ## finances - other/REBA benefits
-elseif (is_Ready('otherBenefits')) {}
+elseif (is_Ready('otherBenefits')) {
+  $_SESSION['questions']['otherBenefits']['status']='answered';
+  $_SESSION['questions']['payMedicareB']['status']='current';
+}
 ## finances - pay medicare B premiums
-elseif (is_Ready('payMedicareB')) {}
+elseif (is_Ready('payMedicareB')) {
+  $_SESSION['questions']['payMedicareB']['status']='answered';
+  if ($_SESSION['maritalStatus']==='Married') {
+    $_SESSION['questions']['assetsMarried']['status']='current';
+  } else {
+    $_SESSION['questions']['assetsSingle']['status']='current';
+  }
+}
 ## finances - assets if single
 elseif (is_Ready('assetsSingle')) {
-  if ($_SESSION['maritalStatus']==='Single' && $_SESSION['applAssetsSingle']==='Yes'){
-    $_SESSION['eligibleAssets']='No';
+  $_SESSION['questions']['assetsSingle']['status']='answered';
+  if ($_SESSION['maritalStatus']==='Single' && $_SESSION['assetsSingle']==='Yes'){
+    $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ????
   } else {
     $_SESSION['eligibleAssets']='Yes';
   }
+  $_SESSION['questions']['shelterType']['status']='current';
 }
 ## finances - assets if married
 elseif (is_Ready('assetsMarried')) {
-  if ($_SESSION['maritalStatus']==='Married' && $_SESSION['applAssetsMarried']==='Yes'){
-    $_SESSION['eligibleAssets']='No';
+  $_SESSION['questions']['assetsMarried']['status']='answered';
+  if ($_SESSION['maritalStatus']==='Married' && $_SESSION['assetsMarried']==='Yes'){
+    $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ????
   } else {
     $_SESSION['eligibleAssets']='Yes';
   }
+  $_SESSION['questions']['shelterType']['status']='current';
 }
 ## housing - shelter type
-elseif (is_Ready('shelterType')) {}
+elseif (is_Ready('shelterType')) {
+  $_SESSION['questions']['shelterType']['status']='answered';
+  if ($_SESSION['shelterType']==='Institutional') {
+    $_SESSION['questions']['shelterType']['status']='current'; // GO TO RESULTS
+  } else {
+    $_SESSION['questions']['housingCost']['status']='current';
+  }
+}
 ## housing - housing cost
 elseif (is_Ready('housingCost')) {
-  $_SESSION['applHousingCost'] = filter_var($_GET['applHousingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
-  if (empty($_SESSION['applHousingCost']) && $_SESSION['applHousingCost'] !== 0){
-    $_SESSION['errors']['applHousingCost'] = 'Please enter a valid dollar amount (0 is OK)';
-    $_SESSION['applHousingCost'] = $_GET['applHousingCost'];
+  $_SESSION['housingCost'] = filter_var($_GET['housingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
+  if (empty($_SESSION['housingCost']) && $_SESSION['housingCost'] !== 0){
+    $_SESSION['errors']['housingCost'] = 'Please enter a valid dollar amount (0 is OK)';
+    $_SESSION['housingCost'] = $_GET['housingCost'];
+  } else {
+    $_SESSION['questions']['housingCost']['status']='answered';
+    $_SESSION['questions']['heatingCost']['status']='current';
   }
 }
 ## housing - heating cost
 elseif (is_Ready('heatingCost')) {
-  $_SESSION['applHeatingCost'] = filter_var($_GET['applHeatingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
-  if (empty($_SESSION['applHeatingCost']) && $_SESSION['applHeatingCost'] !== 0){
-    $_SESSION['errors']['applHeatingCost'] = 'Please enter a valid dollar amount (0 is OK)';
-    $_SESSION['applHeatingCost'] = $_GET['applHeatingCost'];
+  $_SESSION['heatingCost'] = filter_var($_GET['heatingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
+  if (empty($_SESSION['heatingCost']) && $_SESSION['heatingCost'] !== 0){
+    $_SESSION['errors']['heatingCost'] = 'Please enter a valid dollar amount (0 is OK)';
+    $_SESSION['heatingCost'] = $_GET['heatingCost'];
+  } else {
+    $_SESSION['questions']['heatingCost']['status']='answered';
+    $_SESSION['questions']['heatingCost']['status']='current'; // GO TO RESULTS
   }
 }
 
@@ -220,7 +321,6 @@ function service_Date_Validate($dateName){
     $_SESSION['errors'][$dateName] = 'Invalid Date <br> (format as mm/dd/yy)';
     return;
   }
-  //$_SESSION[$dateName] = new DateTime($_SESSION[$dateName]);
   $futureCutoff = new DateTime('+10 years');
   $pastCutoff = new DateTime('-100 years');
   //fix unix epoch problems with years befor 1970. Any date that comes up 10 years from now, will be set to 1900 version
@@ -228,7 +328,7 @@ function service_Date_Validate($dateName){
   if ($date > $futureCutoff || $date < $pastCutoff ){
     $_SESSION['errors'][$dateName] = 'Outside reasonable date range';
   }
-  $_SESSION[$dateName] = $date->format('m/d/y');
+  $_SESSION[$dateName] = $date->format('m/d/Y');
 }
 // check user service dates against MGL definition of veteran
 function is_Wartime($serviceStart, $serviceEnd){
@@ -255,8 +355,8 @@ function is_Wartime($serviceStart, $serviceEnd){
       }
     }
     else { // extra input needed to meet threshold
-      if (is_array($_GET[$wars[$name]['extraInputName']])) { // campaign checkboxes are in array
-        foreach ($_GET[$wars[$name]['extraInputName']] as $value) {
+      if (is_array($_SESSION[$wars[$name]['extraInputName']])) { // campaign checkboxes are in array
+        foreach ($_SESSION[$wars[$name]['extraInputName']] as $value) {
           if ( $value === $wars[$name]['extraInputValue'] &&
             !( $serviceStart > $wars[$name]['end'] || $wars[$name]['begin'] > $serviceEnd) ) {
             // inverse of No overlap = overlap = wartime service
@@ -265,7 +365,7 @@ function is_Wartime($serviceStart, $serviceEnd){
         }
       }
       else { //kdsm is not in array
-        if ( $_GET[$wars[$name]['extraInputName']] === $wars[$name]['extraInputValue'] &&
+        if ( $_SESSION[$wars[$name]['extraInputName']] === $wars[$name]['extraInputValue'] &&
           !( $serviceStart > $wars[$name]['end'] || $wars[$name]['begin'] > $serviceEnd) ) {
           // inverse of No overlap = overlap = wartime service
           return $name; //leave function because met wartime service threshold    }
@@ -282,10 +382,10 @@ function is_Eligible_Service($serviceStart, $serviceEnd){
   if ( $_SESSION['serviceDays'] >= $peacetimeMin->d ){
     Return '>=180 days Active Duty';
   }
-  elseif ( is_Wartime($serviceStart,$serviceEnd) &&  ($_SESSION['serviceDays'] >= $wartimeMin->d) ){
+  elseif ( is_Wartime($serviceStart,$serviceEnd) && ($_SESSION['serviceDays'] >= $wartimeMin->d) ){
     Return '>=90 days Active Duty, at least 1 during wartime';
   }
-  elseif ( $_GET['purpleHeart']       === "Yes" ||
+  elseif ( $_GET['purpleHeart']   === "Yes" ||
        $_GET['serviceDisability'] === "Yes" ||
        $_GET['serviceDeath']      === "Yes" ) {
     Return 'Purple Heart, Service-Connected Disbility, or Service Death';

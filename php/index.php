@@ -50,6 +50,8 @@
         <?php foreach ($_SESSION['questions'] as $name => $array) {
                 if ($array['status']==='current') {
                   include('./includes/questions/'.$array['filename']);
+                } elseif ($array['status']==='ineligible') {
+                  include('./include/resutls.php');
                 }
               }
         ?><br><br><br>
