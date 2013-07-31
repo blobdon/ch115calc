@@ -5,7 +5,7 @@
 ?><!DOCTYPE html>
 <?php
   if ( !isset($_SESSION['questions']) ){
-    include(dirname(__FILE__).'/includes/questions/questionsArray.php');
+    require(dirname(__FILE__).'/includes/questions/questionsArray.php');
   }
   require_once(dirname(__FILE__).'/includes/myFunctions.php');
 ?>
