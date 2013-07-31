@@ -9,14 +9,14 @@
 </ul>
 <div class='input-prepend input-append'>
   <span class='add-on'>$</span>
-  <input type="text" name='applOtherIncome' id='applOtherIncome' class='span1'
-  value='<?php echo isset($_SESSION['applOtherIncome'])?htmlspecialchars($_SESSION['applOtherIncome']):'';?>'>
+  <input type="text" name='otherIncome' id='otherIncome' class='span1'
+  value='<?php echo isset($_SESSION['otherIncome'])?htmlspecialchars($_SESSION['otherIncome']):'';?>'>
   <span class='add-on'>per month</span>
   <button class='calc hide' type='button' id="otherIncomeCalcButton" class="btn">
     Calculator
   </button>
 </div>
-<?php echo isset($_SESSION['errors']['applOtherIncome'])?$_SESSION['errors']['applOtherIncome']:''; ?>
+<?php echo isset($_SESSION['errors']['otherIncome'])?$_SESSION['errors']['otherIncome']:''; ?>
 
 <div id='otherIncomeCalcContent' class='hide'>
   Under Construction

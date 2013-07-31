@@ -8,8 +8,8 @@
   </ul>
 </div>
 <div class='input-append'>
-	<input type="text" class='span1' name='applChildren' id='applChildren'
-	value='<?php echo isset($_SESSION['applChildren'])?htmlspecialchars($_SESSION['applChildren']):'';?>'  >
+	<input type="text" class='span1' name='children' id='children'
+	value='<?php echo isset($_SESSION['children'])?htmlspecialchars($_SESSION['children']):'';?>'  >
 	<span class='add-on'>Children</span>
 </div>
-<?php echo isset($_SESSION['errors']['applChildren'])?$_SESSION['errors']['applChildren']:''; ?>
+<?php echo isset($_SESSION['errors']['children'])?$_SESSION['errors']['children']:''; ?>

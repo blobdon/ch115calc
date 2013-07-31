@@ -29,14 +29,14 @@
 </div>
 <div class='input-prepend input-append'>
   <span class='add-on'>$</span>
-  <input type="text" name='applHousingCost' id='applHousingCost' class='span1'
-  value='<?php echo isset($_SESSION['applHousingCost'])?htmlspecialchars($_SESSION['applHousingCost']):'';?>'>
+  <input type="text" name='housingCost' id='housingCost' class='span1'
+  value='<?php echo isset($_SESSION['housingCost'])?htmlspecialchars($_SESSION['housingCost']):'';?>'>
   <span class='add-on'>per month</span>
   <button class='calc hide' type='button' id="housingCalcButton" class="btn">
     Calculator
   </button>
 </div>
-<?php echo isset($_SESSION['errors']['applHousingCost'])?$_SESSION['errors']['applHousingCost']:''; ?>
+<?php echo isset($_SESSION['errors']['housingCost'])?$_SESSION['errors']['housingCost']:''; ?>
 
 <div id='housingCalcContent' class='hide'>
     Under Construction

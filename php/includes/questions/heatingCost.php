@@ -4,8 +4,8 @@
 </div>
 <div class='input-prepend input-append'>
   <span class='add-on'>$</span>
-  <input type="text" name='applHeatingCost' id='applHeatingCost' class='span1' 
-          value='<?php echo isset($_SESSION['applHeatingCost'])?htmlspecialchars($_SESSION['applHeatingCost']):'';?>' >
+  <input type="text" name='heatingCost' id='heatingCost' class='span1' 
+          value='<?php echo isset($_SESSION['heatingCost'])?htmlspecialchars($_SESSION['heatingCost']):'';?>' >
   <span class='add-on'>per month</span>
 </div>
-<?php echo isset($_SESSION['errors']['applHeatingCost'])?$_SESSION['errors']['applHeatingCost']:''; ?>
+<?php echo isset($_SESSION['errors']['heatingCost'])?$_SESSION['errors']['heatingCost']:''; ?>

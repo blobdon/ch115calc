@@ -50,40 +50,40 @@
     <tbody>
       <tr>
         <td>Personal Allowance</td>
-        <td>+ $ <?php echo $applPersonalAllowance;?></td>
+        <td>+ $ <?php echo $personalAllowance;?></td>
       </tr>
       <tr class=''>
-        <td><?php echo $applChildren;?> child(ren)</td>
-        <td>+ $ <?php echo $applChildAllowance;?></td>
+        <td><?php echo $children;?> child(ren)</td>
+        <td>+ $ <?php echo $childAllowance;?></td>
       </tr>
       <tr>
         <td><?php echo $numREBA;?> REBA allowance(s)</td>
-        <td>+ $ <?php echo $applREBA;?></td>
+        <td>+ $ <?php echo $REBA;?></td>
       </tr>
       <tr>
         <td><?php echo $numMedicareAllowance;?> Medicare allowance(s)</td>
-        <td>+ $ <?php echo $applMedicareAllowance;?></td>
+        <td>+ $ <?php echo $medicareAllowance;?></td>
       </tr>
       <tr>
         <td>Fuel allowance</td>
-        <td>+ $ <?php echo $applFuelAllowance;?></td>
+        <td>+ $ <?php echo $fuelAllowance;?></td>
       </tr>
       <tr>
         <td>Shelter Allowance</td>
-        <td>+ $ <?php echo $applShelterAllowance;?></td>
+        <td>+ $ <?php echo $shelterAllowance;?></td>
       </tr>
       <tr class='total'>
         <td>Total budget</td>
-        <td>= $ <?php echo $applBudget;?></td>
+        <td>= $ <?php echo $budget;?></td>
       </tr>
               <tr>
         <td>Total Income (less 200 as work incentive)</td>
-        <td>- $ <?php echo $applTotalIncome;?></td>
+        <td>- $ <?php echo $totalIncome;?></td>
       </tr>
       <tr class='total <?php echo $_SESSION['eligibleAll']==='Yes'?'success':'error';?>'
-          <?php echo ($applBenefitsPayable>0 && $_SESSION['eligibleAll']==='No')?'style="text-decoration:line-through"':'';?> >
+          <?php echo ($benefitsPayable>0 && $_SESSION['eligibleAll']==='No')?'style="text-decoration:line-through"':'';?> >
         <td><b>Approximate monthly benefit</b></td>
-        <td><b>= $ <?php echo money_format('%.2n', $applBenefitsPayable);?></b></td>
+        <td><b>= $ <?php echo money_format('%.2n', $benefitsPayable);?></b></td>
       </tr>
       <tr>
         <td></td>

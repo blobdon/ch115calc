@@ -8,8 +8,8 @@ $maxShelterAllowance = 0;
 $maxShelterAllowanceUnheated = 440;
 $maxShelterAllowanceHeated = 590;
 $maxFuelAllowance = 265;
-$REBA = 315;
-$medicareAllowance = 99.90;
+$perREBA = 315;
+$perMedicareAllowance = 99.90;
 $childAllowanceFirstTwo = 285;
 $childAllowanceAfterTwo = 150;
 //$maxAssetsSingle = 3200;  //not used - YES/NO question instead
@@ -21,94 +21,94 @@ $personalAllowanceMarried = 885;
 $workIncentive = 200; //per 108 CMR 6.01(5)(d)
 
 //  Calculate correct personal allowance based on housing situation (Budgets #1-4 2102 Melrose-Wakefield)
-$applPersonalAllowance = 0;
-if ($_SESSION['applShelterType']==='Institutional') {
-  $applPersonalAllowance = $personalAllowanceInstitutional;
-} elseif ($_SESSION['applShelterType']==='Transitional') {
-  $applPersonalAllowance = $personalAllowanceTransitional;
-} elseif ($_SESSION['applShelterType']==='Rent' || $_SESSION['applShelterType']==='Mortgage' || $_SESSION['applShelterType']==='Own'){
+$personalAllowance = 0;
+if ($_SESSION['shelterType']==='Institutional') {
+  $sersonalAllowance = $personalAllowanceInstitutional;
+} elseif ($_SESSION['shelterType']==='Transitional') {
+  $personalAllowance = $personalAllowanceTransitional;
+} elseif ($_SESSION['shelterType']==='Rent' || $_SESSION['shelterType']==='Mortgage' || $_SESSION['shelterType']==='Own'){
   if ($_SESSION['maritalStatus']==='Single') {
-  $applPersonalAllowance = $personalAllowanceSingle;
+  $personalAllowance = $personalAllowanceSingle;
   } elseif ($_SESSION['maritalStatus']==='Married' && $_SESSION['liveWithSpouse']==='Yes') {
-  $applPersonalAllowance = $personalAllowanceMarried;
+  $personalAllowance = $personalAllowanceMarried;
   } elseif ($_SESSION['maritalStatus']==='Married' && $_SESSION['liveWithSpouse']==='No') {
-  $applPersonalAllowance = $personalAllowanceSingle;
+  $personalAllowance = $personalAllowanceSingle;
   }
 } else {
-  $applPersonalAllowance = 'ERROR';
+  $personalAllowance = 'ERROR';
 }
 
 // Calculate child allowance
-$applChildAllowance = 0;
-$applChildren = $_SESSION['applChildren'] +0; //adding zero ensures integer type
-if ($applChildren < 3) {
-  $applChildAllowance = $applChildren * $childAllowanceFirstTwo;
+$childAllowance = 0;
+$children = $_SESSION['children'] +0; //adding zero ensures integer type
+if ($children < 3) {
+  $childAllowance = $children * $childAllowanceFirstTwo;
 } else {
-  $applChildAllowance = (2 * $childAllowanceFirstTwo) +
-            (($applChildren - 2) * $childAllowanceAfterTwo);
+  $childAllowance = (2 * $childAllowanceFirstTwo) +
+            (($children - 2) * $childAllowanceAfterTwo);
 }
 
 // Calculate REBA allowance
-$applREBA = 0;
+$REBA = 0;
 $numREBA = 0;
-if ($_SESSION['applOtherBenefits']==='Yes') {
-  $applREBA += $REBA;
+if ($_SESSION['otherBenefits']==='Yes') {
+  $REBA += $perREBA;
   $numREBA ++;
 }
 if ($_SESSION['maritalStatus']==='Married'){
   if ($_SESSION['spouseOtherBenefits']==='Yes' && $_SESSION['liveWithSpouse']==='Yes') {
-    $applREBA += $REBA;
+    $REBA += $perREBA;
     $numREBA ++;
   }
 }
 
 // Calculate Medicare B allowance
-$applMedicareAllowance = 0;
+$medicareAllowance = 0;
 $numMedicareAllowance = 0;
-if ($_SESSION['applPayMedicareB']==='Yes') {
-  $applMedicareAllowance += $medicareAllowance;
+if ($_SESSION['payMedicareB']==='Yes') {
+  $medicareAllowance += $perMedicareAllowance;
   $numMedicareAllowance ++;
 }
 if ($_SESSION['maritalStatus']==='Married'){
   if ($_SESSION['spousePayMedicareB']==='Yes' && $_SESSION['liveWithSpouse']==='Yes') {
-    $applMedicareAllowance += $medicareAllowance;
+    $medicareAllowance += $perMedicareAllowance;
     $numMedicareAllowance ++;
   }
 }
 
 
 //Calculate Fuel Allowance
-$applFuelAllowance = min($maxFuelAllowance, $_SESSION['applHeatingCost']+0);
+$fuelAllowance = min($maxFuelAllowance, $_SESSION['HeatingCost']+0);
 
 //Calculate Shelter Allowance
-$applShelterAllowance = 0;
-$applHousingCost = $_SESSION['applHousingCost'] +0; //adding zero ensures integer type
-if ($applFuelAllowance > 0) {
-  $applShelterAllowance = min($maxShelterAllowanceUnheated,$applHousingCost);
-} elseif ($applFuelAllowance === 0) {
-  $applShelterAllowance = min($maxShelterAllowanceHeated,$applHousingCost);
+$ShelterAllowance = 0;
+$housingCost = $_SESSION['HousingCost'] +0; //adding zero ensures integer type
+if ($fuelAllowance > 0) {
+  $shelterAllowance = min($maxShelterAllowanceUnheated,$housingCost);
+} elseif ($fuelAllowance === 0) {
+  $shelterAllowance = min($maxShelterAllowanceHeated,$housingCost);
 } else {
-  $applShelterAllowance = "Missing fuel or housing cost";
+  $shelterAllowance = "Missing fuel or housing cost";
 }
 
 
 //calculate earned income, include - as work incentive per 108 CMR 6.01(5)(d), minimum of zero
-$applEarnedIncome = max($_SESSION['applEarnedIncome'] - $workIncentive, 0);
-$applOtherIncome = $_SESSION['applOtherIncome'] +0;
+$earnedIncome = max($_SESSION['earnedIncome'] - $workIncentive, 0);
+$otherIncome = $_SESSION['otherIncome'] +0;
 
 //Calculate total income
-$applTotalIncome = $applEarnedIncome + $applOtherIncome;
+$totalIncome = $earnedIncome + $etherIncome;
 
 //calc overall budget by summing all allowances
-$applBudget = $applPersonalAllowance +
-        $applShelterAllowance +
-        $applChildAllowance +
-        $applFuelAllowance +
-        $applREBA +
-        $applMedicareAllowance;
+$budget = $personalAllowance +
+        $shelterAllowance +
+        $childAllowance +
+        $fuelAllowance +
+        $REBA +
+        $medicareAllowance;
 
 //calc benefits payments by budget minus income
-$applBenefitsPayable = max($applBudget - $applTotalIncome,0);
+$benefitsPayable = max($budget - $totalIncome,0);
 
 #
 #  Overall eligibility
@@ -116,7 +116,7 @@ $applBenefitsPayable = max($applBudget - $applTotalIncome,0);
 if ($_SESSION['eligibleService'] === "No" ||
     $_SESSION['eligibleResidence'] === "No" ||
     $_SESSION['eligibleAssets'] === "No" ||
-    $applBenefitsPayable == 0){
+    $BenefitsPayable == 0){
   $_SESSION['eligibleAll'] = 'No';
 } else {
   $_SESSION['eligibleAll'] = 'Yes';

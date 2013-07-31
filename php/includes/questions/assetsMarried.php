@@ -24,13 +24,13 @@
     </div>
 </div>
 <div class='span8'>
-    <input type='radio' name='applAssetsMarried' id='applAssetsMarriedInclude' value='Skipped' class='hide' checked>
-  <label class="radio" for='applAssetsMarried1'>
-    <input type='radio' name='applAssetsMarried' id='applAssetsMarried1' value='Yes'
-    <?php retain_Radio('applAssetsMarried','Yes');?>>YES, I have more than $7000 in assets.
+    <input type='radio' name='assetsMarried' id='assetsMarriedInclude' value='Skipped' class='hide' checked>
+  <label class="radio" for='assetsMarried1'>
+    <input type='radio' name='assetsMarried' id='assetsMarried1' value='Yes'
+    <?php retain_Radio('assetsMarried','Yes');?>>YES, I have more than $7000 in assets.
   </label>
-  <label class="radio" for='applAssetsMarried0'>
-    <input type='radio' name='applAssetsMarried' id='applAssetsMarried0' value='No'
-    <?php retain_Radio('applAssetsMarried','No');?>>NO, I do not have more than $7000 in assets.
+  <label class="radio" for='assetsMarried0'>
+    <input type='radio' name='assetsMarried' id='assetsMarried0' value='No'
+    <?php retain_Radio('assetsMarried','No');?>>NO, I do not have more than $7000 in assets.
   </label>
 </div>

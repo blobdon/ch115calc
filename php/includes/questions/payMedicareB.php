@@ -1,15 +1,15 @@
 <h4>Do you<?php echo $_SESSION['maritalStatus']==='Married'?', and/or your spouse,':''; ?> receive and pay for Medicare Part B coverage out of your social security or private pension check?</h4>
 <span class='span8 help-block'>If someone else pays the Medicare B premium, please select NO</span>
-<div class='span7 <?php echo !empty($_SESSION['errors']['applPayMedicareB']) ? 'question alert-error' : '';?>'>
+<div class='span7 <?php echo !empty($_SESSION['errors']['payMedicareB']) ? 'question alert-error' : '';?>'>
   <?php if ($_SESSION['maritalStatus']==='Married') :?><b>YOU</b><?php endif;?>
-  <input type='radio' name='applPayMedicareB' id='applPayMedicareBInclude' value='Skipped' class='hide' checked>
-  <label class="radio" for='applPayMedicareB1'>
-    <input type='radio' name='applPayMedicareB' id='applPayMedicareB1' value='Yes'
-    <?php retain_Radio('applPayMedicareB','Yes');?>>YES, I receive <strong>and</strong> pay for Medicare B
+  <input type='radio' name='payMedicareB' id='payMedicareBInclude' value='Skipped' class='hide' checked>
+  <label class="radio" for='payMedicareB1'>
+    <input type='radio' name='payMedicareB' id='payMedicareB1' value='Yes'
+    <?php retain_Radio('payMedicareB','Yes');?>>YES, I receive <strong>and</strong> pay for Medicare B
   </label>
-  <label class="radio" for='applPayMedicareB0'>
-    <input type='radio' name='applPayMedicareB' id='applPayMedicareB0' value='No'
-    <?php retain_Radio('applPayMedicareB','No');?>>NO, I do not receive <strong>and</strong> pay for Medicare B
+  <label class="radio" for='payMedicareB0'>
+    <input type='radio' name='payMedicareB' id='payMedicareB0' value='No'
+    <?php retain_Radio('payMedicareB','No');?>>NO, I do not receive <strong>and</strong> pay for Medicare B
   </label>
 </div>
 <?php if ($_SESSION['maritalStatus']==='Married') :?> <!-- display spouse question if married -->

@@ -4,16 +4,16 @@
   <li>Federal, State, County, City, or Town pension</li>
   <li>VA <em>non-service connected</em> pension or widow's pension </li>
 </ul>
-<div class='span7 <?php echo !empty($_SESSION['errors']['applOtherBenefits']) ? 'question alert-error' : '';?>'>
+<div class='span7 <?php echo !empty($_SESSION['errors']['otherBenefits']) ? 'question alert-error' : '';?>'>
   <?php if ($_SESSION['maritalStatus']==='Married'):?><b>YOU</b><?php endif;?>
-  <input type='radio' name='applOtherBenefits' id='applOtherBenefitsInclude' value='Skipped' class='hide' checked>
-  <label class="radio" for='applOtherBenefits1'>
-    <input type='radio' name='applOtherBenefits' id='applOtherBenefits1' value='Yes'
-    <?php retain_Radio('applOtherBenefits','Yes');?>>YES, I receive one or more of the listed benefits
+  <input type='radio' name='otherBenefits' id='otherBenefitsInclude' value='Skipped' class='hide' checked>
+  <label class="radio" for='otherBenefits1'>
+    <input type='radio' name='otherBenefits' id='otherBenefits1' value='Yes'
+    <?php retain_Radio('otherBenefits','Yes');?>>YES, I receive one or more of the listed benefits
   </label>
-  <label class="radio" for='applOtherBenefits0'>
-    <input type='radio' name='applOtherBenefits' id='applOtherBenefits0' value='No'
-    <?php retain_Radio('applOtherBenefits','No');?>>NO, I do not receive any of the listed benefits
+  <label class="radio" for='otherBenefits0'>
+    <input type='radio' name='otherBenefits' id='otherBenefits0' value='No'
+    <?php retain_Radio('otherBenefits','No');?>>NO, I do not receive any of the listed benefits
   </label>
 </div>
 <?php if ($_SESSION['maritalStatus']==='Married'):?> <!-- display spouse question if married -->
