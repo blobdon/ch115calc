@@ -4,31 +4,10 @@
   session_start();
 ?><!DOCTYPE html>
 <?php
-  // if ( !isset($_SESSION['form']) || !isset($_SESSION['index']) ){
-  //   $_SESSION['form'] = array(
-  //     0 => dirname(__FILE__).'/includes/intro.php',
-  //     1 => dirname(__FILE__).'/includes/vetService.php',
-  //     2 => dirname(__FILE__).'/includes/vetResidence.php',
-  //     3 => dirname(__FILE__).'/includes/applFamily.php',
-  //     4 => dirname(__FILE__).'/includes/applFinances.php',
-  //     5 => dirname(__FILE__).'/includes/applShelter.php',
-  //     6 => dirname(__FILE__).'/includes/results.php'
-  //     );
-  //   $_SESSION['index'] = 0;
-  // }
   if ( !isset($_SESSION['questions']) ){
-    $_SESSION['questions'] = array(
-      'service' => array('status' => 'current', 'filename' => 'service.php'),
-      'kdsm' => array('status' => 'none', 'filename' => 'kdsm.php'),
-      'campaigns' => array('status' => 'none', 'filename' => 'campaigns.php'),
-      'purpleHeart' => array('status' => 'none', 'filename' => 'purpleHeart.php'),
-      'serviceDisablility' => array('status' => 'none', 'filename' => 'serviceDisablility.php'),
-      'serviceDeath' => array('status' => 'none', 'filename' => 'serviceDeath.php')
-      );
-    $_SESSION['index'] = 0;
+    include(dirname(__FILE__).'/includes/questions/questionsArray.php');
   }
   require_once(dirname(__FILE__).'/includes/myFunctions.php');
-
 ?>
 
 <html lang='en'>
@@ -54,7 +33,7 @@
   <?php foreach ($_SESSION['questions'] as $name => $array) {
           if ($array['status']==='answered') : ?>
             <div class='row'>
-              <div class='span8 offset2 answered'>
+              <div class='span8 offset2 question-answered'>
                 <?php include('./includes/questions/'.$array['filename']);?>
                   <div class='reset-button'>
                     <form action="process.php" method='GET'>
@@ -66,14 +45,14 @@
           <?php endif;
         }?>
   <div class='row'>
-    <div class='span8 offset2' id='questions'>
+    <div class='span8 offset2 question-current' id='questions'>
       <form class='form-horizontal' action="process.php" method='GET'>
         <?php foreach ($_SESSION['questions'] as $name => $array) {
                 if ($array['status']==='current') {
                   include('./includes/questions/'.$array['filename']);
                 }
               }
-        ?>
+        ?><br><br><br>
         <?php echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'> ":'';?>
         <?php echo $_SESSION['index']>0?"<button type='submit' class='btn btn-large' name='submit' value='Back'>Go Back</button>":'';?>
       </form>

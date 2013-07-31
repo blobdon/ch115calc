@@ -1,5 +1,5 @@
 <?php echo $_SESSION['questions']['service']['status']==='current'?'<h4>':''; ?>
-Please indicate your branch of service, dates of service, and which type of discharge you received.
+Please indicate your branch of service, dates of service, and discharge type.
 <?php echo $_SESSION['questions']['service']['status']==='current'?'</h4>':''; ?>
 <div class='row'>
   <?php if ($_SESSION['questions']['service']['status']==='current') : ?>
@@ -42,9 +42,9 @@ Please indicate your branch of service, dates of service, and which type of disc
     </select></label>
   </div>
   <?php else :?>
-  <div class='span8'>
+  <div class='span8 answer'>
     <strong>
-      <?php echo 'Service in the '.$_SESSION['branch'].' from '.$_SESSION['serviceStart'].' to '.$_SESSION['serviceEnd'].' with '.$_SESSION['discharge'].' discharge';?>
+      <?php echo ''.$_SESSION['branch'].'; '.$_SESSION['serviceStart'].' to '.$_SESSION['serviceEnd'].'; '.$_SESSION['discharge'].' discharge';?>
     </strong>
   </div>
   <?php endif;?>
