@@ -46,7 +46,7 @@ foreach ($_GET as $name => $value) {
   $_SESSION[$name] = $value;
 }
 ## service basics - service.php
-if ($_SESSION['questions']['service']['status']==='current') {
+if (is_Ready('service')) {
   #
   # service date Validation and modification for unix epoch
   #      - would like to rework this to consitently use dateTime object, currently saves back to string in session
@@ -83,20 +83,23 @@ if ($_SESSION['questions']['service']['status']==='current') {
   } // end of if no errors
 } // end of if service
 ## service details - serviceDisability
-elseif ($_SESSION['questions']['serviceDisability']['status']==='current' && $_SESSION['errors']) {}
+elseif (is_Ready('serviceDisability')) {
+  $routing = array('Yes'=>'vetReside', 'No'=>'purpleHeart');
+  radio_Router('serviceDisability', array('Yes'=>'vetReside', 'No'=>'purpleHeart'));
+}
 ## service details - purpleHeart
-elseif ($_SESSION['questions']['purpleHeart']['status']==='current') {}
+elseif (is_Ready('purpleHeart')) {}
 ## service details - campaigns
 //have to update session var for campaigns outside loop, doesnt update if empty on later submits
-elseif ($_SESSION['questions']['campaigns']['status']==='current') {
+elseif (is_Ready('campaigns')) {
   $_SESSION['campaigns'] = $_GET['campaigns'];
 }
 ## service details - kdsm
-elseif ($_SESSION['questions']['kdsm']['status']==='current') {}
+elseif (is_Ready('kdsm')) {}
 ## service details - serviceDeath
-elseif ($_SESSION['questions']['serviceDeath']['status']==='current') {}
+elseif (is_Ready('serviceDeath')) {}
 ## residence - currently
-elseif ($_SESSION['questions']['vetReside']['status']==='current') {
+elseif (is_Ready('vetReside')) {
     if ($_SESSION['vetReside'] === 'Yes'){
     $_SESSION['eligibleResidence'] = 'Yes';
   } else {
@@ -104,15 +107,15 @@ elseif ($_SESSION['questions']['vetReside']['status']==='current') {
   }
 }
 ## residence - prior to service
-elseif ($_SESSION['questions']['vetResidePrior']['status']==='current') {}
+elseif (is_Ready('vetResidePrior')) {}
 ## residence - 3 years continuous
-elseif ($_SESSION['questions']['vetReside3Years']['status']==='current') {}
+elseif (is_Ready('vetReside3Years')) {}
 ## family - marital status
-elseif ($_SESSION['questions']['maritalStatus']['status']==='current') {}
+elseif (is_Ready('maritalStatus')) {}
 ## family - if married, live with spouse
-elseif ($_SESSION['questions']['liveWithSpouse']['status']==='current') {}
+elseif (is_Ready('liveWithSpouse')) {}
 ## family - children
-elseif ($_SESSION['questions']['children']['status']==='current') {
+elseif (is_Ready('children')) {
   $_SESSION['applChildren'] = filter_var($_GET['applChildren'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['applChildren']) && $_SESSION['applChildren'] !== 0){
     $_SESSION['errors']['applChildren'] = 'Please enter a valid number (eg 0,1,2...)';
@@ -120,7 +123,7 @@ elseif ($_SESSION['questions']['children']['status']==='current') {
   }
 }
 ## finances - earned income
-elseif ($_SESSION['questions']['earnedIncome']['status']==='current') {
+elseif (is_Ready('earnedIncome')) {
   $_SESSION['applEarnedIncome'] = filter_var($_GET['applEarnedIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['applEarnedIncome']) && $_SESSION['applEarnedIncome'] !== 0){
     $_SESSION['errors']['applEarnedIncome'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -128,7 +131,7 @@ elseif ($_SESSION['questions']['earnedIncome']['status']==='current') {
   }
 }
 ## finances - other income
-elseif ($_SESSION['questions']['otherIncome']['status']==='current') {
+elseif (is_Ready('otherIncome')) {
   $_SESSION['applOtherIncome'] = filter_var($_GET['applOtherIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['applOtherIncome']) && $_SESSION['applOtherIncome'] !== 0){
     $_SESSION['errors']['applOtherIncome'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -136,11 +139,11 @@ elseif ($_SESSION['questions']['otherIncome']['status']==='current') {
   }
 }
 ## finances - other/REBA benefits
-elseif ($_SESSION['questions']['otherBenefits']['status']==='current') {}
+elseif (is_Ready('otherBenefits')) {}
 ## finances - pay medicare B premiums
-elseif ($_SESSION['questions']['payMedicareB']['status']==='current') {}
+elseif (is_Ready('payMedicareB')) {}
 ## finances - assets if single
-elseif ($_SESSION['questions']['assetsSingle']['status']==='current') {
+elseif (is_Ready('assetsSingle')) {
   if ($_SESSION['maritalStatus']==='Single' && $_SESSION['applAssetsSingle']==='Yes'){
     $_SESSION['eligibleAssets']='No';
   } else {
@@ -148,7 +151,7 @@ elseif ($_SESSION['questions']['assetsSingle']['status']==='current') {
   }
 }
 ## finances - assets if married
-elseif ($_SESSION['questions']['assetsMarried']['status']==='current') {
+elseif (is_Ready('assetsMarried')) {
   if ($_SESSION['maritalStatus']==='Married' && $_SESSION['applAssetsMarried']==='Yes'){
     $_SESSION['eligibleAssets']='No';
   } else {
@@ -156,9 +159,9 @@ elseif ($_SESSION['questions']['assetsMarried']['status']==='current') {
   }
 }
 ## housing - shelter type
-elseif ($_SESSION['questions']['shelterType']['status']==='current') {}
+elseif (is_Ready('shelterType')) {}
 ## housing - housing cost
-elseif ($_SESSION['questions']['housingCost']['status']==='current') {
+elseif (is_Ready('housingCost')) {
   $_SESSION['applHousingCost'] = filter_var($_GET['applHousingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['applHousingCost']) && $_SESSION['applHousingCost'] !== 0){
     $_SESSION['errors']['applHousingCost'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -166,7 +169,7 @@ elseif ($_SESSION['questions']['housingCost']['status']==='current') {
   }
 }
 ## housing - heating cost
-elseif ($_SESSION['questions']['heatingCost']['status']==='current') {
+elseif (is_Ready('heatingCost')) {
   $_SESSION['applHeatingCost'] = filter_var($_GET['applHeatingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['applHeatingCost']) && $_SESSION['applHeatingCost'] !== 0){
     $_SESSION['errors']['applHeatingCost'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -291,6 +294,14 @@ function is_Eligible_Service($serviceStart, $serviceEnd){
 function is_Ready($question){
   if ($_SESSION['questions'][$question]['status']==='current' && empty($_SESSION['errors'][$question])) {
     Return True;
+  }
+}
+function radio_Router($question, $arrayOfPairs){
+  $_SESSION['questions'][$question]['status'] = 'answered';
+  foreach ($arrayOfPairs as $answer => $nextQuestion) {
+    if ($_SESSION[$question] === $answer) {
+      $_SESSION['questions'][$nextQuestion]['status'] = 'current';
+    }
   }
 }
 ?>
