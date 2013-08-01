@@ -299,7 +299,7 @@ foreach ($_SESSION['errors'] as $value) {
 // }
 //redirect to user page
 session_write_close();
-header("Location: index.php"); /* Redirect browser */
+header("Location: index.php#spot"); /* Redirect browser */
 exit(0);
 // print('<pre>');
 // echo 'Session ';

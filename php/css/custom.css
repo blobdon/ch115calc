@@ -75,7 +75,7 @@ tr.total{
 	border-top-color: black;
 	border-top-width: 3px;
 }
-/*.question-current{}*/
+/*.question-current{	}*/
 .question-answered{
 	position: relative;
 	padding: 8px 35px 8px 14px;
@@ -89,4 +89,5 @@ tr.total{
 }
 .answer{
 	padding-left: 2em;
+	font-weight: bold;
 }

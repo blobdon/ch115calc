@@ -1,0 +1,1 @@
+Did you live in Massachusetts when you began your Active-duty service?

@@ -1,27 +1,28 @@
 <?php
 $_SESSION['questions'] = array(
-  'service'           => array('status' => 'current', 'filename' => 'service.php', 'routing'=>array()),
-  'purpleHeart'       => array('status' => 'none', 'filename' => 'purpleHeart.php',
-                              'routing' => array('Yes'=>'vetReside','No'=>'serviceDisability')),
-  'serviceDisability' => array('status' => 'none', 'filename' => 'serviceDisability.php', 'routing'=>array()),
-  'kdsm'              => array('status' => 'none', 'filename' => 'kdsm.php', 'routing'=>array()),
-  'campaigns'         => array('status' => 'none', 'filename' => 'campaigns.php', 'routing'=>array()),
-  'serviceDeath'      => array('status' => 'none', 'filename' => 'serviceDeath.php', 'routing'=>array()),
-  'vetReside'         => array('status' => 'none', 'filename' => 'vetReside.php', 'routing'=>array()),
-  'vetResidePrior'    => array('status' => 'none', 'filename' => 'vetResidePrior.php', 'routing'=>array()),
-  'vetReside3Years'   => array('status' => 'none', 'filename' => 'vetReside3Years.php', 'routing'=>array()),
-  'maritalStatus'     => array('status' => 'none', 'filename' => 'maritalStatus.php', 'routing'=>array()),
-  'liveWithSpouse'    => array('status' => 'none', 'filename' => 'liveWithSpouse.php', 'routing'=>array()),
-  'children'          => array('status' => 'none', 'filename' => 'children.php', 'routing'=>array()),
-  'earnedIncome'      => array('status' => 'none', 'filename' => 'earnedIncome.php', 'routing'=>array()),
-  'otherIncome'       => array('status' => 'none', 'filename' => 'otherIncome.php', 'routing'=>array()),
-  'otherBenefits'     => array('status' => 'none', 'filename' => 'otherBenefits.php', 'routing'=>array()),
-  'payMedicareB'      => array('status' => 'none', 'filename' => 'payMedicareB.php', 'routing'=>array()),
-  'assetsSingle'      => array('status' => 'none', 'filename' => 'assetsSingle.php', 'routing'=>array()),
-  'assetsMarried'     => array('status' => 'none', 'filename' => 'assetsMarried.php', 'routing'=>array()),
-  'shelterType'       => array('status' => 'none', 'filename' => 'shelterType.php', 'routing'=>array()),
-  'housingCost'       => array('status' => 'none', 'filename' => 'housingCost.php', 'routing'=>array()),
-  'heatingCost'       => array('status' => 'none', 'filename' => 'heatingCost.php', 'routing'=>array())
+  'service'           => array('status' => 'none', 'question' => 'serviceQ.php',           'controls' => 'serviceControls.php'),
+  'purpleHeart'       => array('status' => 'none', 'question' => 'purpleHeartQ.php',       'controls' => 'purpleHeartControls.php'),
+  'serviceDisability' => array('status' => 'none', 'question' => 'serviceDisabilityQ.php', 'controls' => 'serviceDisabilityControls.php'),
+  'kdsm'              => array('status' => 'none', 'question' => 'kdsmQ.php',              'controls' => 'kdsmControls.php'),
+  'campaigns'         => array('status' => 'none', 'question' => 'campaignsQ.php',         'controls' => 'campaignsControls.php'),
+  'serviceDeath'      => array('status' => 'none', 'question' => 'serviceDeathQ.php',      'controls' => 'serviceDeathControls.php'),
+  'vetReside'         => array('status' => 'none', 'question' => 'vetResideQ.php',         'controls' => 'vetResideControls.php'),
+  'vetResidePrior'    => array('status' => 'none', 'question' => 'vetResidePriorQ.php',    'controls' => 'vetResidePriorControls.php'),
+  'vetReside3Years'   => array('status' => 'none', 'question' => 'vetReside3YearsQ.php',   'controls' => 'vetReside3YearsControls.php'),
+  'maritalStatus'     => array('status' => 'none', 'question' => 'maritalStatusQ.php',     'controls' => 'maritalStatusControls.php'),
+  'liveWithSpouse'    => array('status' => 'none', 'question' => 'liveWithSpouseQ.php',    'controls' => 'liveWithSpouseControls.php'),
+  'children'          => array('status' => 'none', 'question' => 'childrenQ.php',          'controls' => 'childrenControls.php'),
+  'earnedIncome'      => array('status' => 'none', 'question' => 'earnedIncomeQ.php',      'controls' => 'earnedIncomeControls.php'),
+  'otherIncome'       => array('status' => 'none', 'question' => 'otherIncomeQ.php',       'controls' => 'otherIncomeControls.php'),
+  'otherBenefits'     => array('status' => 'none', 'question' => 'otherBenefitsQ.php',     'controls' => 'otherBenefitsControls.php'),
+  'payMedicareB'      => array('status' => 'none', 'question' => 'payMedicareBQ.php',      'controls' => 'payMedicareBControls.php'),
+  'assetsSingle'      => array('status' => 'none', 'question' => 'assetsSingleQ.php',      'controls' => 'assetsSingleControls.php'),
+  'assetsMarried'     => array('status' => 'none', 'question' => 'assetsMarriedQ.php',     'controls' => 'assetsMarriedControls.php'),
+  'shelterType'       => array('status' => 'none', 'question' => 'shelterTypeQ.php',       'controls' => 'shelterTypeControls.php'),
+  'housingCost'       => array('status' => 'none', 'question' => 'housingCostQ.php',       'controls' => 'housingCostControls.php'),
+  'heatingCost'       => array('status' => 'none', 'question' => 'heatingCostQ.php',       'controls' => 'heatingCostControls.php')
   );
 $_SESSION['index'] = 0;
+$_SESSION['questions']['service']['status']='current';
+
 ?>

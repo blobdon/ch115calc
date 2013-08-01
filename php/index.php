@@ -19,8 +19,8 @@
   <title>Ch115 Calc</title>
   <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
-   <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
   <!-- additional -->
     <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
@@ -30,48 +30,49 @@
   <?php include('./includes/navTracker.php'); ?>
 
   <div class='container'>
-  <?php foreach ($_SESSION['questions'] as $name => $array) {
-          if ($array['status']==='answered') : ?>
-            <div class='row'>
-              <div class='span8 offset2 question-answered'>
-                <?php include('./includes/questions/'.$array['filename']);?>
-                  <div class='reset-button'>
-                    <form action="process.php" method='GET'>
-                      <input type="submit" class='btn' name='Edit' value='Edit'>
-                    </form>
-                  </div>
-              </div>
+    <?php 
+    foreach ($_SESSION['questions'] as $name => $array) {
+      if ($array['status']==='answered') : ?>
+        <div class='row'>
+          <div class='span8 offset2 question-answered'>
+            <div class=''><?php include('./includes/questions/'.$name.'Q.php');?></div>
+            <div class='answer'><?php include('./includes/questions/'.$name.'Answer.php');?></div>
+            <div class='reset-button'>
+              <form action="process.php" method='GET'>
+                <button type="submit" class='btn btn-link' name='edit' value='edit<?php echo $name ?>'>Change</button>
+              </form>
             </div>
-          <?php endif;
-        }?>
-  <div class='row'>
-    <div class='span8 offset2 question-current' id='questions'>
-      <form class='form-horizontal' action="process.php" method='GET'>
-        <?php foreach ($_SESSION['questions'] as $name => $array) {
-                if ($array['status']==='current') {
-                  include('./includes/questions/'.$array['filename']);
-                } elseif ($array['status']==='ineligible') {
-                  include('./include/resutls.php');
-                }
-              }
-        ?><br><br><br>
-        <?php echo $_SESSION['index']<6?"<input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'> ":'';?>
-        <?php echo $_SESSION['index']>0?"<button type='submit' class='btn btn-large' name='submit' value='Back'>Go Back</button>":'';?>
-      </form>
-    </div>
+          </div>
+        </div>
+      <?php endif;
+    }?>
+    <a id='spot'></a>
+    <div class='row'>
+      <div class='span8 offset2 question-current' id='questions'>
+        <form class='form-horizontal' action="process.php" method='GET'>
+          <?php 
+          foreach ($_SESSION['questions'] as $name => $array) {
+            if ($array['status']==='current') :?>
+              <h4><?php include('./includes/questions/'.$name.'Q.php');?></h4>
+              <?php include('./includes/questions/'.$name.'Controls.php');?>
+              <?php elseif ($array['status']==='ineligible') :?>
+              <?php include('./include/results.php'); ?>
+            <?php endif; 
+          } ?>
+          <br><br><br>
+          <input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'>
+        </form>
+      </div>
 
-  </div> <!-- main container row -->
-    <div id='header' class='text-center'>
+    </div> <!-- end of main container row -->
 
-      <?php //echo $_SESSION['index'].'<br>'.$_SESSION['form'][$_SESSION['index']];  ?>
-    </div>
       <?php
-        print('<pre>');
-        echo 'Session ';
-        print_r($_SESSION);
-        print('</pre>');
+        // print('<pre>');
+        // echo 'Session ';
+        // print_r($_SESSION);
+        // print('</pre>');
      ?>
-  </div> <!-- main container -->
+  </div> <!-- end of main container -->
 
 <!-- 
    <script src="./js/jquery-1.10.2.min.js"></script>
