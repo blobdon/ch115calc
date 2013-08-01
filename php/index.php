@@ -4,8 +4,9 @@
   session_start();
 ?><!DOCTYPE html>
 <?php
-  if ( !isset($_SESSION['questions']) ){
-    require(dirname(__FILE__).'/includes/questions/questionsArray.php');
+  if ( !isset($_SESSION['current']) ){
+    $_SESSION['current'] = 'service';
+    //require(dirname(__FILE__).'/includes/questions/questionsArray.php');
   }
   require_once(dirname(__FILE__).'/includes/myFunctions.php');
 ?>
@@ -30,35 +31,25 @@
   <?php include('./includes/navTracker.php'); ?>
 
   <div class='container'>
-    <?php 
-    foreach ($_SESSION['questions'] as $name => $array) {
-      if ($array['status']==='answered') : ?>
-        <div class='row'>
-          <div class='span8 offset2 question-answered'>
-            <div class=''><?php include('./includes/questions/'.$name.'Q.php');?></div>
-            <div class='answer'><?php include('./includes/questions/'.$name.'Answer.php');?></div>
-            <div class='reset-button'>
-              <form action="process.php" method='GET'>
-                <button type="submit" class='btn btn-link' name='edit' value='edit<?php echo $name ?>'>Change</button>
-              </form>
-            </div>
+    <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
+      <div class='row'>
+        <div class='span8 offset2 question-answered'>
+          <div class=''><?php include('./includes/questions/'.$question.'Q.php');?></div>
+          <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
+          <div class='reset-button'>
+            <form action="process.php" method='GET'>
+              <button type="submit" class='btn btn-link' name='edit' value='edit<?php echo $question ?>'>Change</button>
+            </form>
           </div>
         </div>
-      <?php endif;
-    }?>
+      </div>
+    <?php endforeach; }?>
     <a id='spot'></a>
     <div class='row'>
       <div class='span8 offset2 question-current' id='questions'>
         <form class='form-horizontal' action="process.php" method='GET'>
-          <?php 
-          foreach ($_SESSION['questions'] as $name => $array) {
-            if ($array['status']==='current') :?>
-              <h4><?php include('./includes/questions/'.$name.'Q.php');?></h4>
-              <?php include('./includes/questions/'.$name.'Controls.php');?>
-              <?php elseif ($array['status']==='ineligible') :?>
-              <?php include('./include/results.php'); ?>
-            <?php endif; 
-          } ?>
+          <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
+          <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
           <br><br><br>
           <input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'>
         </form>
