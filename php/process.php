@@ -250,7 +250,7 @@ elseif (is_Ready('assetsMarried')) {
 elseif (is_Ready('shelterType')) {
   $_SESSION['answered'][]='shelterType';
   if ($_SESSION['shelterType']==='Institutional') {
-    $_SESSION['current']='shelterType'; // GO TO RESULTS
+    $_SESSION['current']='results'; // GO TO RESULTS
   } else {
     $_SESSION['current']='housingCost';
   }
@@ -274,7 +274,7 @@ elseif (is_Ready('heatingCost')) {
     $_SESSION['heatingCost'] = $_GET['heatingCost'];
   } else {
     $_SESSION['answered'][]='heatingCost';
-    $_SESSION['current']='heatingCost'; // GO TO RESULTS
+    $_SESSION['current']='results'; // GO TO RESULTS
   }
 }
 

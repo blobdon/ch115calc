@@ -78,11 +78,11 @@ if ($_SESSION['maritalStatus']==='Married'){
 
 
 //Calculate Fuel Allowance
-$fuelAllowance = min($maxFuelAllowance, $_SESSION['HeatingCost']+0);
+$fuelAllowance = min($maxFuelAllowance, $_SESSION['heatingCost']+0);
 
 //Calculate Shelter Allowance
 $ShelterAllowance = 0;
-$housingCost = $_SESSION['HousingCost'] +0; //adding zero ensures integer type
+$housingCost = $_SESSION['housingCost'] +0; //adding zero ensures integer type
 if ($fuelAllowance > 0) {
   $shelterAllowance = min($maxShelterAllowanceUnheated,$housingCost);
 } elseif ($fuelAllowance === 0) {
@@ -97,7 +97,7 @@ $earnedIncome = max($_SESSION['earnedIncome'] - $workIncentive, 0);
 $otherIncome = $_SESSION['otherIncome'] +0;
 
 //Calculate total income
-$totalIncome = $earnedIncome + $etherIncome;
+$totalIncome = $earnedIncome + $otherIncome;
 
 //calc overall budget by summing all allowances
 $budget = $personalAllowance +

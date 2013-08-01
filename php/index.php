@@ -48,10 +48,14 @@
     <div class='row'>
       <div class='span8 offset2 question-current' id='questions'>
         <form class='form-horizontal' action="process.php" method='GET'>
-          <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
-          <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
-          <br><br><br>
-          <input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'>
+          <?php if ($_SESSION['current']==='results') :?>
+            <?php include('./includes/results.php');?>
+          <?php else :?>
+            <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
+            <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
+            <br>
+            <input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'>
+          <?php endif; ?>
         </form>
       </div>
 
