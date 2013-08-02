@@ -1,7 +1,9 @@
 <div class='container progress-tracker'>
   <br>
   <div class='row'>
-    <br><br><br>
+    <div class='span12 text-center'>
+      <h3>Calculate your Veteran's Financial and Medical Assistance</h3>
+    </div>
   </div>
   <div class='reset-button'>
     <form action="process.php" method='GET'>

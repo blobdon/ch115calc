@@ -5,7 +5,7 @@
 ?><!DOCTYPE html>
 <?php
   if ( !isset($_SESSION['current']) ){
-    $_SESSION['current'] = 'service';
+    $_SESSION['current'] = 'intro';
     //require(dirname(__FILE__).'/includes/questions/questionsArray.php');
   }
   require_once(dirname(__FILE__).'/includes/myFunctions.php');
@@ -38,7 +38,7 @@
           <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
           <div class='reset-button'>
             <form action="process.php" method='GET'>
-              <button type="submit" class='btn btn-link' name='edit' value='edit<?php echo $question ?>'>Change</button>
+              <!-- <button type="submit" class='btn btn-link' name='edit' value='edit<?php echo $question ?>'>Change</button> -->
             </form>
           </div>
         </div>
@@ -48,7 +48,11 @@
     <div class='row'>
       <div class='span8 offset2 question-current' id='questions'>
         <form class='form-horizontal' action="process.php" method='GET'>
-          <?php if ($_SESSION['current']==='results') :?>
+          <?php if ($_SESSION['current']==='intro') :?>
+            <?php include('./includes/intro.php');?>
+            <br>
+            <button type="submit" class='btn btn-large btn-primary' name='begin' value='begin'>Begin</button>
+          <?php elseif ($_SESSION['current']==='results') :?>
             <?php include('./includes/results.php');?>
           <?php else :?>
             <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>

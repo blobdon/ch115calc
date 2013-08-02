@@ -7,9 +7,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 ?>
 <div class='row'>
 <div class='span8'>
-  <hr>
   <h3>Based on your answers, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h3>
-  <hr>
 </div>
 </div>
 
@@ -101,5 +99,13 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 <div class='row'>
 <div class='span8' id='medOnlyResults'>
 
+</div>
+</div>
+
+<div class='row'>
+<div class='span8' id='additionalBenefitsResults'>
+  <h4>You may also be eligible for these other benefits:</h4>
+  <!-- Payments in cases of 100% disability or service death -->
+  <!-- welcome home payments based on wartime service -->
 </div>
 </div>

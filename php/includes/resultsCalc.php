@@ -116,7 +116,7 @@ $benefitsPayable = max($budget - $totalIncome,0);
 if ($_SESSION['eligibleService'] === "No" ||
     $_SESSION['eligibleResidence'] === "No" ||
     $_SESSION['eligibleAssets'] === "No" ||
-    $BenefitsPayable == 0){
+    $benefitsPayable == 0){
   $_SESSION['eligibleAll'] = 'No';
 } else {
   $_SESSION['eligibleAll'] = 'Yes';

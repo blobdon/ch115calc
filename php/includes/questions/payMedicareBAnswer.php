@@ -1,4 +1,7 @@
 <?php 
-echo 'YOU - '.$_SESSION['payMedicareB'];
-if ($_SESSION['maritalStatus']==='Married') { echo ';  SPOUSE - '.$_SESSION['spousePayMedicareB']; }
+if ($_SESSION['maritalStatus']==='Married') { 
+	echo 'YOU - '.$_SESSION['payMedicareB'].';  SPOUSE - '.$_SESSION['spousePayMedicareB']; 
+} else {
+	echo $_SESSION['payMedicareB'];
+}
 ?>

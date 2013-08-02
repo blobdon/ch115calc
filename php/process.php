@@ -15,15 +15,15 @@ if (isset($_GET['submitReset'])){
   exit(0);
 }
 #
-# submitted via begin button - resets session and moves to first form
+# submitted via begin button - resets session and moves to first question
 #
-// elseif (isset($_GET['submitBegin'])) { //if coming from Begin/Intro
-//   session_unset();                 //clear old session vars
-//   session_regenerate_id(true);     //new session id, clear old
-//   $_SESSION['index'] = 1;
-//   header("Location: index.php"); /* Redirect browser */
-//   exit(0);
-// }
+elseif (isset($_GET['begin'])) { //if coming from Begin/Intro
+  session_unset();                 //clear old session vars
+  session_regenerate_id(true);     //new session id, clear old
+  $_SESSION['current']='service';
+  header("Location: index.php"); /* Redirect browser */
+  exit(0);
+}
 #
 # submitted from any input forms - runs validation and navigates appropriately
 #

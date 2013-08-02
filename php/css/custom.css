@@ -17,9 +17,9 @@
 	box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-body {
-	background-color: #666666; /* #A8A88B; for willmer hale site*/
-}
+/*body {
+	background-color: #666666;  #A8A88B; for willmer hale site
+}*/
 .container {
 	background-color: white; /*#FFFFE9; wilmer hale site*/
 	-webkit-border-radius: 4px;
