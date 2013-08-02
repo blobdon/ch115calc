@@ -16,7 +16,6 @@
   </button>
 </div>
 <?php echo isset($_SESSION['errors']['otherIncome'])?$_SESSION['errors']['otherIncome']:''; ?>
-
 <div id='otherIncomeCalcContent' class='hide'>
   Under Construction
   <?php //include(dirname(__FILE__).'/includes/otherIncomeCalc.php'); ?>

@@ -91,3 +91,7 @@ tr.total{
 	padding-left: 2em;
 	font-weight: bold;
 }
+.error{
+	font-weight: bold;
+	color: red;
+}

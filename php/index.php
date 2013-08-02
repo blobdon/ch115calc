@@ -21,7 +21,7 @@
   <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
   <!-- additional -->
     <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
@@ -57,8 +57,8 @@
           <?php else :?>
             <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
             <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
-            <br>
-            <input type='submit' class='btn btn-primary btn-large' name='submit' value='Continue'>
+            <hr>
+            <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
           <?php endif; ?>
         </form>
       </div>
@@ -66,10 +66,10 @@
     </div> <!-- end of main container row -->
 
       <?php
-        // print('<pre>');
-        // echo 'Session ';
-        // print_r($_SESSION);
-        // print('</pre>');
+        print('<pre>');
+        echo 'Session ';
+        print_r($_SESSION);
+        print('</pre>');
      ?>
   </div> <!-- end of main container -->
 

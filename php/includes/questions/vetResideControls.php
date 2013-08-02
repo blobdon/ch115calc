@@ -1,5 +1,5 @@
 <div class='span8'>
-  <input type='radio' name='vetReside' id='vetResideInclude' value='Skipped' class='hide' checked>
+  <span class='error'><?php echo isset($_SESSION['errors']['vetReside']) ?$_SESSION['errors']['vetReside']:'';?></span>
   <label class="radio" for='vetReside1'>
     <input type='radio' name='vetReside' id='vetReside1' value='Yes'
     <?php retain_Radio('vetReside','Yes');?>>

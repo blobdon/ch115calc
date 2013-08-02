@@ -6,7 +6,7 @@ ob_start();
 #
 # if submitted via Reset button - resets session and returns to begin page
 #
-if (isset($_GET['submitReset'])){
+if (isset($_GET['reset'])){
   session_destroy();
   session_start();
   session_unset();
@@ -31,25 +31,23 @@ elseif (isset($_GET['submit'])) {
 #
 #  Entry Validation for all forms
 #
-//loop through submission and mark blank or skipped required questions.
-foreach ($_GET as $name => $value) {
-  if (empty($_GET[$name]) && $_GET[$name] !== '0') {
-    $_SESSION['errors'][$name] = 'Required';
-  } elseif ($_GET[$name]==='Skipped') { //this is how I make radios required, hidden checked value = Skipped
-    $_SESSION['errors'][$name] = 'Required';
-  } else {
-    $_SESSION['errors'][$name] = '';
-  }
-}
 //save submitted values to SESSION
 foreach ($_GET as $name => $value) {
   $_SESSION[$name] = $value;
 }
+// clear previous error - new errors checked within each
+unset($_SESSION['errors']);
 ## service basics - service.php
-if (is_Ready('service')) {
+if ($_GET['submit']==='service') {
   #
   # service date Validation and modification for unix epoch
   #      - would like to rework this to consitently use dateTime object, currently saves back to string in session
+  if ($_SESSION['branch']==='blank') {
+    $_SESSION['errors']['branch']='Please select your branch of service';
+  }
+  if ($_SESSION['discharge']==='blank') {
+    $_SESSION['errors']['discharge']='Please select the type of discharge you received';
+  }
   if (isset($_GET['serviceStart']) && isset($_GET['serviceEnd'])) {
     service_Date_Validate('serviceStart'); //valid date, proper format, +10, -100 years
     service_Date_Validate('serviceEnd'); //valid date, proper format, +10, -100 years
@@ -82,33 +80,37 @@ if (is_Ready('service')) {
   } // end of if no errors
 } // end of if service
 ## service details - purpleHeart
-elseif (is_Ready('purpleHeart')) {
-  $_SESSION['answered'][]='purpleHeart';
-  $serviceStart = new DateTime($_SESSION['serviceStart']);
-  $serviceEnd = new DateTime($_SESSION['serviceEnd']);
-  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
-      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
-      $_SESSION['current']='vetReside';
-  } else {
-      $_SESSION['eligibleService'] = 'No';
-      $_SESSION['current']='serviceDisability';
-  }
+elseif ($_GET['submit']==='purpleHeart') {
+  if (isset($_SESSION['purpleHeart'])) {
+      $_SESSION['answered'][]='purpleHeart';
+      $serviceStart = new DateTime($_SESSION['serviceStart']);
+      $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+      if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+          $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+          $_SESSION['current']='vetReside';
+      } else {
+          $_SESSION['eligibleService'] = 'No';
+          $_SESSION['current']='serviceDisability';
+      }
+    } else {$_SESSION['errors']['purpleHeart']='Please select YES or NO';}
 }
 ## service details - serviceDisability
-elseif (is_Ready('serviceDisability')) {
-  $_SESSION['answered'][]='serviceDisability';
-  $serviceStart = new DateTime($_SESSION['serviceStart']);
-  $serviceEnd = new DateTime($_SESSION['serviceEnd']);
-  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
-      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
-      $_SESSION['current']='vetReside';
-  } else {
-      $_SESSION['eligibleService'] = 'No';
-      $_SESSION['current']='kdsm';
-  }
+elseif ($_GET['submit']==='serviceDisability') {
+    if (isset($_SESSION['serviceDisability'])) {
+      $_SESSION['answered'][]='serviceDisability';
+      $serviceStart = new DateTime($_SESSION['serviceStart']);
+      $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+      if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+        $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+        $_SESSION['current']='vetReside';
+      } else {
+        $_SESSION['eligibleService'] = 'No';
+        $_SESSION['current']='kdsm';
+      }
+    } else {$_SESSION['errors']['serviceDisability']='Please select YES or NO';}
 }
 ## service details - kdsm
-elseif (is_Ready('kdsm')) {
+elseif ($_GET['submit']==='kdsm') {
   $_SESSION['answered'][]='kdsm';
   $serviceStart = new DateTime($_SESSION['serviceStart']);
   $serviceEnd = new DateTime($_SESSION['serviceEnd']);
@@ -131,7 +133,7 @@ elseif (is_Ready('kdsm')) {
 }
 ## service details - campaigns
 //have to update session var for campaigns outside loop, doesnt update if empty on later submits
-elseif (is_Ready('campaigns')) {
+elseif ($_GET['submit']==='campaigns') {
   $_SESSION['answered'][]='campaigns';
   $_SESSION['campaigns'] = $_GET['campaigns'];
   $serviceStart = new DateTime($_SESSION['serviceStart']);
@@ -150,23 +152,27 @@ elseif (is_Ready('campaigns')) {
   }
 }
 ## service details - serviceDeath
-elseif (is_Ready('serviceDeath')) {}
+elseif ($_GET['submit']==='serviceDeath') {}
 ## residence - currently
-elseif (is_Ready('vetReside')) {
-  $_SESSION['answered'][]='vetReside';
-  if ($_SESSION['vetReside'] === 'Yes'){
-    $_SESSION['eligibleResidence'] = 'Yes';
+elseif ($_GET['submit']==='vetReside') {
+  if (isset($_SESSION['vetReside'])) {
+    $_SESSION['answered'][]='vetReside';
+    if ($_SESSION['vetReside'] === 'Yes'){
+      $_SESSION['eligibleResidence'] = 'Yes';
+    } else {
+      $_SESSION['eligibleResidence'] = 'No';
+    }
+    $_SESSION['current']='maritalStatus';
   } else {
-    $_SESSION['eligibleResidence'] = 'No';
+    $_SESSION['errors']['vetReside'] = 'Please select YES or NO';
   }
-  $_SESSION['current']='maritalStatus';
 }
 ## residence - prior to service
-elseif (is_Ready('vetResidePrior')) {}
+elseif ($_GET['submit']==='vetResidePrior') {}
 ## residence - 3 years continuous
-elseif (is_Ready('vetReside3Years')) {}
+elseif ($_GET['submit']==='vetReside3Years') {}
 ## family - marital status
-elseif (is_Ready('maritalStatus')) {
+elseif ($_GET['submit']==='maritalStatus') {  /////////////HERERERERERERERERERERERE
   $_SESSION['answered'][]='maritalStatus';
   if ($_SESSION['maritalStatus']==='Married') {
     $_SESSION['current']='liveWithSpouse';
@@ -175,12 +181,12 @@ elseif (is_Ready('maritalStatus')) {
   }
 }
 ## family - if married, live with spouse
-elseif (is_Ready('liveWithSpouse')) {
+elseif ($_GET['submit']==='liveWithSpouse') {
   $_SESSION['answered'][]='liveWithSpouse';
   $_SESSION['current']='children';
 }
 ## family - children
-elseif (is_Ready('children')) {
+elseif ($_GET['submit']==='children') {
   $_SESSION['children'] = filter_var($_GET['children'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['children']) && $_SESSION['children'] !== 0){
     $_SESSION['errors']['children'] = 'Please enter a valid number (eg 0,1,2...)';
@@ -191,7 +197,7 @@ elseif (is_Ready('children')) {
   }
 }
 ## finances - earned income
-elseif (is_Ready('earnedIncome')) {
+elseif ($_GET['submit']==='earnedIncome') {
   $_SESSION['earnedIncome'] = filter_var($_GET['earnedIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['earnedIncome']) && $_SESSION['earnedIncome'] !== 0){
     $_SESSION['errors']['earnedIncome'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -202,7 +208,7 @@ elseif (is_Ready('earnedIncome')) {
   }
 }
 ## finances - other income
-elseif (is_Ready('otherIncome')) {
+elseif ($_GET['submit']==='otherIncome') {
   $_SESSION['otherIncome'] = filter_var($_GET['otherIncome'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['otherIncome']) && $_SESSION['otherIncome'] !== 0){
     $_SESSION['errors']['otherIncome'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -213,12 +219,12 @@ elseif (is_Ready('otherIncome')) {
   }
 }
 ## finances - other/REBA benefits
-elseif (is_Ready('otherBenefits')) {
+elseif ($_GET['submit']==='otherBenefits') {
   $_SESSION['answered'][]='otherBenefits';
   $_SESSION['current']='payMedicareB';
 }
 ## finances - pay medicare B premiums
-elseif (is_Ready('payMedicareB')) {
+elseif ($_GET['submit']==='payMedicareB') {
   $_SESSION['answered'][]='payMedicareB';
   if ($_SESSION['maritalStatus']==='Married') {
     $_SESSION['current']='assetsMarried';
@@ -227,7 +233,7 @@ elseif (is_Ready('payMedicareB')) {
   }
 }
 ## finances - assets if single
-elseif (is_Ready('assetsSingle')) {
+elseif ($_GET['submit']==='assetsSingle') {
   $_SESSION['answered'][]='assetsSingle';
   if ($_SESSION['maritalStatus']==='Single' && $_SESSION['assetsSingle']==='Yes'){
     $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ????
@@ -237,7 +243,7 @@ elseif (is_Ready('assetsSingle')) {
   $_SESSION['current']='shelterType';
 }
 ## finances - assets if married
-elseif (is_Ready('assetsMarried')) {
+elseif ($_GET['submit']==='assetsMarried') {
   $_SESSION['answered'][]='assetsMarried';
   if ($_SESSION['maritalStatus']==='Married' && $_SESSION['assetsMarried']==='Yes'){
     $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ????
@@ -247,7 +253,7 @@ elseif (is_Ready('assetsMarried')) {
   $_SESSION['current']='shelterType';
 }
 ## housing - shelter type
-elseif (is_Ready('shelterType')) {
+elseif ($_GET['submit']==='shelterType') {
   $_SESSION['answered'][]='shelterType';
   if ($_SESSION['shelterType']==='Institutional') {
     $_SESSION['current']='results'; // GO TO RESULTS
@@ -256,7 +262,7 @@ elseif (is_Ready('shelterType')) {
   }
 }
 ## housing - housing cost
-elseif (is_Ready('housingCost')) {
+elseif ($_GET['submit']==='housingCost') {
   $_SESSION['housingCost'] = filter_var($_GET['housingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['housingCost']) && $_SESSION['housingCost'] !== 0){
     $_SESSION['errors']['housingCost'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -267,7 +273,7 @@ elseif (is_Ready('housingCost')) {
   }
 }
 ## housing - heating cost
-elseif (is_Ready('heatingCost')) {
+elseif ($_GET['submit']==='heatingCost') {
   $_SESSION['heatingCost'] = filter_var($_GET['heatingCost'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['heatingCost']) && $_SESSION['heatingCost'] !== 0){
     $_SESSION['errors']['heatingCost'] = 'Please enter a valid dollar amount (0 is OK)';
@@ -326,7 +332,7 @@ function service_Date_Validate($dateName){
   //fix unix epoch problems with years befor 1970. Any date that comes up 10 years from now, will be set to 1900 version
   if ($date >= $futureCutoff) { $date->modify('-100 years');}
   if ($date > $futureCutoff || $date < $pastCutoff ){
-    $_SESSION['errors'][$dateName] = 'Outside reasonable date range';
+    $_SESSION['errors'][$dateName] = 'Date outside reasonable date range';
   }
   $_SESSION[$dateName] = $date->format('m/d/Y');
 }
@@ -389,11 +395,6 @@ function is_Eligible_Service($serviceStart, $serviceEnd){
        $_GET['serviceDisability'] === "Yes" ||
        $_GET['serviceDeath']      === "Yes" ) {
     Return 'Purple Heart, Service-Connected Disbility, or Service Death';
-  }
-}
-function is_Ready($question) {
-  if ($_SESSION['current']===$question && empty($_SESSION['errors'][$question])) {
-    Return True;
   }
 }
 ?>

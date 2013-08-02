@@ -4,8 +4,8 @@
   <li>VA <em>non-service connected</em> pension or widow's pension </li>
 </ul>
 <div class='span7 <?php echo !empty($_SESSION['errors']['otherBenefits']) ? 'question alert-error' : '';?>'>
+  <span class='error'><?php echo isset($_SESSION['errors']['otherBenefits']) ?$_SESSION['errors']['otherBenefits']:'';?></span>
   <?php if ($_SESSION['maritalStatus']==='Married'):?><b>YOU</b><?php endif;?>
-  <input type='radio' name='otherBenefits' id='otherBenefitsInclude' value='Skipped' class='hide' checked>
   <label class="radio" for='otherBenefits1'>
     <input type='radio' name='otherBenefits' id='otherBenefits1' value='Yes'
     <?php retain_Radio('otherBenefits','Yes');?>>YES, I receive one or more of the listed benefits
@@ -17,8 +17,8 @@
 </div>
 <?php if ($_SESSION['maritalStatus']==='Married'):?> <!-- display spouse question if married -->
 <div class='span7 spouse <?php echo !empty($_SESSION['errors']['spouseOtherBenefits']) ? 'question alert-error' : '';?>'>
+  <span class='error'><?php echo isset($_SESSION['errors']['spouseOtherBenefits']) ?$_SESSION['errors']['spouseOtherBenefits']:'';?></span>
   <b>SPOUSE</b>
-  <input type='radio' name='spouseOtherBenefits' id='spouseOtherBenefitsInclude' value='Skipped' class='hide' checked>
   <label class="radio" for='spouseOtherBenefits1'>
     <input type='radio' name='spouseOtherBenefits' id='spouseOtherBenefits1' value='Yes'
     <?php retain_Radio('spouseOtherBenefits','Yes');?>>YES, my spouse receives one or more of the listed benefits

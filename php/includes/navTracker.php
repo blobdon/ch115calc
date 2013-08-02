@@ -8,7 +8,7 @@
   <div class='reset-button'>
     <form action="process.php" method='GET'>
       <!-- <input type="submit" class='btn btn-warning' name='submitBegin' value='Begin'> -->
-      <input type="submit" class='btn btn-warning' name='submitReset' value='Reset'>
+      <input type="submit" class='btn btn-warning' name='reset' value='reset'>
     </form>
   </div>
 </div> <!-- end of navigation div -->
