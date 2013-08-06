@@ -95,22 +95,22 @@ tr.total{
 	font-weight: bold;
 	color: red;
 }
-.header, .header *{
+#header, #header *{
 	background-color: #333333;
 	color: white;
 	font-size: 24.5px;
 	font-weight: bold;
 }
-.header{
+#header{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-.footer, .footer *{
+#footer, #footer *{
 	background-color: silver;
 	color: gray;
 	list-style: none;
 }
-.footer{
+#footer{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }

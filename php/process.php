@@ -172,24 +172,33 @@ elseif ($_GET['submit']==='vetResidePrior') {}
 ## residence - 3 years continuous
 elseif ($_GET['submit']==='vetReside3Years') {}
 ## family - marital status
-elseif ($_GET['submit']==='maritalStatus') {  /////////////HERERERERERERERERERERERE
-  $_SESSION['answered'][]='maritalStatus';
-  if ($_SESSION['maritalStatus']==='Married') {
-    $_SESSION['current']='liveWithSpouse';
+elseif ($_GET['submit']==='maritalStatus') {
+  if (isset($_SESSION['maritalStatus'])) {
+    $_SESSION['answered'][]='maritalStatus';
+    if ($_SESSION['maritalStatus']==='Married') {
+      $_SESSION['current']='liveWithSpouse';
+    } else {
+      $_SESSION['current']='children';
+    }
   } else {
-    $_SESSION['current']='children';
+    $_SESSION['errors']['maritalStatus'] = 'Please select MARRIED or SINGLE';
   }
+
 }
 ## family - if married, live with spouse
 elseif ($_GET['submit']==='liveWithSpouse') {
-  $_SESSION['answered'][]='liveWithSpouse';
-  $_SESSION['current']='children';
+  if (isset($_SESSION['liveWithSpouse'])) {
+    $_SESSION['answered'][]='liveWithSpouse';
+    $_SESSION['current']='children';
+  } else {
+    $_SESSION['errors']['liveWithSpouse'] = 'Please select YES or NO';
+  }
 }
 ## family - children
 elseif ($_GET['submit']==='children') {
   $_SESSION['children'] = filter_var($_GET['children'], FILTER_VALIDATE_INT,array('options'=>array('min_range'=>0)));
   if (empty($_SESSION['children']) && $_SESSION['children'] !== 0){
-    $_SESSION['errors']['children'] = 'Please enter a valid number (eg 0,1,2...)';
+    $_SESSION['errors']['children'] = 'Please enter a valid number of children (eg 0,1,2...)';
     $_SESSION['children'] = $_GET['children'];
   } else {
     $_SESSION['answered'][]='children';
@@ -220,46 +229,78 @@ elseif ($_GET['submit']==='otherIncome') {
 }
 ## finances - other/REBA benefits
 elseif ($_GET['submit']==='otherBenefits') {
-  $_SESSION['answered'][]='otherBenefits';
-  $_SESSION['current']='payMedicareB';
+  if (isset($_SESSION['otherBenefits']) && isset($_SESSION['spouseOtherBenefits'])) {
+    $_SESSION['answered'][]='otherBenefits';
+    $_SESSION['current']='payMedicareB';
+  } else {
+    if (!isset($_SESSION['otherBenefits'])) {
+      $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
+    }
+    if (!isset($_SESSION['spouseOtherBenefits'])) {
+      $_SESSION['errors']['spouseOtherBenefits'] = 'Please select YES or NO for your SPOUSE';
+    }
+  }
 }
 ## finances - pay medicare B premiums
 elseif ($_GET['submit']==='payMedicareB') {
-  $_SESSION['answered'][]='payMedicareB';
-  if ($_SESSION['maritalStatus']==='Married') {
-    $_SESSION['current']='assetsMarried';
+  if (isset($_SESSION['payMedicareB']) && isset($_SESSION['spousePayMedicareB'])) {
+    $_SESSION['answered'][]='payMedicareB';
+    if ($_SESSION['maritalStatus']==='Married') {
+      $_SESSION['current']='assetsMarried';
+    } else {
+      $_SESSION['current']='assetsSingle';
+    }
   } else {
-    $_SESSION['current']='assetsSingle';
+    if (!isset($_SESSION['payMedicareB'])) {
+      $_SESSION['errors']['payMedicareB'] = 'Please select YES or NO';
+    }
+    if (!isset($_SESSION['spousePayMedicareB'])) {
+      $_SESSION['errors']['spousePayMedicareB'] = 'Please select YES or NO';
+    }
   }
+
 }
 ## finances - assets if single
 elseif ($_GET['submit']==='assetsSingle') {
-  $_SESSION['answered'][]='assetsSingle';
-  if ($_SESSION['maritalStatus']==='Single' && $_SESSION['assetsSingle']==='Yes'){
-    $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ????
+  if (isset($_SESSION['assetsSingle'])) {
+    $_SESSION['answered'][]='assetsSingle';
+    if ($_SESSION['maritalStatus']==='Single' && $_SESSION['assetsSingle']==='Yes'){
+      $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ???? No, need to complete for spendown & medical
+    } else {
+      $_SESSION['eligibleAssets']='Yes';
+    }
+    $_SESSION['current']='shelterType';
   } else {
-    $_SESSION['eligibleAssets']='Yes';
+    $_SESSION['errors']['assetsSingle'] = 'Please select YES or NO';
   }
-  $_SESSION['current']='shelterType';
 }
 ## finances - assets if married
 elseif ($_GET['submit']==='assetsMarried') {
-  $_SESSION['answered'][]='assetsMarried';
-  if ($_SESSION['maritalStatus']==='Married' && $_SESSION['assetsMarried']==='Yes'){
-    $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ????
+  if (isset($_SESSION['assetsMarried'])) {
+    $_SESSION['answered'][]='assetsMarried';
+    if ($_SESSION['maritalStatus']==='Married' && $_SESSION['assetsMarried']==='Yes'){
+      $_SESSION['eligibleAssets']='No'; // GO TO RESULTS ???? No, need to complete for spendown & medical
+    } else {
+      $_SESSION['eligibleAssets']='Yes';
+    }
+    $_SESSION['current']='shelterType';
   } else {
-    $_SESSION['eligibleAssets']='Yes';
+    $_SESSION['errors']['assetsMarried'] = 'Please select YES or NO';
   }
-  $_SESSION['current']='shelterType';
 }
 ## housing - shelter type
 elseif ($_GET['submit']==='shelterType') {
-  $_SESSION['answered'][]='shelterType';
-  if ($_SESSION['shelterType']==='Institutional') {
-    $_SESSION['current']='results'; // GO TO RESULTS
+  if (isset($_SESSION['shelterType'])) {
+    $_SESSION['answered'][]='shelterType';
+    if ($_SESSION['shelterType']==='Institutional') {
+      $_SESSION['current']='results'; // GO TO RESULTS ??? do not need housing/heating costs because = 0
+    } else {
+      $_SESSION['current']='housingCost';
+    }
   } else {
-    $_SESSION['current']='housingCost';
+    $_SESSION['errors']['shelterType'] = 'Please select your type of housing';
   }
+
 }
 ## housing - housing cost
 elseif ($_GET['submit']==='housingCost') {
@@ -334,7 +375,7 @@ function service_Date_Validate($dateName){
   if ($date > $futureCutoff || $date < $pastCutoff ){
     $_SESSION['errors'][$dateName] = 'Date outside reasonable date range';
   }
-  $_SESSION[$dateName] = $date->format('m/d/Y');
+  $_SESSION[$dateName] = $date->format('m/d/y');
 }
 // check user service dates against MGL definition of veteran
 function is_Wartime($serviceStart, $serviceEnd){

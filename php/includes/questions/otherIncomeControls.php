@@ -6,6 +6,8 @@
   <li>Retirement income</li>
   <li>Unemployment, Worker's Compensation, sick-leave or long-term disability benefits</li>
 </ul>
+<span class='error'><?php echo isset($_SESSION['errors']['otherIncome']) ?$_SESSION['errors']['otherIncome']:'';?></span>
+<br>
 <div class='input-prepend input-append'>
   <span class='add-on'>$</span>
   <input type="text" name='otherIncome' id='otherIncome' class='span1'
@@ -15,7 +17,6 @@
     Calculator
   </button>
 </div>
-<?php echo isset($_SESSION['errors']['otherIncome'])?$_SESSION['errors']['otherIncome']:''; ?>
 <div id='otherIncomeCalcContent' class='hide'>
   Under Construction
   <?php //include(dirname(__FILE__).'/includes/otherIncomeCalc.php'); ?>

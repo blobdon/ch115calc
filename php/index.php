@@ -27,14 +27,12 @@
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
 </head>
 <body>
-  <div class='header'>
+  <div id='header'>
     <div class='container'>
-      <div>
-        <div class='row'>
-          <img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">
-          &nbsp;
-          <span>Veterans Legal Clinic</span>
-        </div>
+      <div class='row'>
+        <img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">
+        &nbsp;
+        <span>Veterans Legal Clinic</span>
       </div>
     </div>
   </div>
@@ -45,7 +43,7 @@
     </div>
     <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
       <div class='row'>
-        <div class='span8 offset1 question-answered'>
+        <div class='span10 offset1 question-answered'>
           <div class=''><?php include('./includes/questions/'.$question.'Q.php');?></div>
           <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
           <div class='reset-button'>
@@ -58,7 +56,7 @@
     <?php endforeach; }?>
     <a id='spot'></a>
     <div class='row'>
-      <div class='span8 offset1 question-current' id='questions'>
+      <div class='span10 offset1 question-current' id='questions'>
         <form class='form-horizontal' action="process.php" method='GET'>
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
@@ -66,12 +64,17 @@
             <button type="submit" class='btn btn-large btn-primary' name='begin' value='begin'>Begin</button>
           <?php elseif ($_SESSION['current']==='results') :?>
             <?php include('./includes/results.php');?>
-          <?php else :?>
-            <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
-            <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
-            <hr>
-            <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
             <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
+          <?php else :?>
+            <div class='row'>
+               <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
+              <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
+            </div>
+            <hr>
+            <div class='row'>
+              <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
+              <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
+            </div>
           <?php endif; ?>
         </form>
       </div>
@@ -86,7 +89,7 @@
      ?>
   </div> <!-- end of main container -->
   
-  <div class='footer'>
+  <div id='footer'>
     <?php //include('./includes/footer.php'); ?>
     <div class='container'>
       <div>
