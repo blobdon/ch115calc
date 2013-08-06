@@ -20,20 +20,32 @@
   <title>Ch115 Calc</title>
   <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+   <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet"> -->
   <!-- additional -->
     <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
 </head>
 <body>
-<!-- navigatio/progress tracker -->
-  <?php include('./includes/navTracker.php'); ?>
+  <div class='header'>
+    <div class='container'>
+      <div>
+        <div class='row'>
+          <img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">
+          &nbsp;
+          <span>Veterans Legal Clinic</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class='container'>
+    <div class='row'>
+      <h2>Calculate your Chapter 115 Veteran's Financial and Medical Assistance</h2>
+    </div>
     <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
       <div class='row'>
-        <div class='span8 offset2 question-answered'>
+        <div class='span8 offset1 question-answered'>
           <div class=''><?php include('./includes/questions/'.$question.'Q.php');?></div>
           <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
           <div class='reset-button'>
@@ -46,7 +58,7 @@
     <?php endforeach; }?>
     <a id='spot'></a>
     <div class='row'>
-      <div class='span8 offset2 question-current' id='questions'>
+      <div class='span8 offset1 question-current' id='questions'>
         <form class='form-horizontal' action="process.php" method='GET'>
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
@@ -59,6 +71,7 @@
             <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
             <hr>
             <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
+            <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
           <?php endif; ?>
         </form>
       </div>
