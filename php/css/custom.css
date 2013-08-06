@@ -101,7 +101,16 @@ tr.total{
 	font-size: 24.5px;
 	font-weight: bold;
 }
-.header > * {
-	padding-top: 5px;
-	padding-bottom: 5px;
+.header{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.footer, .footer *{
+	background-color: silver;
+	color: gray;
+	list-style: none;
+}
+.footer{
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

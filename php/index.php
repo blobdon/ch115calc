@@ -85,7 +85,32 @@
         print('</pre>');
      ?>
   </div> <!-- end of main container -->
-
+  
+  <div class='footer'>
+    <?php //include('./includes/footer.php'); ?>
+    <div class='container'>
+      <div>
+        <div class='row'>
+          <div class='span3'>
+            <b>Veterans Clinic</b>
+            <ul>
+              <li>Home</li>
+              <li>About</li>
+              <li>Service</li>
+            </ul>
+          </div>
+          <div class='span3'>
+            <b>Legal Services Center</b>
+            <ul>
+              <li>Home</li>
+              <li>About</li>
+              <li>Service</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- 
    <script src="./js/jquery-1.10.2.min.js"></script>
    <script src="./js/bootstrap.min.js"></script>
