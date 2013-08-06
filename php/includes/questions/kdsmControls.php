@@ -1,5 +1,5 @@
 <div class='span8'>
-	<span class='error'><?php echo isset($_SESSION['errors']['vetReside']) ?$_SESSION['errors']['kdsm']:'';?></span>
+	<span class='error'><?php echo isset($_SESSION['errors']['kdsm']) ?$_SESSION['errors']['kdsm']:'';?></span>
   	<label class="radio" for='kdsm1'>
     	<input type='radio' name='kdsm' id='kdsm1' value='Yes'<?php retain_Radio('kdsm','Yes'); ?>>
     		YES, I was awarded a Korea Defense Service Medal

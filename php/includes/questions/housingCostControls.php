@@ -38,8 +38,6 @@
     Calculator
   </button>
 </div>
-<?php echo isset($_SESSION['errors']['housingCost'])?$_SESSION['errors']['housingCost']:''; ?>
-
 <div id='housingCalcContent' class='hide'>
     Under Construction
   <?php //include(dirname(__FILE__).'/includes/housingCalc.php'); ?>

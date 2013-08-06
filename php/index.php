@@ -37,26 +37,34 @@
     </div>
   </div>
 
+  <div id='content'>
   <div class='container'>
     <div class='row'>
-      <h2>Calculate your Chapter 115 Veteran's Financial and Medical Assistance</h2>
-    </div>
-    <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
-      <div class='row'>
-        <div class='span10 offset1 question-answered'>
-          <div class=''><?php include('./includes/questions/'.$question.'Q.php');?></div>
-          <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
-          <div class='reset-button'>
-            <form action="process.php" method='GET'>
-              <!-- <button type="submit" class='btn btn-link' name='edit' value='edit<?php echo $question ?>'>Change</button> -->
-            </form>
-          </div>
-        </div>
+      <div class='span12'>
+        <h2>Calculate your Chapter 115 Veteran's Financial and Medical Assistance</h2>
       </div>
-    <?php endforeach; }?>
+    </div>
+    <div class='row'>
+      <div id='answers span12'>
+        <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
+          <div class='row'>
+            <div class='span8 offset1 question-answered'>
+              <div class=''><?php include('./includes/questions/'.$question.'Q.php');?></div>
+              <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
+              <div class='reset-button'>
+                <form action="process.php" method='GET'>
+                  <button disabled type="submit" class='btn btn-link' name='edit' value='edit<?php echo $question ?>'>Edit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; }?>
+      </div>
+    </div>
+
     <a id='spot'></a>
     <div class='row'>
-      <div class='span10 offset1 question-current' id='questions'>
+      <div class='span11 offset1 question-current' id='questions'>
         <form class='form-horizontal' action="process.php" method='GET'>
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
@@ -82,13 +90,13 @@
     </div> <!-- end of main container row -->
 
       <?php
-        print('<pre>');
-        echo 'Session ';
-        print_r($_SESSION);
-        print('</pre>');
+        // print('<pre>');
+        // echo 'Session ';
+        // print_r($_SESSION);
+        // print('</pre>');
      ?>
   </div> <!-- end of main container -->
-  
+  </div>
   <div id='footer'>
     <?php //include('./includes/footer.php'); ?>
     <div class='container'>

@@ -96,40 +96,33 @@ elseif ($_GET['submit']==='purpleHeart') {
 }
 ## service details - serviceDisability
 elseif ($_GET['submit']==='serviceDisability') {
-    if (isset($_SESSION['serviceDisability'])) {
-      $_SESSION['answered'][]='serviceDisability';
-      $serviceStart = new DateTime($_SESSION['serviceStart']);
-      $serviceEnd = new DateTime($_SESSION['serviceEnd']);
-      if (is_Eligible_Service($serviceStart,$serviceEnd)) {
-        $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
-        $_SESSION['current']='vetReside';
-      } else {
-        $_SESSION['eligibleService'] = 'No';
-        $_SESSION['current']='kdsm';
-      }
-    } else {$_SESSION['errors']['serviceDisability']='Please select YES or NO';}
+  if (isset($_SESSION['serviceDisability'])) {
+    $_SESSION['answered'][]='serviceDisability';
+    $serviceStart = new DateTime($_SESSION['serviceStart']);
+    $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+    if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['current']='vetReside';
+    } else {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['current']='kdsm';
+    }
+  } else {$_SESSION['errors']['serviceDisability']='Please select YES or NO';}
 }
 ## service details - kdsm
 elseif ($_GET['submit']==='kdsm') {
-  $_SESSION['answered'][]='kdsm';
-  $serviceStart = new DateTime($_SESSION['serviceStart']);
-  $serviceEnd = new DateTime($_SESSION['serviceEnd']);
-  if ( is_Wartime($serviceStart, $serviceEnd) ) {
-    $_SESSION['test'] = 'hello';
-    $_SESSION['serviceEra'] = is_Wartime($serviceStart,$serviceEnd);
-  } else {
-    $_SESSION['serviceEra'] = 'Peacetime';
-    $_SESSION['test'] = 'got to else';
-  }
-  if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+  if (isset($_SESSION['kdsm'])) {
+    $_SESSION['answered'][]='kdsm';
+    $serviceStart = new DateTime($_SESSION['serviceStart']);
+    $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+    if (is_Eligible_Service($serviceStart,$serviceEnd)) {
       $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
       $_SESSION['current']='vetReside';
-      $_SESSION['test2'] = 'second if';
-  } else {
+    } else {
       $_SESSION['eligibleService'] = 'No';
       $_SESSION['current']='campaigns';
-      $_SESSION['test2'] = 'second else';
-  }
+    }
+  } else {$_SESSION['errors']['kdsm']='Please select YES or NO';}
 }
 ## service details - campaigns
 //have to update session var for campaigns outside loop, doesnt update if empty on later submits
@@ -229,36 +222,49 @@ elseif ($_GET['submit']==='otherIncome') {
 }
 ## finances - other/REBA benefits
 elseif ($_GET['submit']==='otherBenefits') {
-  if (isset($_SESSION['otherBenefits']) && isset($_SESSION['spouseOtherBenefits'])) {
-    $_SESSION['answered'][]='otherBenefits';
-    $_SESSION['current']='payMedicareB';
-  } else {
-    if (!isset($_SESSION['otherBenefits'])) {
-      $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
+  if ($_SESSION['maritalStatus']==='Married') {
+    if (isset($_SESSION['otherBenefits']) && isset($_SESSION['spouseOtherBenefits'])) {
+      $_SESSION['answered'][]='otherBenefits';
+      $_SESSION['current']='payMedicareB';
+    } else {
+      if (!isset($_SESSION['otherBenefits'])) {
+        $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
+      }
+      if (!isset($_SESSION['spouseOtherBenefits'])) {
+        $_SESSION['errors']['spouseOtherBenefits'] = 'Please select YES or NO for your SPOUSE';
+      }
     }
-    if (!isset($_SESSION['spouseOtherBenefits'])) {
-      $_SESSION['errors']['spouseOtherBenefits'] = 'Please select YES or NO for your SPOUSE';
+  } elseif ($_SESSION['maritalStatus']==='Single') {
+    if (isset($_SESSION['otherBenefits'])) {
+      $_SESSION['answered'][]='otherBenefits';
+      $_SESSION['current']='payMedicareB';
+    } else {
+      $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
     }
   }
 }
 ## finances - pay medicare B premiums
 elseif ($_GET['submit']==='payMedicareB') {
-  if (isset($_SESSION['payMedicareB']) && isset($_SESSION['spousePayMedicareB'])) {
-    $_SESSION['answered'][]='payMedicareB';
-    if ($_SESSION['maritalStatus']==='Married') {
+  if ($_SESSION['maritalStatus']==='Married') {
+    if (isset($_SESSION['payMedicareB']) && isset($_SESSION['spousePayMedicareB'])) {
+      $_SESSION['answered'][]='payMedicareB';
       $_SESSION['current']='assetsMarried';
     } else {
-      $_SESSION['current']='assetsSingle';
+      if (!isset($_SESSION['payMedicareB'])) {
+        $_SESSION['errors']['payMedicareB'] = 'Please select YES or NO';
+      }
+      if (!isset($_SESSION['spousePayMedicareB'])) {
+        $_SESSION['errors']['spousePayMedicareB'] = 'Please select YES or NO for your SPOUSE';
+      }
     }
-  } else {
-    if (!isset($_SESSION['payMedicareB'])) {
+  } elseif ($_SESSION['maritalStatus']==='Single') {
+    if (isset($_SESSION['payMedicareB'])) {
+      $_SESSION['answered'][]='payMedicareB';
+      $_SESSION['current']='assetsSingle';
+    } else {
       $_SESSION['errors']['payMedicareB'] = 'Please select YES or NO';
     }
-    if (!isset($_SESSION['spousePayMedicareB'])) {
-      $_SESSION['errors']['spousePayMedicareB'] = 'Please select YES or NO';
-    }
   }
-
 }
 ## finances - assets if single
 elseif ($_GET['submit']==='assetsSingle') {

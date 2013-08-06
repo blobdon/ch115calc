@@ -9,4 +9,3 @@
           value='<?php echo isset($_SESSION['heatingCost'])?htmlspecialchars($_SESSION['heatingCost']):'';?>' >
   <span class='add-on'>per month</span>
 </div>
-<?php echo isset($_SESSION['errors']['heatingCost'])?$_SESSION['errors']['heatingCost']:''; ?>
