@@ -69,7 +69,7 @@
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
             <br>
-            <button type="submit" class='btn btn-large btn-primary' name='begin' value='begin'>Begin</button>
+            <button type="submit" class='btn btn-large btn-primary' name='begin' value='begin'>Press Here to Begin</button>
           <?php elseif ($_SESSION['current']==='results') :?>
             <?php include('./includes/results.php');?>
             <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
