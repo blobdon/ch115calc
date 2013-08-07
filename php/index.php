@@ -53,7 +53,7 @@
               <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
               <div class='reset-button'>
                 <form action="process.php" method='GET'>
-                  <button disabled type="submit" class='btn btn-link' name='edit' value='edit<?php echo $question ?>'>Edit</button>
+                  <button type="submit" class='btn btn-link' name='edit' value='<?php echo $question ?>'>Edit</button>
                 </form>
               </div>
             </div>
@@ -65,7 +65,7 @@
     <a id='spot'></a>
     <div class='row'>
       <div class='span11 offset1 question-current' id='questions'>
-        <form class='form-horizontal' action="process.php" method='GET'>
+        <form class='form' action="process.php" method='GET'>
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
             <br>
@@ -90,10 +90,10 @@
     </div> <!-- end of main container row -->
 
       <?php
-        // print('<pre>');
-        // echo 'Session ';
-        // print_r($_SESSION);
-        // print('</pre>');
+        print('<pre>');
+        echo 'Session ';
+        print_r($_SESSION);
+        print('</pre>');
      ?>
   </div> <!-- end of main container -->
   </div>

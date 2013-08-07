@@ -7,7 +7,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 ?>
 <div class='row'>
 <div class='span8'>
-  <h3>Based on your answers, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h3>
+  <h3>Based on your answers above, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h3>
 </div>
 </div>
 

@@ -25,6 +25,18 @@ elseif (isset($_GET['begin'])) { //if coming from Begin/Intro
   exit(0);
 }
 #
+# submitted edit button on previous question
+#
+elseif (isset($_GET['edit'])) {
+  $position = array_search($_GET['edit'], $_SESSION['answered']);
+  if ($position != False) {
+    array_splice($_SESSION['answered'], $position);
+  }
+  $_SESSION['current'] = $_GET['edit'];
+  header("Location: index.php"); /* Redirect browser */
+  exit(0);
+}
+#
 # submitted from any input forms - runs validation and navigates appropriately
 #
 elseif (isset($_GET['submit'])) {
