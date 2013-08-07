@@ -18,7 +18,7 @@
     <span class='error'><?php echo isset($_SESSION['errors']['serviceStart'])?$_SESSION['errors']['serviceStart']:'';?></span>
     <div class=' <?php echo !empty($_SESSION['errors']['serviceStart']) ? 'question alert-error' : '';?>'>
       <label class='text-center' for="serviceStart">Date service began <br>
-      <input type="text" class="datepicker span2" placeholder="mm/dd/yy" name='serviceStart' id='serviceStart' value='<?php echo isset($_SESSION['serviceStart'])? htmlspecialchars($_SESSION['serviceStart']):'';?>'>
+      <input type="text" class="datepicker span2" placeholder="mm/dd/yyyy" name='serviceStart' id='serviceStart' value='<?php echo isset($_SESSION['serviceStart'])? htmlspecialchars($_SESSION['serviceStart']):'';?>'>
       </label>
     </div>
   </div>
@@ -26,7 +26,7 @@
     <span class='error'><?php echo isset($_SESSION['errors']['serviceEnd'])?$_SESSION['errors']['serviceEnd']:'';?></span>
     <div class='<?php echo !empty($_SESSION['errors']['serviceEnd']) ? 'question alert-error' : '';?>'>
       <label class='text-center' for="serviceEnd">Date service ended <br>
-      <input type="text" class="datepicker span2" placeholder="mm/dd/yy" name='serviceEnd' id='serviceEnd' value='<?php echo isset($_SESSION['serviceEnd'])? htmlspecialchars($_SESSION['serviceEnd']):'';?>'>
+      <input type="text" class="datepicker span2" placeholder="mm/dd/yyyy" name='serviceEnd' id='serviceEnd' value='<?php echo isset($_SESSION['serviceEnd'])? htmlspecialchars($_SESSION['serviceEnd']):'';?>'>
       </label>
     </div>
   </div>

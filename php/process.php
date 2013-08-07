@@ -368,10 +368,10 @@ ob_flush();
 #
 // date validation for PHP >=5.3
 function service_Date_Validate($dateName){
-  $date = DateTime::createFromFormat('m/d/y', $_SESSION[$dateName]);
+  $date = DateTime::createFromFormat('m/d/Y', $_SESSION[$dateName]);
   $date_errors = DateTime::getLastErrors();
   if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
-    $_SESSION['errors'][$dateName] = 'Invalid Date <br> (format as mm/dd/yy)';
+    $_SESSION['errors'][$dateName] = 'Invalid Date <br> (format as mm/dd/yyyy)';
     return;
   }
   $futureCutoff = new DateTime('+10 years');
@@ -381,7 +381,7 @@ function service_Date_Validate($dateName){
   if ($date > $futureCutoff || $date < $pastCutoff ){
     $_SESSION['errors'][$dateName] = 'Date outside reasonable date range';
   }
-  $_SESSION[$dateName] = $date->format('m/d/y');
+  $_SESSION[$dateName] = $date->format('m/d/Y');
 }
 // check user service dates against MGL definition of veteran
 function is_Wartime($serviceStart, $serviceEnd){
