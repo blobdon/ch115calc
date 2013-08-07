@@ -311,6 +311,8 @@ elseif ($_GET['submit']==='shelterType') {
   if (isset($_SESSION['shelterType'])) {
     $_SESSION['answered'][]='shelterType';
     if ($_SESSION['shelterType']==='Institutional') {
+      $_SESSION['housingCost']=0;
+      $_SESSION['heatingCost']=0;
       $_SESSION['current']='results'; // GO TO RESULTS ??? do not need housing/heating costs because = 0
     } else {
       $_SESSION['current']='housingCost';
