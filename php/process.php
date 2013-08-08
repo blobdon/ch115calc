@@ -33,7 +33,7 @@ elseif (isset($_GET['edit'])) {
     array_splice($_SESSION['answered'], $position);
   }
   $_SESSION['current'] = $_GET['edit'];
-  header("Location: index.php"); /* Redirect browser */
+  header("Location: index.php#spot"); /* Redirect browser */
   exit(0);
 }
 #
