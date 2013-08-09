@@ -23,7 +23,7 @@ $workIncentive = 200; //per 108 CMR 6.01(5)(d)
 //  Calculate correct personal allowance based on housing situation (Budgets #1-4 2102 Melrose-Wakefield)
 $personalAllowance = 0;
 if ($_SESSION['shelterType']==='Institutional') {
-  $sersonalAllowance = $personalAllowanceInstitutional;
+  $personalAllowance = $personalAllowanceInstitutional;
 } elseif ($_SESSION['shelterType']==='Transitional') {
   $personalAllowance = $personalAllowanceTransitional;
 } elseif ($_SESSION['shelterType']==='Rent' || $_SESSION['shelterType']==='Mortgage' || $_SESSION['shelterType']==='Own'){

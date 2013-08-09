@@ -72,3 +72,12 @@ tr.total{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+#help-banner{
+	background-color: #333333;
+	color: silver;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}

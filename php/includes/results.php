@@ -6,36 +6,15 @@
 require_once(dirname(__FILE__).'/resultsCalc.php');
 ?>
 <div class='row'>
-<div class='span8'>
+<div class='span11'>
   <h3>Based on your answers above, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h3>
 </div>
 </div>
 
-<div class='row'>
-<div class='span8 hide' id='serviceResults'>
-	<h4>Veteran's service</h4>
-	<?php
-
-	 echo $_SESSION["serviceStart"]." - ".$_SESSION["serviceEnd"]." is ".$_SESSION["serviceDays"]." days of service";
-  //     	echo '<div class="span8">'.(is_Eligible_Service($serviceStart,$serviceEnd) ?
-  //         'This service meets the MA definition of veteran.<br>'.is_Eligible_Service($serviceStart,$serviceEnd)
-  //         : ' This service DOES NOT meet the MA definition of veteran.<br>
-  //         <i class="icon-remove"></i> (>=180 days Active Duty)<br>
-  //         <i class="icon-remove"></i> (>=90 days Active Duty, at least 1 during wartime)<br>
-  //         <i class="icon-remove"></i> (Less days than required, but Purple Heart, Service-Connected Disbility, or Service Death'
-  //       ).'</div><br>';
-
-//   if ($_SESSION['index'] === count($_SESSION['form'])) {
-
-  ?>
-</div>
-</div>
 
 <div class='row'>
-<div class='span5 offset1' id='budgetResults'>
+<div class='span5 well' id='budgetResults'>
   <h4>Estimated Benefit Calculation</h4>
-
-
   <table class='table table-condensed'>
     <thead>
       <tr>
@@ -87,12 +66,31 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
       </tr>
     </tbody>
   </table>
-  <div class='row'>
-  <div class='well alert alert-info'>
+  <hr>
+  <div class='alert alert-info'>
     <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
   </div>
-  </div>
 
+</div>
+<!-- </div> -->
+
+<!-- <div class='row'> -->
+<div class='span5 well' id='discretionaryFaults'>
+  <h4>You <em>may</em> be denied this benefit for the following reasons:</h4>
+  <ul>
+    <li>Conviction of some crimes</li>
+    <li>Failure to support your dependents</li>
+    <li>Voluntary unemployemnt</li>
+    <li>Continuous "unwholesome habits"</li>
+    <li>Need is based solely on your willful acts</li>
+    <li>Dishonorably discharged from a national soldiers'/sailors' home</li>
+    <li>Dishonorably discharged from a Massachusetts soldiers' home</li>
+  </ul>
+  <span class='help-block'>If you are denied the benefit for any of these reasons, remember that you have to right to appeal the decision. Contact us if you need assistance with your appeal.</span>
+</div>
+<div class='span5 well'>
+  <h4>You have a right to appeal.</h4>
+  <p>If you have applied for this benefit through your local VSO, but feel that you did not receive the correct determination from them, remember that you have the right to appeal the decision. Initial determinations have been modified or reversed on appeal. We are available to aid you in your appeal.</p>
 </div>
 </div>
 
@@ -103,9 +101,48 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 </div>
 
 <div class='row'>
-<div class='span8' id='additionalBenefitsResults'>
-  <h4>You may also be eligible for these other benefits:</h4>
-  <!-- Payments in cases of 100% disability or service death -->
-  <!-- welcome home payments based on wartime service -->
+<div class='span9'>
+  <h3>You may also be eligible for:</h3>
+  <div class='row'>
+    <div class='span4 well'>
+      <b>Bonuses (single payment $100 - $1000)</b><br>
+      To VETERAN if:
+      <ul>
+        <li>Lived in MA when entered service</li>
+        <li>Active service:</li>
+        <ul>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/bonus.html'>Since Sep 11, 2001 ($500-1000)</a></li>
+            <ul>
+              <li>50% for subsequent deployments</li>
+            </ul>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/persian-gulf-war.html'>Persian Gulf War ($300-500)</a></li>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/vietnam-war.html'>Vietnam War ($200-300)</a></li>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/korean-war.html'>Korean War ($100-300)</a></li>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/world-war-ii.html'>WWII ($100-300)</a></li>
+        </ul>
+      </ul>
+      To FAMILY if:
+      <ul>
+        <li>Veteran qualified above</li>
+        <li>Veteran deceased</li>
+      </ul>      
+    </div>
+    <div class='span4 well'>
+      <b>Annuity ($2000 each year)</b><br>
+      To VETERAN if:
+      <ul>
+        <li>Met service requirement above <b>AND</b></li> <!-- ONLY SHOW THIS DIV IF THEY MEET SERVICE REQ -->
+        <li>Other than dishonorable discharge <b>AND</b></li>
+        <li>MA resident <b>AND</b></li>
+        <li>Service-connected Blindness, paraplegia, double amputation, or 100% disability rating</li>
+      </ul>
+      To PARENT and SPOUSE of Deceased Veteran if:
+      <ul>
+        <li>Service-connected death</li>
+        <li>Parent/Spouse is MA resident</li>
+        <li>Spouse is not remarried</li>
+      </ul>
+    </div>
+  </div>
 </div>
 </div>
