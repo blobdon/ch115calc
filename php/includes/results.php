@@ -11,28 +11,9 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 </div>
 </div>
 
-<div class='row'>
-<div class='span8 hide' id='serviceResults'>
-	<h4>Veteran's service</h4>
-	<?php
-
-	 echo $_SESSION["serviceStart"]." - ".$_SESSION["serviceEnd"]." is ".$_SESSION["serviceDays"]." days of service";
-  //     	echo '<div class="span8">'.(is_Eligible_Service($serviceStart,$serviceEnd) ?
-  //         'This service meets the MA definition of veteran.<br>'.is_Eligible_Service($serviceStart,$serviceEnd)
-  //         : ' This service DOES NOT meet the MA definition of veteran.<br>
-  //         <i class="icon-remove"></i> (>=180 days Active Duty)<br>
-  //         <i class="icon-remove"></i> (>=90 days Active Duty, at least 1 during wartime)<br>
-  //         <i class="icon-remove"></i> (Less days than required, but Purple Heart, Service-Connected Disbility, or Service Death'
-  //       ).'</div><br>';
-
-//   if ($_SESSION['index'] === count($_SESSION['form'])) {
-
-  ?>
-</div>
-</div>
 
 <div class='row'>
-<div class='span5 offset1' id='budgetResults'>
+<div class='span5' id='budgetResults'>
   <h4>Estimated Benefit Calculation</h4>
 
 
@@ -88,7 +69,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
     </tbody>
   </table>
   <div class='row'>
-  <div class='well alert alert-info'>
+  <div class='span5 alert alert-info'>
     <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
   </div>
   </div>
@@ -97,7 +78,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 </div>
 
 <div class='row'>
-<div class='span8' id='discretionaryFaults'>
+<div class='span4 well' id='discretionaryFaults'>
   <h4>You <em>may</em> be denied this benefit for the following reasons:</h4>
     <span class='help-block'>If you are denied the benefit for any of these reasons, remember that you have to right to appeal the decision. Contact us if you need assistance with your appeal.</span>
   <ul>
@@ -106,7 +87,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
     <li>Voluntary unemployemnt</li>
     <li>Continuous "unwholesome habits"</li>
     <li>Need is based solely on your willful acts</li>
-    <li>Dishonorably discharged from a national soldiers'/sailors home</li>
+    <li>Dishonorably discharged from a national soldiers'/sailors' home</li>
     <li>Dishonorably discharged from a Massachusetts soldiers' home</li>
   </ul>
 
@@ -120,9 +101,16 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 </div>
 
 <div class='row'>
-<div class='span8' id='additionalBenefitsResults'>
+<div class='span' id='additionalBenefitsResults'>
   <h4>You may also be eligible for these other benefits:</h4>
   <!-- Payments in cases of 100% disability or service death -->
   <!-- welcome home payments based on wartime service -->
 </div>
+</div>
+
+<div class='row'>
+  <div class='span4 well'>
+    <h4>You have a right to appeal.</h4>
+    <p>If you have applied for this benefit through your local VSO, but feel that you did not receive the correct determination from them, remember that you have the right to appeal the decision. Initial determinations have been modified or reversed on appeal. We are available to aid you in your appeal.</p>
+  </div>
 </div>
