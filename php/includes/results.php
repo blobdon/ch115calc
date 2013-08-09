@@ -101,10 +101,49 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 </div>
 
 <div class='row'>
-<div class='span' id='additionalBenefitsResults'>
-  <h4>You may also be eligible for these other benefits:</h4>
-  <!-- Payments in cases of 100% disability or service death -->
-  <!-- welcome home payments based on wartime service -->
+<div class='span9'>
+  <h3>You may also be eligible for:</h3>
+  <div class='row'>
+    <div class='span4 well'>
+      <b>Bonuses (single payment $100 - $1000)</b><br>
+      To VETERAN if:
+      <ul>
+        <li>Lived in MA when entered service</li>
+        <li>Active service:</li>
+        <ul>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/bonus.html'>Since Sep 11, 2001 ($500-1000)</a></li>
+            <ul>
+              <li>50% for subsequent deployments</li>
+            </ul>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/persian-gulf-war.html'>Persian Gulf War ($300-500)</a></li>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/vietnam-war.html'>Vietnam War ($200-300)</a></li>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/korean-war.html'>Korean War ($100-300)</a></li>
+          <li><a href='http://www.mass.gov/veterans/benefits-and-services/bonus/bonuses-only/world-war-ii.html'>WWII ($100-300)</a></li>
+        </ul>
+      </ul>
+      To FAMILY if:
+      <ul>
+        <li>Veteran qualified above</li>
+        <li>Veteran deceased</li>
+      </ul>      
+    </div>
+    <div class='span4 well'>
+      <b>Annuity ($2000 each year)</b><br>
+      To VETERAN if:
+      <ul>
+        <li>Met service requirement above <b>AND</b></li> <!-- ONLY SHOW THIS DIV IF THEY MEET SERVICE REQ -->
+        <li>Other than dishonorable discharge <b>AND</b></li>
+        <li>MA resident <b>AND</b></li>
+        <li>Service-connected Blindness, paraplegia, double amputation, or 100% disability rating</li>
+      </ul>
+      To PARENT and SPOUSE of Deceased Veteran if:
+      <ul>
+        <li>Service-connected death</li>
+        <li>Parent/Spouse is MA resident</li>
+        <li>Spouse is not remarried</li>
+      </ul>
+    </div>
+  </div>
 </div>
 </div>
 
