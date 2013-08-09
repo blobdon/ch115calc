@@ -97,6 +97,23 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 </div>
 
 <div class='row'>
+<div class='span8' id='discretionaryFaults'>
+  <h4>You <em>may</em> be denied this benefit for the following reasons:</h4>
+    <span class='help-block'>If you are denied the benefit for any of these reasons, remember that you have to right to appeal the decision. Contact us if you need assistance with your appeal.</span>
+  <ul>
+    <li>Conviction of some crimes</li>
+    <li>Failure to support your dependents</li>
+    <li>Voluntary unemployemnt</li>
+    <li>Continuous "unwholesome habits"</li>
+    <li>Need is based solely on your willful acts</li>
+    <li>Dishonorably discharged from a national soldiers'/sailors home</li>
+    <li>Dishonorably discharged from a Massachusetts soldiers' home</li>
+  </ul>
+
+</div>
+</div>
+
+<div class='row'>
 <div class='span8' id='medOnlyResults'>
 
 </div>
