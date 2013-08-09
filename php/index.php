@@ -64,7 +64,7 @@
 
     <a id='spot'></a>
     <div class='row'>
-      <div class='span11 offset1 question-current' id='questions'>
+      <div class='span12 question-current' id='questions'>
         <form class='form' action="process.php" method='GET'>
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
@@ -75,13 +75,16 @@
             <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
           <?php else :?>
             <div class='row'>
-               <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
-              <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>
+              <div class='span11 offset1'>
+                <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
+                <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>                
+              </div>
             </div>
-            <hr>
             <div class='row'>
-              <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
-              <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
+              <div class='span8 offset1'>
+                <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
+                <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
+              </div>
             </div>
           <?php endif; ?>
         </form>
@@ -90,34 +93,35 @@
     </div> <!-- end of main container row -->
 
       <?php
-        print('<pre>');
-        echo 'Session ';
-        print_r($_SESSION);
-        print('</pre>');
+        // print('<pre>');
+        // echo 'Session ';
+        // print_r($_SESSION);
+        // print('</pre>');
      ?>
   </div> <!-- end of main container -->
+  </div>
+  <div id='help-banner'>
+      Have Questions? Need Help? <a>Contact Us.</a>
   </div>
   <div id='footer'>
     <?php //include('./includes/footer.php'); ?>
     <div class='container'>
-      <div>
-        <div class='row'>
-          <div class='span3'>
-            <b>Veterans Clinic</b>
-            <ul>
-              <li>Home</li>
-              <li>About</li>
-              <li>Service</li>
-            </ul>
-          </div>
-          <div class='span3'>
-            <b>Legal Services Center</b>
-            <ul>
-              <li>Home</li>
-              <li>About</li>
-              <li>Service</li>
-            </ul>
-          </div>
+      <div class='row'>
+        <div class='span3'>
+          <b>Veterans Clinic</b>
+          <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Service</li>
+          </ul>
+        </div>
+        <div class='span3'>
+          <b>Legal Services Center</b>
+          <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Service</li>
+          </ul>
         </div>
       </div>
     </div>

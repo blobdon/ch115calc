@@ -6,17 +6,15 @@
 require_once(dirname(__FILE__).'/resultsCalc.php');
 ?>
 <div class='row'>
-<div class='span8'>
+<div class='span11'>
   <h3>Based on your answers above, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h3>
 </div>
 </div>
 
 
 <div class='row'>
-<div class='span5' id='budgetResults'>
+<div class='span5 well' id='budgetResults'>
   <h4>Estimated Benefit Calculation</h4>
-
-
   <table class='table table-condensed'>
     <thead>
       <tr>
@@ -68,19 +66,17 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
       </tr>
     </tbody>
   </table>
-  <div class='row'>
-  <div class='span5 alert alert-info'>
+  <hr>
+  <div class='alert alert-info'>
     <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
   </div>
-  </div>
 
 </div>
-</div>
+<!-- </div> -->
 
-<div class='row'>
-<div class='span4 well' id='discretionaryFaults'>
+<!-- <div class='row'> -->
+<div class='span5 well' id='discretionaryFaults'>
   <h4>You <em>may</em> be denied this benefit for the following reasons:</h4>
-    <span class='help-block'>If you are denied the benefit for any of these reasons, remember that you have to right to appeal the decision. Contact us if you need assistance with your appeal.</span>
   <ul>
     <li>Conviction of some crimes</li>
     <li>Failure to support your dependents</li>
@@ -90,7 +86,11 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
     <li>Dishonorably discharged from a national soldiers'/sailors' home</li>
     <li>Dishonorably discharged from a Massachusetts soldiers' home</li>
   </ul>
-
+  <span class='help-block'>If you are denied the benefit for any of these reasons, remember that you have to right to appeal the decision. Contact us if you need assistance with your appeal.</span>
+</div>
+<div class='span5 well'>
+  <h4>You have a right to appeal.</h4>
+  <p>If you have applied for this benefit through your local VSO, but feel that you did not receive the correct determination from them, remember that you have the right to appeal the decision. Initial determinations have been modified or reversed on appeal. We are available to aid you in your appeal.</p>
 </div>
 </div>
 
@@ -145,11 +145,4 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
     </div>
   </div>
 </div>
-</div>
-
-<div class='row'>
-  <div class='span4 well'>
-    <h4>You have a right to appeal.</h4>
-    <p>If you have applied for this benefit through your local VSO, but feel that you did not receive the correct determination from them, remember that you have the right to appeal the decision. Initial determinations have been modified or reversed on appeal. We are available to aid you in your appeal.</p>
-  </div>
 </div>
