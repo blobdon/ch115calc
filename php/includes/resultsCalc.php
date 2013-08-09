@@ -110,19 +110,4 @@ $budget = $personalAllowance +
 //calc benefits payments by budget minus income
 $benefitsPayable = max($budget - $totalIncome,0);
 
-#
-#  Overall eligibility
-#
-if ($_SESSION['eligibleService'] === "No" ||
-    $_SESSION['eligibleResidence'] === "No" ||
-    $_SESSION['eligibleAssets'] === "No" ||
-    $benefitsPayable == 0){
-  $_SESSION['eligibleAll'] = 'No';
-} else {
-  $_SESSION['eligibleAll'] = 'Yes';
-}
-
-
-
-
 ?>
