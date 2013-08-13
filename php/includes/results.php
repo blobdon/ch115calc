@@ -7,7 +7,6 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
   $_SESSION['eligibleAll'] = 'No';
 } else {
   $_SESSION['eligibleAll'] = 'Yes';
-  require_once(dirname(__FILE__).'/resultsCalc.php'); //call from correct file - DIR is from calling script, already in /includes
 }
 ?>
 <div class='row'>
@@ -20,8 +19,8 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
     <h4>It appears that your service does not meet the eligibility standards for this benefit.</h4>
     In order to be eligible, your active service must meet one of the following:
     <ul>
-      <li>Minimum of 180 days service during peacetime</li>
-      <li>Minimum of 90 days service, at least one day during wartime</li>
+      <li>Minimum of 180 days service during peacetime, <b>OR</b></li>
+      <li>Minimum of 90 days service, at least one day during wartime, <b>OR</b></li>
       <li>Exception to minimum days</li>
         <ul>
           <li>Purple Heart</li>
@@ -33,8 +32,11 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
 <?php elseif ($_SESSION['eligibleResidence']==='No'):?>
   <h4>You must be living in Massachusetts for at least 1 day to be eligible for this benefit.</h4>
   You must continue to live in Massachusetts in order to continue receiving this benefit
-<?php elseif ($_SESSION['eligibleAssets']==='No'):?>
-<?php else :?>
+<?php else :?><?php require_once(dirname(__FILE__).'/resultsCalc.php');?>
+  <?php if ($_SESSION['eligibleAssets']==='No'):?>
+  <h4>Your current assets are above the maximum allowable for this need-based benefit.</h4>
+  <p>Once your assets fall below <?php echo $_SESSION['maritalStatus']==='Single'?'$3200':"7200";?>, if everything else remains the same, you may be eligible for the estimated benefit detailed below.</p>
+  <?php endif; ?>
 <div class='row'>
 <div class='span5 well' id='budgetResults'>
   <h4>Estimated Benefit Calculation</h4>
@@ -89,10 +91,6 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
       </tr>
     </tbody>
   </table>
-  <hr>
-  <div class='alert alert-info'>
-    <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
-  </div>
 </div>
 <div class='span5 well' id='discretionaryFaults'>
   <h4>You <em>may</em> be denied this benefit for the following reasons:</h4>
@@ -117,6 +115,7 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
 <div class='span8' id='medOnlyResults'>
 
 </div>
+
 </div>
 <?php endif; ?>
 <div class='row'>
@@ -164,4 +163,7 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
     </div>
   </div>
 </div>
+</div>
+<div class='alert alert-info'>
+  <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
 </div>

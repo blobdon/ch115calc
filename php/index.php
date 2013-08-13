@@ -93,10 +93,10 @@
     </div> <!-- end of main container row -->
 
       <?php
-        print('<pre>');
-        echo 'Session ';
-        print_r($_SESSION);
-        print('</pre>');
+        // print('<pre>');
+        // echo 'Session ';
+        // print_r($_SESSION);
+        // print('</pre>');
      ?>
   </div> <!-- end of main container -->
   </div>
