@@ -2,16 +2,41 @@
 #
 #  6 - RESULTS CALCULATION
 #
-//make sure calling from correct file - DIR is from calling script, in this case already in /inlcudes
-require_once(dirname(__FILE__).'/resultsCalc.php');
+//  Overall eligibility
+if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === "No" || $_SESSION['eligibleAssets'] === "No") {
+  $_SESSION['eligibleAll'] = 'No';
+} else {
+  $_SESSION['eligibleAll'] = 'Yes';
+}
 ?>
 <div class='row'>
 <div class='span11'>
-  <h3>Based on your answers above, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h3>
+  <h2>Based on your answers above, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h2>
 </div>
 </div>
-
-
+<?php if ($_SESSION['eligibleService']==='No'):?>
+  <div>
+    <h4>It appears that your service does not meet the eligibility standards for this benefit.</h4>
+    In order to be eligible, your active service must meet one of the following:
+    <ul>
+      <li>Minimum of 180 days service during peacetime, <b>OR</b></li>
+      <li>Minimum of 90 days service, at least one day during wartime, <b>OR</b></li>
+      <li>Exception to minimum days</li>
+        <ul>
+          <li>Purple Heart</li>
+          <li>Service-Connected Disability</li>
+          <li>Service-Related Death</li>
+        </ul>
+    </ul>
+  </div>
+<?php elseif ($_SESSION['eligibleResidence']==='No'):?>
+  <h4>You must be living in Massachusetts for at least 1 day to be eligible for this benefit.</h4>
+  You must continue to live in Massachusetts in order to continue receiving this benefit
+<?php else :?><?php require_once(dirname(__FILE__).'/resultsCalc.php');?>
+  <?php if ($_SESSION['eligibleAssets']==='No'):?>
+  <h4>Your current assets are above the maximum allowable for this need-based benefit.</h4>
+  <p>Once your assets fall below <?php echo $_SESSION['maritalStatus']==='Single'?'$3200':"7200";?>, if everything else remains the same, you may be eligible for the estimated benefit detailed below.</p>
+  <?php endif; ?>
 <div class='row'>
 <div class='span5 well' id='budgetResults'>
   <h4>Estimated Benefit Calculation</h4>
@@ -48,7 +73,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
         <td>+ $ <?php echo $shelterAllowance;?></td>
       </tr>
       <tr class='total'>
-        <td>Total budget</td>
+        <td>Total Needs</td>
         <td>= $ <?php echo $budget;?></td>
       </tr>
               <tr>
@@ -66,21 +91,13 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
       </tr>
     </tbody>
   </table>
-  <hr>
-  <div class='alert alert-info'>
-    <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
-  </div>
-
 </div>
-<!-- </div> -->
-
-<!-- <div class='row'> -->
 <div class='span5 well' id='discretionaryFaults'>
   <h4>You <em>may</em> be denied this benefit for the following reasons:</h4>
   <ul>
     <li>Conviction of some crimes</li>
     <li>Failure to support your dependents</li>
-    <li>Voluntary unemployemnt</li>
+    <li>Voluntary unemployment</li>
     <li>Continuous "unwholesome habits"</li>
     <li>Need is based solely on your willful acts</li>
     <li>Dishonorably discharged from a national soldiers'/sailors' home</li>
@@ -98,11 +115,12 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
 <div class='span8' id='medOnlyResults'>
 
 </div>
-</div>
 
+</div>
+<?php endif; ?>
 <div class='row'>
 <div class='span9'>
-  <h3>You may also be eligible for:</h3>
+  <h2>You may also be eligible for:</h2>
   <div class='row'>
     <div class='span4 well'>
       <b>Bonuses (single payment $100 - $1000)</b><br>
@@ -145,4 +163,7 @@ require_once(dirname(__FILE__).'/resultsCalc.php');
     </div>
   </div>
 </div>
+</div>
+<div class='alert alert-info'>
+  <i class='icon-exclamation-sign'></i>This in only an estimate, a final determination of your benefits can only be made by the Department of Veteran's Services. You must apply through your local Veterans' Service Officer (VSO).
 </div>

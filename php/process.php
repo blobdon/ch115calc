@@ -29,7 +29,8 @@ elseif (isset($_GET['begin'])) { //if coming from Begin/Intro
 #
 elseif (isset($_GET['edit'])) {
   $position = array_search($_GET['edit'], $_SESSION['answered']);
-  if ($position != False) {
+  $_SESSION['position'] = $position;
+  if ($position !== False) {
     array_splice($_SESSION['answered'], $position);
   }
   $_SESSION['current'] = $_GET['edit'];
@@ -153,7 +154,7 @@ elseif ($_GET['submit']==='campaigns') {
       $_SESSION['current']='vetReside';
   } else {
       $_SESSION['eligibleService'] = 'No';
-      $_SESSION['current']='vetReside'; //later change to results page showing ineligible.
+      $_SESSION['current']='results'; //later change to results page showing ineligible.
   }
 }
 ## service details - serviceDeath
@@ -164,10 +165,11 @@ elseif ($_GET['submit']==='vetReside') {
     $_SESSION['answered'][]='vetReside';
     if ($_SESSION['vetReside'] === 'Yes'){
       $_SESSION['eligibleResidence'] = 'Yes';
+      $_SESSION['current']='maritalStatus';
     } else {
       $_SESSION['eligibleResidence'] = 'No';
+      $_SESSION['current']='results';
     }
-    $_SESSION['current']='maritalStatus';
   } else {
     $_SESSION['errors']['vetReside'] = 'Please select YES or NO';
   }
