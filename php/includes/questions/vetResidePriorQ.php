@@ -1,1 +1,1 @@
-Did you live in Massachusetts when you began your Active-duty service?
+Did the Veteran live in Massachusetts when they began their Active-duty service?

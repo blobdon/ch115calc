@@ -3,7 +3,7 @@
 #  6 - RESULTS CALCULATION
 #
 //  Overall eligibility
-if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === "No" || $_SESSION['eligibleAssets'] === "No") {
+if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === "No" || $_SESSION['eligibleAssets'] === "No" || $_SESSION['eligibleDep']==='No') {
   $_SESSION['eligibleAll'] = 'No';
 } else {
   $_SESSION['eligibleAll'] = 'Yes';
@@ -14,10 +14,25 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
   <h2>Based on your answers above, you might<?php echo $_SESSION['eligibleAll']==='No'?' NOT':'';?> be eligible for Chapter 115 financial assistance.<i class='icon-exclamation-sign'></i></h2>
 </div>
 </div>
-<?php if ($_SESSION['eligibleService']==='No'):?>
+<?php if ($_SESSION['eligibleDep']==='No'):?>
   <div>
-    <h4>It appears that your service does not meet the eligibility standards for this benefit.</h4>
-    In order to be eligible, your active service must meet one of the following:
+    <h4>It appears that you are not a type of Dependent eligible to receive this benefit.</h4>
+    In order to be eligible, you must be one of the following:
+    <ul>
+      <li>Spouse of the veteran</li>
+      <li>Widow or widower of the veteran</li>
+      <li>Dependent parent of the veteran</li>
+      <li>Any person who acted as a parent to the veteran for five years immediately preceding the commencement of the veteran's wartime service</li>
+      <li>Child of the veteran until his or her 19th birthday</li>
+      <li>Child of the veteran between 19 years and 23 years of age while the child is attending high school, an institution of higher learning or some other accredited educational institution provided that the applicant is in receipt of benefits under the provisions of M.G.L. c. 115</li>
+      <li>Child of the veteran 19 years of age or older who is mentally or physically unable to support himself or herself and was affected by the disability prior to his or her 18th birthday</li>
+      <li>Legally adopted child of the veteran</li>
+    </ul>
+  </div>
+<?php elseif ($_SESSION['eligibleService']==='No'):?>
+  <div>
+    <h4>It appears that <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran's":'your';?> service does not meet the eligibility standards for this benefit.</h4>
+    In order to be eligible, <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran's":'your';?> active service must meet one of the following:
     <ul>
       <li>Minimum of 180 days service during peacetime, <b>OR</b></li>
       <li>Minimum of 90 days service, at least one day during wartime, <b>OR</b></li>
@@ -30,9 +45,19 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
     </ul>
   </div>
 <?php elseif ($_SESSION['eligibleResidence']==='No'):?>
-  <h4>You must be living in Massachusetts for at least 1 day to be eligible for this benefit.</h4>
+  <h4>It appears that you have not met the residence requirements for this benefit.</h4>
+  <?php if ($_SESSION['submit']==='vetReside'):?>
+    <?php echo $_SESSION['applicant']==='Dependent'?'Both you and the Veteran':'You';?> must be living in Massachusetts to be eligible for this benefit.
+  <?php elseif ($_SESSION['submit']==='vetReside3Years'):?>
+    For a DEPENDENT to be eligible, one of the following must be true:
+    <ul>
+      <li>Veteran lived in Massachusetts when they entered active service, <b>OR</b></li>
+      <li>Both the Veteran and Dependent have lived in Massachusetts continuously for at least 3 years</li>
+    </ul>
+  <?php endif; ?>
   You must continue to live in Massachusetts in order to continue receiving this benefit
-<?php else :?><?php require_once(dirname(__FILE__).'/resultsCalc.php');?>
+<?php else :?>
+  <?php require_once(dirname(__FILE__).'/resultsCalc.php');?>
   <?php if ($_SESSION['eligibleAssets']==='No'):?>
   <h4>Your current assets are above the maximum allowable for this need-based benefit.</h4>
   <p>Once your assets fall below <?php echo $_SESSION['maritalStatus']==='Single'?'$3200':"7200";?>, if everything else remains the same, you may be eligible for the estimated benefit detailed below.</p>

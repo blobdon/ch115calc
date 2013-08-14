@@ -81,3 +81,7 @@ tr.total{
 	font-weight: bold;
 	text-align: center;
 }
+.inline-label{
+	margin-top: 5px;
+	vertical-align: middle;
+}
