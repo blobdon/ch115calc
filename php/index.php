@@ -80,6 +80,7 @@
                 <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>                
               </div>
             </div>
+            <br>
             <div class='row'>
               <div class='span8 offset1'>
                 <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
@@ -93,10 +94,10 @@
     </div> <!-- end of main container row -->
 
       <?php
-        // print('<pre>');
-        // echo 'Session ';
-        // print_r($_SESSION);
-        // print('</pre>');
+        print('<pre>');
+        echo 'Session ';
+        print_r($_SESSION);
+        print('</pre>');
      ?>
   </div> <!-- end of main container -->
   </div>

@@ -1,1 +1,1 @@
-Were you awarded a Purple Heart?
+<?php echo $_SESSION['applicant']==='Dependent'?"Was the Veteran":'Were you' ?> awarded a Purple Heart?

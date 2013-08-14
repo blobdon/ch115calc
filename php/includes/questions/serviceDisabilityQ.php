@@ -1,1 +1,1 @@
-Do you have a service-connected disability?
+<?php echo $_SESSION['applicant']==='Dependent'?"Does the Veteran":'Do you' ?> have a service-connected disability?

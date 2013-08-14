@@ -20,7 +20,12 @@ if (isset($_GET['reset'])){
 elseif (isset($_GET['begin'])) { //if coming from Begin/Intro
   session_unset();                 //clear old session vars
   session_regenerate_id(true);     //new session id, clear old
-  $_SESSION['current']='service';
+  $_SESSION['current']='applicant';
+  $_SESSION['eligibleDep']='No';
+  $_SESSION['eligibleService']='No';
+  $_SESSION['eligibleResidence']='No';
+  $_SESSION['eligibleAssets']='No';
+  $_SESSION['eligibleAll']='No';
   header("Location: index.php"); /* Redirect browser */
   exit(0);
 }
@@ -50,16 +55,43 @@ foreach ($_GET as $name => $value) {
 }
 // clear previous error - new errors checked within each
 unset($_SESSION['errors']);
+## veteran or dependent - applicant.php
+if ($_GET['submit']==='applicant') {
+  if (isset($_SESSION['applicant'])) {
+    $_SESSION['answered'][]='applicant';
+    if ($_SESSION['applicant']==='Veteran') {
+      $_SESSION['eligibleDep']='Not Applicable';
+      $_SESSION['current']='service';
+    } else {
+      $_SESSION['current']='depType';
+    }
+  }
+    else {$_SESSION['errors']['applicant']='Please select VETERAN or DEPENDENT';}
+}
+## type of dependent - depType.php
+elseif ($_GET['submit']==='depType') {
+  if (isset($_SESSION['depType'])) {
+      $_SESSION['answered'][]='depType';
+      if ($_SESSION['depType']==='Other') {
+          $_SESSION['eligibleDep'] = 'No';
+          $_SESSION['current']='results';
+      } else {
+          $_SESSION['eligibleDep'] = 'Yes'; // Need to add questions for children (age, school, disabled)
+          $_SESSION['current']='service';
+          if ($_SESSION['depType']==='Spouse') {$_SESSION['maritalStatus']='Married';} //must be true, dont ask again
+      }
+    } else {$_SESSION['errors']['depType']='Please select the option that best describes your relation to the Veteran';}
+}
 ## service basics - service.php
-if ($_GET['submit']==='service') {
+elseif ($_GET['submit']==='service') {
   #
   # service date Validation and modification for unix epoch
   #      - would like to rework this to consitently use dateTime object, currently saves back to string in session
   if ($_SESSION['branch']==='blank') {
-    $_SESSION['errors']['branch']='Please select your branch of service';
+    $_SESSION['errors']['branch']='Please select branch of service';
   }
   if ($_SESSION['discharge']==='blank') {
-    $_SESSION['errors']['discharge']='Please select the type of discharge you received';
+    $_SESSION['errors']['discharge']='Please select the type of discharge received';
   }
   if (isset($_GET['serviceStart']) && isset($_GET['serviceEnd'])) {
     service_Date_Validate('serviceStart'); //valid date, proper format, +10, -100 years
@@ -152,32 +184,126 @@ elseif ($_GET['submit']==='campaigns') {
   if (is_Eligible_Service($serviceStart,$serviceEnd)) {
       $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
       $_SESSION['current']='vetReside';
+  } elseif ($_SESSION['applicant']==='Dependent') {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['current']='serviceDeath'; 
   } else {
       $_SESSION['eligibleService'] = 'No';
-      $_SESSION['current']='results'; //later change to results page showing ineligible.
+      $_SESSION['current']='results';
   }
 }
 ## service details - serviceDeath
-elseif ($_GET['submit']==='serviceDeath') {}
-## residence - currently
-elseif ($_GET['submit']==='vetReside') {
-  if (isset($_SESSION['vetReside'])) {
-    $_SESSION['answered'][]='vetReside';
-    if ($_SESSION['vetReside'] === 'Yes'){
-      $_SESSION['eligibleResidence'] = 'Yes';
-      $_SESSION['current']='maritalStatus';
+elseif ($_GET['submit']==='serviceDeath') {
+  if (isset($_SESSION['serviceDeath'])) {
+    $_SESSION['answered'][]='serviceDeath';
+    $serviceStart = new DateTime($_SESSION['serviceStart']);
+    $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+    if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['current']='vetReside';
     } else {
-      $_SESSION['eligibleResidence'] = 'No';
+      $_SESSION['eligibleService'] = 'No';
       $_SESSION['current']='results';
     }
-  } else {
-    $_SESSION['errors']['vetReside'] = 'Please select YES or NO';
+  } else {$_SESSION['errors']['serviceDeath']='Please select YES or NO';}
+}
+## residence - currently
+elseif ($_GET['submit']==='vetReside') {
+  //dependent applicant
+  if ($_SESSION['applicant']==='Dependent') {
+    if (isset($_SESSION['vetReside']) && isset($_SESSION['depReside'])) {
+      $_SESSION['answered'][]='vetReside';
+      if ($_SESSION['vetReside'] === 'Yes' && $_SESSION['depReside']==='Yes'){
+        $_SESSION['current']='vetResidePrior';
+      } else {
+        $_SESSION['eligibleResidence']='No';
+        $_SESSION['current']='results';
+      }
+    } else {
+      if (!isset($_SESSION['vetReside'])) {
+        $_SESSION['errors']['vetReside'] = 'Please select YES or NO for the VETERAN';
+      }
+      if (!isset($_SESSION['depReside'])) {
+        $_SESSION['errors']['depReside'] = 'Please select YES or NO for yourself (DEPENDENT)';
+      }
+    }
+  } 
+  // veteran applicant
+  elseif ($_SESSION['applicant']==='Veteran') {
+    if (isset($_SESSION['vetReside'])) {
+      $_SESSION['answered'][]='vetReside';
+      if ($_SESSION['vetReside']==='Yes') {
+        $_SESSION['eligibleResidence']='Yes';
+        $_SESSION['current']='maritalStatus';
+      } else {
+        $_SESSION['eligibleResidence']='No';
+        $_SESSION['current']='results';
+      }      
+    } else {
+      $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
+    }
   }
 }
 ## residence - prior to service
-elseif ($_GET['submit']==='vetResidePrior') {}
+elseif ($_GET['submit']==='vetResidePrior') {
+    if (isset($_SESSION['vetResidePrior'])) {
+    $_SESSION['answered'][]='vetResidePrior';
+    if ($_SESSION['vetResidePrior']==='Yes') {
+      $_SESSION['eligibleResidence'] = 'Yes';
+      if ($_SESSION['depType']==='Spouse') {
+        $_SESSION['current']='liveWithSpouse';
+      } else {
+        $_SESSION['current']='maritalStatus';
+      }
+    } else {
+      $_SESSION['current']='vetReside3Years';
+    }
+  } else {
+    $_SESSION['errors']['vetResidePrior'] = 'Please select YES or NO';
+  }
+}
 ## residence - 3 years continuous
-elseif ($_GET['submit']==='vetReside3Years') {}
+elseif ($_GET['submit']==='vetReside3Years') {
+    //dependent applicant
+  if ($_SESSION['applicant']==='Dependent') {
+    if (isset($_SESSION['vetReside3Years']) && isset($_SESSION['depReside3Years'])) {
+      $_SESSION['answered'][]='vetReside3Years';
+      if ($_SESSION['vetReside3Years'] === 'Yes' && $_SESSION['depReside3Years']==='Yes'){
+        $_SESSION['eligibleResidence']='Yes';
+        if ($_SESSION['depType']==='Spouse') {
+          $_SESSION['current']='liveWithSpouse';
+        } else {
+          $_SESSION['current']='maritalStatus';
+        }
+      } else {
+        $_SESSION['eligibleResidence']='No';
+        $_SESSION['current']='results';
+      }
+    } else {
+      if (!isset($_SESSION['vetReside3Years'])) {
+        $_SESSION['errors']['vetReside3Years'] = 'Please select YES or NO for the VETERAN';
+      }
+      if (!isset($_SESSION['depReside3Years'])) {
+        $_SESSION['errors']['depReside3Years'] = 'Please select YES or NO for yourself (DEPENDENT)';
+      }
+    }
+  }
+  // veteran applicant -- WONT BE ASKED THIS QUESTION
+  // elseif ($_SESSION['applicant']==='Veteran') {
+  //   if (isset($_SESSION['vetReside3Years'])) {
+  //     $_SESSION['answered'][]='vetReside3Years';
+  //     if ($_SESSION['vetReside3Years']==='Yes') {
+  //       $_SESSION['eligibleReside3Yearsnce']='Yes';
+  //       $_SESSION['current']='maritalStatus';
+  //     } else {
+  //       $_SESSION['eligibleReside3Yearsnce']='No';
+  //       $_SESSION['current']='results';
+  //     }      
+  //   } else {
+  //     $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
+  //   }
+  // }
+}
 ## family - marital status
 elseif ($_GET['submit']==='maritalStatus') {
   if (isset($_SESSION['maritalStatus'])) {
@@ -190,7 +316,6 @@ elseif ($_GET['submit']==='maritalStatus') {
   } else {
     $_SESSION['errors']['maritalStatus'] = 'Please select MARRIED or SINGLE';
   }
-
 }
 ## family - if married, live with spouse
 elseif ($_GET['submit']==='liveWithSpouse') {

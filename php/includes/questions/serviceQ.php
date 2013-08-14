@@ -1,1 +1,1 @@
-Please indicate your branch of service, dates of service, and discharge type.
+Please indicate <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran's":'your' ?> branch of service, dates of service, and discharge type.
