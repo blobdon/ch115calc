@@ -240,7 +240,7 @@ elseif ($_GET['submit']==='vetReside') {
         $_SESSION['current']='results';
       }      
     } else {
-      $_SESSION['errors']['otherBenefits'] = 'Please select YES or NO';
+      $_SESSION['errors']['vetReside'] = 'Please select YES or NO';
     }
   }
 }
