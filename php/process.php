@@ -512,7 +512,7 @@ function service_Date_Validate($dateName){
   $date = DateTime::createFromFormat('m/d/Y', $_SESSION[$dateName]);
   $date_errors = DateTime::getLastErrors();
   if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
-    $_SESSION['errors'][$dateName] = 'Invalid Date <br> (format as mm/dd/yyyy)';
+    $_SESSION['errors'][$dateName] = 'Invalid Date (format as mm/dd/yyyy)';
     return;
   }
   $futureCutoff = new DateTime('+10 years');
