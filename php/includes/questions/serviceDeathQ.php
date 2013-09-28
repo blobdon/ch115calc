@@ -1,0 +1,1 @@
+Did the veteran die while on active duty? (under conditions other than dishonorable)
