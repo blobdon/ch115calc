@@ -32,7 +32,7 @@
       <div class='row'>
         <img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">
         &nbsp;
-        <span>Veterans Legal Clinic</span>
+        <span>Veterans Legal Clinic of the Legal Services Center at Harvard Law School</span>
       </div>
     </div>
   </div>
