@@ -30,9 +30,11 @@
   <div id='header'>
     <div class='container'>
       <div class='row'>
-        <img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">
-        &nbsp;
-        <span>Veterans Legal Clinic of the Legal Services Center at Harvard Law School</span>
+        <span>Veterans Legal Clinic</span>
+        &nbsp;<img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">&nbsp;
+        <span>of the Legal Service Center</span> 
+        &nbsp;<img src="./img/HLSLogoHeader.png" alt="Harvard Law School">&nbsp;
+        <span>at Harvard Law School</span>
       </div>
     </div>
   </div>
