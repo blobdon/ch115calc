@@ -30,9 +30,11 @@
   <div id='header'>
     <div class='container'>
       <div class='row'>
-        <img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">
-        &nbsp;
         <span>Veterans Legal Clinic</span>
+        &nbsp;<img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">&nbsp;
+        <span>of the Legal Service Center</span> 
+        &nbsp;<img src="./img/HLSLogoHeader.png" alt="Harvard Law School">&nbsp;
+        <span>at Harvard Law School</span>
       </div>
     </div>
   </div>
@@ -41,7 +43,7 @@
   <div class='container'>
     <div class='row'>
       <div class='span12'>
-        <h2>Calculate your Chapter 115 Veteran's Financial and Medical Assistance</h2>
+        <h2>Massachusetts Veterans' Benefits Online Eligibility Tool</h2>
       </div>
     </div>
     <div class='row'>
@@ -69,7 +71,7 @@
           <?php if ($_SESSION['current']==='intro') :?>
             <?php include('./includes/intro.php');?>
             <br>
-            <button type="submit" class='btn btn-large btn-primary' name='begin' value='begin'>Press Here to Begin</button>
+            <button type="submit" class='btn btn-large btn-block btn-primary' name='begin' value='begin'>I have read and understand the Important Notes above and I wish to CONTINUE to the tool</button>
           <?php elseif ($_SESSION['current']==='results') :?>
             <?php include('./includes/results.php');?>
             <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
