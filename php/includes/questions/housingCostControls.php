@@ -16,7 +16,7 @@
     </div>
   <?php elseif ($_SESSION['shelterType']==='Own'): ?>
     <div class='span4'>
-      <b>Include all::</b>
+      <b>Include all:</b>
       <ul>
         <li>Property Taxes (current and betterment)</li>
         <li>Water and Sewer charges</li>
