@@ -1,1 +1,1 @@
-Are you the VETERAN, or a DEPENDENT of the Veteran?
+Are you a VETERAN, or a DEPENDENT of a Veteran?
