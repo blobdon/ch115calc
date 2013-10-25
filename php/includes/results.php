@@ -1,7 +1,4 @@
 <?php
-#
-#  6 - RESULTS CALCULATION
-#
 //  Overall eligibility
 if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === "No" || $_SESSION['eligibleAssets'] === "No" || $_SESSION['eligibleDep']==='No') {
   $_SESSION['eligibleAll'] = 'No';
@@ -60,7 +57,7 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
   <?php require_once(dirname(__FILE__).'/resultsCalc.php');?>
   <?php if ($_SESSION['eligibleAssets']==='No'):?>
   <h4>Your current assets are above the maximum allowable for this need-based benefit.</h4>
-  <p>Once your assets fall below <?php echo $_SESSION['maritalStatus']==='Single'?'$3200':"7200";?>, if everything else remains the same, you may be eligible for the estimated benefit detailed below.</p>
+  <p>Once your assets fall below <?php echo $_SESSION['maritalStatus']==='Single'?'$3200':"7000";?>, if everything else remains the same, you may be eligible for the estimated benefit detailed below.</p>
   <?php endif; ?>
 <div class='row'>
 <div class='span5 well' id='budgetResults'>
