@@ -39,7 +39,7 @@ elseif (isset($_GET['edit'])) {
     array_splice($_SESSION['answered'], $position);
   }
   $_SESSION['current'] = $_GET['edit'];
-  header("Location: index.php#spot"); /* Redirect browser */
+  header("Location: index.php#spot"); /* Redirect browser to question */
   exit(0);
 }
 #
@@ -115,12 +115,21 @@ elseif ($_GET['submit']==='service') {
     } else {
     $_SESSION['serviceEra'] = 'Peacetime';
     }
-    if (is_Eligible_Service($serviceStart,$serviceEnd)) {
-      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
-      $_SESSION['current']='vetReside';
+    if ($_SESSION['branch']==='Merchant Marine') {
+        if (is_Wartime($serviceStart,$serviceEnd)) {
+          $_SESSION['current']='merchMarineConflict';
+        } else {
+          $_SESSION['eligibleService'] = 'No';
+          $_SESSION['current']='results';
+        }
     } else {
-      $_SESSION['eligibleService'] = 'No';
-      $_SESSION['current']='purpleHeart';
+      if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+        $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+        $_SESSION['current']='vetReside';
+      } else {
+        $_SESSION['eligibleService'] = 'No';
+        $_SESSION['current']='purpleHeart';
+      }
     }
   } // end of if no errors
 } // end of if service
@@ -206,6 +215,32 @@ elseif ($_GET['submit']==='serviceDeath') {
       $_SESSION['current']='results';
     }
   } else {$_SESSION['errors']['serviceDeath']='Please select YES or NO';}
+}
+## service details - merchMarineConflict
+elseif ($_GET['submit']==='merchMarineConflict') {
+  if (isset($_SESSION['merchMarineConflict'])) {
+    $_SESSION['answered'][]='merchMarineConflict';
+    if ($_SESSION['merchMarineConflict']==='Yes') {
+      $_SESSION['current']='merchMarineDischarge';
+    } else {
+      $_SESSION['current']='results';
+    }
+  } else {$_SESSION['errors']['merchMarineConflict']='Please select YES or NO';}
+}
+## service details - merchMarineDischarge
+elseif ($_GET['submit']==='merchMarineDischarge') {
+  if (isset($_SESSION['merchMarineDischarge'])) {
+    $_SESSION['answered'][]='merchMarineDischarge';
+    $serviceStart = new DateTime($_SESSION['serviceStart']);
+    $serviceEnd = new DateTime($_SESSION['serviceEnd']);
+    if (is_Eligible_Service($serviceStart,$serviceEnd)) {
+      $_SESSION['eligibleService'] = is_Eligible_Service($serviceStart,$serviceEnd);
+      $_SESSION['current']='vetReside';
+    } else {
+      $_SESSION['eligibleService'] = 'No';
+      $_SESSION['current']='results';
+    }
+  } else {$_SESSION['errors']['merchMarineDischarge']='Please select YES or NO';}
 }
 ## residence - currently
 elseif ($_GET['submit']==='vetReside') {
@@ -526,7 +561,7 @@ function service_Date_Validate($dateName){
 }
 // check user service dates against MGL definition of veteran
 function is_Wartime($serviceStart, $serviceEnd){
-  //These dates reflect MGL c4 s7 cl43rd, not including campaigns or merchant marines, as of 6/11/2013
+  //These dates reflect MGL c4 s7 cl43rd, as of 6/11/2013
   // this array of wars is used by isWartime function
   $wars = array(
       'WWI' => array( begin => new DateTime('6-Apr-1917'), end => new DateTime('11-Nov-1918') ),
@@ -537,7 +572,8 @@ function is_Wartime($serviceStart, $serviceEnd){
       'Korea Defense Service Medal' => array( begin => new DateTime('28-Jul-1954'), end => new DateTime(), extraInputName => 'kdsm', extraInputValue => 'Yes' ),
       'Lebanese Peacekeeping Force' => array( begin => new DateTime('25-Aug-1982'), end => new DateTime('1-Dec-1987'), extraInputName => 'campaigns', extraInputValue => 'Lcampaign' ),
       'Grenada Rescue Mission' => array( begin => new DateTime('25-Oct-1983'), end => new DateTime('15-Dec-1983'), extraInputName => 'campaigns', extraInputValue => 'Gcampaign' ),
-      'Panamanian Intervention Force' => array( begin => new DateTime('20-Dec-1989'), end => new DateTime('31-Jan-1990'), extraInputName => 'campaigns', extraInputValue => 'Pcampaign' )
+      'Panamanian Intervention Force' => array( begin => new DateTime('20-Dec-1989'), end => new DateTime('31-Jan-1990'), extraInputName => 'campaigns', extraInputValue => 'Pcampaign' ),
+      'WWII Merchant Marine' => array( begin => new DateTime('7-Dec-1941'), end => new DateTime('31-Dec-1946'), extraInputName => 'branch', extraInputValue => 'Merchant Marine' )
   );
   // loop through war date ranges looking for overlap with service
   foreach ($wars as $name => $property) {
@@ -545,11 +581,13 @@ function is_Wartime($serviceStart, $serviceEnd){
     if (empty($wars[$name]['extraInputName'])) { //No extra input needed to meet threshold
       if ( !( $serviceStart > $wars[$name]['end'] || $wars[$name]['begin'] > $serviceEnd) ) {
       // inverse of No overlap = overlap = wartime service
-        return $name; //leave function because met wartime service threshold    }
+        if ($_SESSION['branch']!=='Merchant Marine') {
+          return $name; //leave function because met wartime service threshold 
+        }
       }
     }
     else { // extra input needed to meet threshold
-      if (is_array($_SESSION[$wars[$name]['extraInputName']])) { // campaign checkboxes are in array
+      if (is_array($_SESSION[$wars[$name]['extraInputName']])) { // campaign checkboxes are in an array
         foreach ($_SESSION[$wars[$name]['extraInputName']] as $value) {
           if ( $value === $wars[$name]['extraInputValue'] &&
             !( $serviceStart > $wars[$name]['end'] || $wars[$name]['begin'] > $serviceEnd) ) {
@@ -558,7 +596,7 @@ function is_Wartime($serviceStart, $serviceEnd){
           }
         }
       }
-      else { //kdsm is not in array
+      else { //kdsm and merchant marine are not in arrays, so I used different loop from campaigns 
         if ( $_SESSION[$wars[$name]['extraInputName']] === $wars[$name]['extraInputValue'] &&
           !( $serviceStart > $wars[$name]['end'] || $wars[$name]['begin'] > $serviceEnd) ) {
           // inverse of No overlap = overlap = wartime service
@@ -568,21 +606,25 @@ function is_Wartime($serviceStart, $serviceEnd){
     }
     // Did not meet threshold by three checks above = not wartime service.
   }
-} // end of isWartime
+} // end of function isWartime
 // !!! Doesnt include disqualifiers yet
 function is_Eligible_Service($serviceStart, $serviceEnd){
   $peacetimeMin = new DateInterval('P180D');
   $wartimeMin = new DateInterval('P90D');
-  if ( $_SESSION['serviceDays'] >= $peacetimeMin->d ){
-    Return '>=180 days Active Duty';
+  if ($_SESSION['branch']==='Merchant Marine') {
+    if ( is_Wartime($serviceStart,$serviceEnd) && ($_SESSION['merchMarineConflict']==='Yes') && ($_SESSION['merchMarineDischarge']==='Yes') ){
+      Return 'armed conflict as member of Merchant Marine, with discharge from CG, Army, or Navy';
+    }
+  } else {
+    if ($_SESSION['serviceDays'] >= $peacetimeMin->d) {
+      Return '>=180 days Active Duty';
+    }
+    elseif ( is_Wartime($serviceStart,$serviceEnd) && ($_SESSION['serviceDays'] >= $wartimeMin->d) ){
+      Return '>=90 days Active Duty, at least 1 during wartime';
+    }
+    elseif ( $_GET['purpleHeart']   === "Yes" || $_GET['serviceDisability'] === "Yes" || $_GET['serviceDeath'] === "Yes" ) {
+      Return 'Purple Heart, Service-Connected Disbility, or Service Death';
+    }
   }
-  elseif ( is_Wartime($serviceStart,$serviceEnd) && ($_SESSION['serviceDays'] >= $wartimeMin->d) ){
-    Return '>=90 days Active Duty, at least 1 during wartime';
-  }
-  elseif ( $_GET['purpleHeart']   === "Yes" ||
-       $_GET['serviceDisability'] === "Yes" ||
-       $_GET['serviceDeath']      === "Yes" ) {
-    Return 'Purple Heart, Service-Connected Disbility, or Service Death';
-  }
-}
+} //end of function is_Eligible_Service
 ?>

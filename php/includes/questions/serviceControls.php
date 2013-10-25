@@ -11,6 +11,7 @@
         <option value="Air Force"<?php retain_Select('branch','Air Force');?>>Air Force</option>
         <option value="Active Guard/Reserve"<?php retain_Select('branch','Active Guard/Reserve');?>>Active Guard/Reserve</option>
         <option value="Coast Guard"<?php retain_Select('branch','Coast Guard');?>>Coast Guard</option>
+        <option value="Merchant Marine"<?php retain_Select('branch','Merchant Marine');?>>Merchant Marine</option>
       </select>
   </label>
   </div>

@@ -33,7 +33,8 @@ if ($_SESSION['eligibleService'] === "No" || $_SESSION['eligibleResidence'] === 
     <ul>
       <li>Minimum of 180 days service during peacetime, <b>OR</b></li>
       <li>Minimum of 90 days service, at least one day during wartime, <b>OR</b></li>
-      <li>Exception to minimum days</li>
+      <li>Merchant Marine service in armed conflict between December 7, 1941 and December 31, 1946, with honorable discharge from the U.S. Coast Guard, Army, or Navy, <b>OR</b></li>
+      <li>Any of these exceptions to minimum days requirement:</li>
         <ul>
           <li>Purple Heart</li>
           <li>Service-Connected Disability</li>
