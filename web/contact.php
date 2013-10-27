@@ -58,8 +58,8 @@
       if (isset($_GET['a'])) {
 		  if($_GET['a'] == "send") {
 			  $headers = '';
-			  $body = "A request for help has come in from " . $_POST['firstNameInsert'] . " " . $_POST['lastNameInsert'] . ".\n";
-			  $body .= "The following is a summary of their complaint: " . $_POST['complaintInsert'] . "\n";
+			  $body = "A request for help has come in from " . $_POST['firstNameInsert'] . " " . $_POST['lastNameInsert'] . ".\n\n";
+			  $body .= "The following is a summary of their complaint: " . $_POST['complaintInsert'] . "\n\n";
 			  if (isset($_POST['emailInsert']) || isset($_POST['phoneInsert'])) {
 			  $body .= "They provided the following contact information: \n";
 			  }
@@ -69,20 +69,26 @@
 			  if (isset($_POST['phoneInsert'])) {
 			  $body .= "Phone number: " . $_POST['phoneInsert'] . "\n";
 			  }
-			  $body .= "Thanks and have a great day!";
+			  $body .= "\nThanks and have a great day!";
 			  $to = $_POST['emailInsert'];
 			  $subject = "Request for Help";
 			  mail($to, $subject, strip_tags($body), $headers);
 	  ?>  
-	  <tr><td><h3>Your Request Has Been Sent!</h3></td></tr>
+      	<table border="0">
+		  <tr><td><h3>Your Request Has Been Sent!</h3></td></tr>
 
+		<tr><td><h3>Visit us</h3></td></tr>
+		<tr><td>122 Boylston Street</td></tr>
+		<tr><td>Jamaica Plain, MA 02130</td></tr>
+		<tr><td><h3>Call Us</h3></td></tr>
+		<tr><td>617-522-3003</td></tr>
+      	</table>
 	  <?  
       	}
       }
       else {
       ?>
       	<table border="0">
-<!-- 		<tr><td></td></tr> -->
 		<tr><td><h3>Visit us</h3></td></tr>
 		<tr><td>122 Boylston Street</td></tr>
 		<tr><td>Jamaica Plain, MA 02130</td></tr>
