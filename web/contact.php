@@ -59,7 +59,7 @@
 		  if($_GET['a'] == "send") {
 			  $headers = '';
 			  $body = "A request for help has come in from " . mysqli_real_escape_string($_POST['firstNameInsert']) . " " . mysqli_real_escape_string($_POST['lastNameInsert']) . ".\n\n";
-			  $body .= "The following is a summary of their problem: " . mysqli_real_escape_string($_POST['complaintInsert']) . "\n\n";
+			  $body .= "The following is a summary of their complaint: " . mysqli_real_escape_string($_POST['complaintInsert']) . "\n\n";
 			  if (isset($_POST['emailInsert']) || isset($_POST['phoneInsert'])) {
 			  $body .= "They provided the following contact information: \n";
 			  }
@@ -70,7 +70,7 @@
 			  $body .= "Phone number: " . mysqli_real_escape_string($_POST['phoneInsert']) . "\n";
 			  }
 			  $body .= "\nThanks and have a great day!";
-			  $to = mysqli_real_escape_string($_POST['emailInsert']);
+			  $to = $_POST['emailInsert'];
 			  $subject = "Request for Help";
 			  mail($to, $subject, strip_tags($body), $headers);
 	  ?>  
