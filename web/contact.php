@@ -69,7 +69,7 @@
 			  if (isset($_POST['phoneInsert'])) {
 			  $body += "Phone number: " . $_POST['phoneInsert'] . "\n";
 			  }
-			  $body += "Thanks and have a great day!"
+			  $body += "Thanks and have a great day!";
 			  $to = $_POST['emailInsert'];
 			  $subject = "Request for Help";
 			  mail($to, $subject, strip_tags($body), $headers);
