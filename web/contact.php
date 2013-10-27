@@ -70,7 +70,7 @@
 			  $body .= "Phone number: " . escapeshellcmd($_POST['phoneInsert']) . "\n";
 			  }
 			  $body .= "\nThanks and have a great day!";
-			  $to = $_POST['emailInsert'];
+			  $to = escapeshellcmd($_POST['emailInsert']);
 			  $subject = "Request for Help";
 			  mail($to, $subject, strip_tags($body), $headers);
 	  ?>  
