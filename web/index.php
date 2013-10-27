@@ -17,7 +17,7 @@
   <link rel="icon"
       type="image/png"
       href="/img/calc-favicon.png">
-  <title>Ch115 Calc - test test test</title>
+  <title>Ch115 Calc</title>
   <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
   <div id='header'>
     <div class='container'>
       <div class='row'>
-        <span>Veterans Legal Clinic</span>
+        <span>Veterans Legal Clinic time to test me</span>
         &nbsp;<img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">&nbsp;
         <span>of the Legal Service Center</span> 
         &nbsp;<img src="./img/HLSLogoHeader.png" alt="Harvard Law School">&nbsp;
