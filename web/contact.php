@@ -59,17 +59,17 @@
 		  if($_GET['a'] == "send") {
 			  $headers = '';
 			  $body = "A request for help has come in from " . $_POST['firstNameInsert'] . " " . $_POST['lastNameInsert'] . ".\n";
-			  $body += "The following is a summary of their complaint: " . $_POST['complaintInsert'] . "\n";
-			  if (isset($_POST['emailInsert']) || isset($_POST['phoneInsert'])) {
-			  $body += "They provided the following contact information: \n";
-			  }
-			  if (isset($_POST['emailInsert'])) {
-			  $body += "Email: " . $_POST['phoneInsert'] . "\n";
-			  }
-			  if (isset($_POST['phoneInsert'])) {
-			  $body += "Phone number: " . $_POST['phoneInsert'] . "\n";
-			  }
-			  $body += "Thanks and have a great day!";
+		// 	  $body += "The following is a summary of their complaint: " . $_POST['complaintInsert'] . "\n";
+// 			  if (isset($_POST['emailInsert']) || isset($_POST['phoneInsert'])) {
+// 			  $body += "They provided the following contact information: \n";
+// 			  }
+// 			  if (isset($_POST['emailInsert'])) {
+// 			  $body += "Email: " . $_POST['phoneInsert'] . "\n";
+// 			  }
+// 			  if (isset($_POST['phoneInsert'])) {
+// 			  $body += "Phone number: " . $_POST['phoneInsert'] . "\n";
+// 			  }
+// 			  $body += "Thanks and have a great day!";
 			  $to = $_POST['emailInsert'];
 			  $subject = "Request for Help";
 			  mail($to, $subject, strip_tags($body), $headers);
