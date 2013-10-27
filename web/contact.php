@@ -48,48 +48,28 @@
     </div>
     <div class='row'>
       <div id='answers span12'>
-        <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
-          <div class='row'>
-            <div class='span8 offset1 question-answered'>
-              <div class=''><?php include('./includes/questions/'.$question.'Q.php');?></div>
-              <div class='answer'><?php include('./includes/questions/'.$question.'Answer.php');?></div>
-              <div class='reset-button'>
-                <form action="process.php" method='GET'>
-                  <button type="submit" class='btn btn-link' name='edit' value='<?php echo $question ?>'>Edit</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; }?>
+        
       </div>
     </div>
 
     <a id='spot'></a>
     <div class='row'>
       <div class='span12 question-current' id='questions'>
-        <form class='form' action="process.php" method='GET'>
-          <?php if ($_SESSION['current']==='intro') :?>
-            <?php include('./includes/intro.php');?>
-            <br>
-            <button type="submit" class='btn btn-large btn-block btn-primary' name='begin' value='begin'>I have read and understand the Important Notes above and I wish to CONTINUE to the tool</button>
-          <?php elseif ($_SESSION['current']==='results') :?>
-            <?php include('./includes/results.php');?>
-            <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
-          <?php else :?>
-            <div class='row'>
-              <div class='span11 offset1'>
-                <h4><?php include('./includes/questions/'.$_SESSION['current'].'Q.php');?></h4>
-                <?php include('./includes/questions/'.$_SESSION['current'].'Controls.php');?>                
-              </div>
-            </div>
-            <br>
-            <div class='row'>
-              <div class='span8 offset1'>
-                <button type="submit" class='btn btn-large btn-primary' name='submit' value='<?php echo $_SESSION['current'];?>'>Continue</button>
-                <input type="submit" class='btn btn-warning pull-right' name='reset' value='reset'>
-              </div>
-            </div>
-          <?php endif; ?>
+        <form class='form' action="mail.php" method='GET'>
+		<table border="0">
+    	<td>First name: </td><td><input type='text' name='firstNameInsert' size=15></td></tr><tr>
+    	<td>Last name: </td><td><input type='text' name='lastNameInsert' size=15></td></tr><tr>
+    	<td>Email: </td><td><input type='text' name='emailInsert' size=15></td></tr><tr>
+    	<td>Phone: </td><td><input type='text' name='phoneInsert' size=15></td></tr><tr>
+    	<td>Summary of the problem: </td><td><textarea name="complaint" style="resize: vertical;" size="64">Dear %Student%,
+	A package has arrived for you at the Currier House bells desk. Please go there for pick up.</textarea></td></tr><tr>
+
+		</table><input type="submit" class='btn btn-alert pull-left' name="add" value="Add" />
+
+         
+         
+         
+         
         </form>
       </div>
 
