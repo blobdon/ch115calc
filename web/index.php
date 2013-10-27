@@ -17,7 +17,7 @@
   <link rel="icon"
       type="image/png"
       href="/img/calc-favicon.png">
-  <title>Ch115 Calc</title>
+  <title>Ch115 Calc - test test test</title>
   <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
