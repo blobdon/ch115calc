@@ -43,7 +43,7 @@
   <div class='container'>
     <div class='row'>
       <div class='span12'>
-        <h2>Massachusetts Veterans' Benefits Online Eligibility Tool</h2>
+        <h2>Contact Us with Questions or Concerns</h2>
       </div>
     </div>
     <div class='row'>
@@ -52,27 +52,46 @@
       </div>
     </div>
 
-    <a id='spot'></a>
     <div class='row'>
       <div class='span12 question-current' id='questions'>
-        <form class='form' action="mail.php" method='GET'>
-		<table border="0">
+      <?
+      if($_GET['a'] == "send") {
+      	  $headers = '';
+		  $body = "We have a problem!";
+		  $to = $_POST['emailInsert'];
+		  $subject = "Request for Help";
+		  mail($to, $subject, strip_tags($body), $headers);
+	  ?>  
+	  <tr><td><h3>Your Request Has Been Sent!</h3></td></tr>
+
+	  <?  
+      }
+      else {
+      ?>
+      	<table border="0">
+<!-- 		<tr><td></td></tr> -->
+		<tr><td><h3>Visit us</h3></td></tr>
+		<tr><td>122 Boylston Street</td></tr>
+		<tr><td>Jamaica Plain, MA 02130</td></tr>
+		<tr><td><h3>Call Us</h3></td></tr>
+		<tr><td>617-522-3003</td></tr>
+      	</table>
+      	<br>
+      	<table border="0">
+
+      	<tr><td><h3>Email Us</h3></td></tr>
+        <form class='form' action="contact.php?a=send" method='POST'>
     	<td>First name: </td><td><input type='text' name='firstNameInsert' size=15></td></tr><tr>
     	<td>Last name: </td><td><input type='text' name='lastNameInsert' size=15></td></tr><tr>
     	<td>Email: </td><td><input type='text' name='emailInsert' size=15></td></tr><tr>
     	<td>Phone: </td><td><input type='text' name='phoneInsert' size=15></td></tr><tr>
-    	<td>Summary of the problem: </td><td><textarea name="complaint" style="resize: vertical;" size="64">Dear %Student%,
-	A package has arrived for you at the Currier House bells desk. Please go there for pick up.</textarea></td></tr><tr>
-
+    	<td>Summary of the problem: </td><td><textarea name="complaintInsert" style="resize: vertical;" size="64"></textarea></td></tr><tr>
 		</table><input type="submit" class='btn btn-alert pull-left' name="add" value="Add" />
-
-         
-         
-         
-         
         </form>
       </div>
-
+	<?
+	}
+	?>
     </div> <!-- end of main container row -->
 
       <?php
