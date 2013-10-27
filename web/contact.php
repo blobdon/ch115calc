@@ -55,16 +55,18 @@
     <div class='row'>
       <div class='span12 question-current' id='questions'>
       <?
-      if($_GET['a'] == "send") {
-      	  $headers = '';
-		  $body = "We have a problem!";
-		  $to = $_POST['emailInsert'];
-		  $subject = "Request for Help";
-		  mail($to, $subject, strip_tags($body), $headers);
+      if (isset($_GET['a'])) {
+		  if($_GET['a'] == "send") {
+			  $headers = '';
+			  $body = "We have a problem!";
+			  $to = $_POST['emailInsert'];
+			  $subject = "Request for Help";
+			  mail($to, $subject, strip_tags($body), $headers);
 	  ?>  
 	  <tr><td><h3>Your Request Has Been Sent!</h3></td></tr>
 
 	  <?  
+      	}
       }
       else {
       ?>
