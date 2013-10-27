@@ -58,16 +58,16 @@
       if (isset($_GET['a'])) {
 		  if($_GET['a'] == "send") {
 			  $headers = '';
-			  $body = "A request for help has come in from " . mysqli_real_escape_string($_POST['firstNameInsert']) . " " . mysqli_real_escape_string($_POST['lastNameInsert']) . ".\n\n";
-			  $body .= "The following is a summary of their complaint: " . mysqli_real_escape_string($_POST['complaintInsert']) . "\n\n";
+			  $body = "A request for help has come in from " . escapeshellcmd($_POST['firstNameInsert']) . " " . escapeshellcmd($_POST['lastNameInsert']) . ".\n\n";
+			  $body .= "The following is a summary of their complaint: " . escapeshellcmd($_POST['complaintInsert']) . "\n\n";
 			  if (isset($_POST['emailInsert']) || isset($_POST['phoneInsert'])) {
 			  $body .= "They provided the following contact information: \n";
 			  }
 			  if (isset($_POST['emailInsert'])) {
-			  $body .= "Email: " . mysqli_real_escape_string($_POST['phoneInsert']) . "\n";
+			  $body .= "Email: " . escapeshellcmd($_POST['phoneInsert']) . "\n";
 			  }
 			  if (isset($_POST['phoneInsert'])) {
-			  $body .= "Phone number: " . mysqli_real_escape_string($_POST['phoneInsert']) . "\n";
+			  $body .= "Phone number: " . escapeshellcmd($_POST['phoneInsert']) . "\n";
 			  }
 			  $body .= "\nThanks and have a great day!";
 			  $to = $_POST['emailInsert'];
