@@ -58,19 +58,19 @@
       if (isset($_GET['a'])) {
 		  if($_GET['a'] == "send") {
 			  $headers = '';
-			  $body = "A request for help has come in from " . $_POST['firstNameInsert'] . " " . $_POST['lastNameInsert'] . ".\n\n";
-			  $body .= "The following is a summary of their complaint: " . $_POST['complaintInsert'] . "\n\n";
+			  $body = "A request for help has come in from " . mysqli_real_escape_string($_POST['firstNameInsert']) . " " . mysqli_real_escape_string($_POST['lastNameInsert']) . ".\n\n";
+			  $body .= "The following is a summary of their problem: " . mysqli_real_escape_string($_POST['complaintInsert']) . "\n\n";
 			  if (isset($_POST['emailInsert']) || isset($_POST['phoneInsert'])) {
 			  $body .= "They provided the following contact information: \n";
 			  }
 			  if (isset($_POST['emailInsert'])) {
-			  $body .= "Email: " . $_POST['phoneInsert'] . "\n";
+			  $body .= "Email: " . mysqli_real_escape_string($_POST['phoneInsert']) . "\n";
 			  }
 			  if (isset($_POST['phoneInsert'])) {
-			  $body .= "Phone number: " . $_POST['phoneInsert'] . "\n";
+			  $body .= "Phone number: " . mysqli_real_escape_string($_POST['phoneInsert']) . "\n";
 			  }
 			  $body .= "\nThanks and have a great day!";
-			  $to = $_POST['emailInsert'];
+			  $to = mysqli_real_escape_string($_POST['emailInsert']);
 			  $subject = "Request for Help";
 			  mail($to, $subject, strip_tags($body), $headers);
 	  ?>  
