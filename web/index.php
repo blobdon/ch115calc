@@ -30,7 +30,7 @@
   <div id='header'>
     <div class='container'>
       <div class='row'>
-        <span>Veterans Legal Clinic time to test me sdfdsf</span>
+        <span>Veterans Legal Clinic time to test me sdfdsfsdfsdfsdfsd</span>
         &nbsp;<img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">&nbsp;
         <span>of the Legal Service Center</span> 
         &nbsp;<img src="./img/HLSLogoHeader.png" alt="Harvard Law School">&nbsp;
