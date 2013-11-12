@@ -1,4 +1,4 @@
-  Include all other income from any other sources: 
+Include all other income from any other sources: 
   (This list does not include all sources, these are just examples)
 <ul>
   <li>Rental property,</li>

@@ -104,7 +104,7 @@
   </div> <!-- end of main container -->
   </div>
   <div id='help-banner'>
-      Have Questions? Need Help? <a>Contact Us.</a>
+      Have Questions? Need Help? <a href="contact.php">Contact Us.</a>
   </div>
   <div id='footer'>
     <?php //include('./includes/footer.php'); ?>
