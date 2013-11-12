@@ -45,6 +45,9 @@
       <div class='span12'>
         <h2>Massachusetts Veterans' Benefits Online Eligibility Tool</h2>
       </div>
+      <?php
+        phpinfo()
+      ?>
     </div>
     <div class='row'>
       <div id='answers span12'>
