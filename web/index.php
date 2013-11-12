@@ -45,9 +45,6 @@
       <div class='span12'>
         <h2>Massachusetts Veterans' Benefits Online Eligibility Tool</h2>
       </div>
-      <?php
-        phpinfo()
-      ?>
     </div>
     <div class='row'>
       <div id='answers span12'>
@@ -107,37 +104,4 @@
   </div> <!-- end of main container -->
   </div>
   <div id='help-banner'>
-      Have Questions? Need Help? <a href="contact.php">Contact Us.</a>
-  </div>
-  <div id='footer'>
-    <?php //include('./includes/footer.php'); ?>
-    <div class='container'>
-      <div class='row'>
-        <div class='span3'>
-          <b>Veterans Clinic</b>
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Service</li>
-          </ul>
-        </div>
-        <div class='span3'>
-          <b>Legal Services Center</b>
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Service</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-   <script src="/js/jquery-1.10.2.min.js"></script>
-   <script src="/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-   <script type="text/javascript" src="/js/date.js"></script>
-   <script type="text/javascript" src="/js/mine.js"></script>
-
-</body>
-</html>
+      Have Questions? Need Help? <a href="
