@@ -34,7 +34,7 @@
         &nbsp;<img src="./img/HLSVetClinicLogoHeader.png" alt="HLS Veterans Legal Clinic">&nbsp;
         <span>of the Legal Service Center</span> 
         &nbsp;<img src="./img/HLSLogoHeader.png" alt="Harvard Law School">&nbsp;
-        <span>Harvard Law School</span>
+        <span>at Harvard Law School</span>
       </div>
     </div>
   </div>
