@@ -19,6 +19,42 @@ $(document).ready(function() {
 			$('#serviceEnd').datepicker('setStartDate',$('#serviceStart').val());
 			$('#serviceStart').datepicker('setEndDate',$('#serviceEnd').val());
 
+	document.getElementById("choices").onchange=function() {
+    hideAll(this); 
+    var id = this.value;
+    if (id) show(id);
+  }
+
+  function show(id) {
+        var el = document.getElementById(id);
+        if (el) el.style.display = "block";
+        else alert("No such ID as "+id);
+    }
+
+    function hide(id) {
+        var el = document.getElementById(id);
+        el.style.display  = "none";
+    }
+
+    function hideAll(sel) {
+      var allSels=document.getElementsByClassName("fillmein");
+      for (var i=0;i<allSels.length;i++) {
+          if (allSels[i]!=sel) {
+              console.log(allSels[i].id)
+              allSels[i].style.display='none';
+              inputs = allSels[i].getElementsByTagName('input');
+              if (inputs.length > 0) {
+                var j = 0;
+                while (j<inputs.length && typeof inputs[j] !== 'undefined'){
+                  inputs[j].value = "";
+                  j++;
+                }
+              }
+              
+          }    
+      }
+    }
+
 	});
 // Applicant Income
 	// $('.getPay').hide();

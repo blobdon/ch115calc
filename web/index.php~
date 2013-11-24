@@ -17,7 +17,7 @@
   <link rel="icon"
       type="image/png"
       href="/img/calc-favicon.png">
-  <title>Ch115 Calc</title>
+  <title>Ch115 Calculations</title>
   <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +25,6 @@
   <!-- additional -->
     <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
-    <script type="text/javascript" src="/js/helpers.js"></script>
-
 </head>
 <body>
   <div id='header'>
@@ -49,13 +47,6 @@
       </div>
 
     </div>
-    <?php 
-      echo $_SESSION['current'];
-      echo "other cookies:";
-    { foreach ($_SESSION['answered'] as $question) :
-        print $question;
-      endforeach; }
-    ?>
     <div class='row'>
       <div id='answers span12'>
         <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
@@ -73,6 +64,7 @@
         <?php endforeach; }?>
       </div>
     </div>
+
     <a id='spot'></a>
     <div class='row'>
       <div class='span12 question-current' id='questions'>
@@ -101,11 +93,7 @@
           <?php endif; ?>
         </form>
       </div>
-      <? if ($_SESSION['current'] == 'earnedIncome') { ?>
-        <script>
-        displayPopup('flyBox');
-        </script> 
-    <?  }?>
+
     </div> <!-- end of main container row -->
 
       <?php
