@@ -544,6 +544,7 @@ ob_flush();
 #
 // date validation for PHP >=5.3
 function service_Date_Validate($dateName){
+  date_default_timezone_set('America/New_York');
   $date = DateTime::createFromFormat('m/d/Y', $_SESSION[$dateName]);
   $date_errors = DateTime::getLastErrors();
   if ($date_errors['warning_count'] + $date_errors['error_count'] > 0) {
