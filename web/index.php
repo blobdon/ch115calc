@@ -49,13 +49,6 @@
       </div>
 
     </div>
-    <?php 
-      echo $_SESSION['current'];
-      echo "other cookies:";
-    { foreach ($_SESSION['answered'] as $question) :
-        print $question;
-      endforeach; }
-    ?>
     <div class='row'>
       <div id='answers span12'>
         <?php if (isset($_SESSION['answered'])) { foreach ($_SESSION['answered'] as $question) :?>
