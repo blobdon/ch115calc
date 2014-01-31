@@ -25,8 +25,6 @@
   <!-- additional -->
     <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
-    <script type="text/javascript" src="/js/helpers.js"></script>
-
 </head>
 <body>
   <div id='header'>
@@ -66,6 +64,7 @@
         <?php endforeach; }?>
       </div>
     </div>
+
     <a id='spot'></a>
     <div class='row'>
       <div class='span12 question-current' id='questions'>
@@ -94,11 +93,7 @@
           <?php endif; ?>
         </form>
       </div>
-      <? if ($_SESSION['current'] == 'earnedIncome') { ?>
-        <script>
-        displayPopup('flyBox');
-        </script> 
-    <?  }?>
+
     </div> <!-- end of main container row -->
 
       <?php
