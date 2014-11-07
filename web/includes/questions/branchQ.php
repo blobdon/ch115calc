@@ -1,1 +1,0 @@
-What was <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran's":'your' ?> branch of service?

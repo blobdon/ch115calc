@@ -1,1 +1,0 @@
-How many days did <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran":'you' ?> serve?

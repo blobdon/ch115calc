@@ -1,1 +1,0 @@
-Do you <?php echo $_SESSION['applicant']==='Dependent'?'and/or the Veteran':''; ?> currently live in Massashusetts?

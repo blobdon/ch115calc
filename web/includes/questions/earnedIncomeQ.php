@@ -1,1 +1,0 @@
-What is your Total MONTHLY income from EMPLOYMENT, after taxes?

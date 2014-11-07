@@ -1,1 +1,0 @@
-What type of discharge did <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran":'you' ?> receive?

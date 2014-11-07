@@ -1,1 +1,0 @@
-Select the option that best describes your housing situation:

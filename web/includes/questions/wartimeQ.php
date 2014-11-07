@@ -1,1 +1,0 @@
-Did <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran":'you' ?> serve during any of these time periods?

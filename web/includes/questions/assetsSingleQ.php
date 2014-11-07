@@ -1,1 +1,0 @@
-Do you have more than $3200 in assets?
