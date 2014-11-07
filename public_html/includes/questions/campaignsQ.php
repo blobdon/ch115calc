@@ -1,0 +1,1 @@
+Did <?php echo $_SESSION['applicant']==='Dependent'?"the Veteran":'you' ?> serve in any of the following campaigns? (Optional - Check any/all that apply)

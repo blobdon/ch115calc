@@ -1,0 +1,1 @@
+Do you<?php echo $_SESSION['maritalStatus']==='Married'?', and/or your spouse,':'';?> receive any of the following benefits?
